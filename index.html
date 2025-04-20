@@ -2,179 +2,227 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jadwal Perkuliahan 4 TIM Semester Genap 2024/2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f2f5;
       margin: 0;
       padding: 20px;
+      color: #333;
     }
     h1, h3 {
       text-align: center;
+      color: #2c3e50;
+    }
+    h1 {
+      margin-bottom: 5px;
+    }
+    h3 {
+      margin-top: 0;
+      font-weight: 400;
+      color: #555;
+    }
+    .table-container {
+      overflow-x: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      margin-top: 30px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      background-color: #fff;
-      margin-bottom: 40px;
+      min-width: 800px;
     }
     th, td {
-      border: 1px solid #ddd;
-      padding: 12px;
-      text-align: left;
+      padding: 16px 14px;
       vertical-align: top;
     }
     th {
-      background-color: #007BFF;
-      color: white;
+      background-color: #1e88e5;
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
+    td {
+      background-color: #fff;
+      border-bottom: 1px solid #e0e0e0;
     }
+    tr:nth-child(even) td {
+      background-color: #f9fbfc;
+    }
+    tr:hover td {
+      background-color: #eef4fb;
+    }
+
+    /* Garis pembatas vertikal */
+    td:not(:last-child),
+    th:not(:last-child) {
+      border-right: 1px solid #e0e0e0;
+    }
+
+    td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+      white-space: pre-line;
+    }
+
     .note {
       text-align: center;
       font-style: italic;
-      margin-top: 20px;
-      color: #555;
+      margin-top: 40px;
+      color: #666;
+    }
+
+    em {
+      color: #e67e22;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      th, td {
+        font-size: 14px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      h3 {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
+
   <h1>Jadwal Perkuliahan 4 TIM Semester Genap</h1>
   <h3>(Minggu 1–22) TIM Latest Version (Tentativ) 2024/2025</h3>
 
-  <table>
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Hari</th>
-        <th>Jam</th>
-        <th>Mata Kuliah</th>
-        <th>Dosen</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <br><br><br><b>1</b></td>
-        <td>
-          <br><br><br><b>Senin</b></td>
-        <td>
-          14:00 – 14:40<br>
-          14:40 – 15:20<br>
-          15:20 – 16:00<br><br>
-          16:00 – 16:40<br>
-          16:40 – 17:20<br>
-          17:20 – 18:00
-        </td>
-        <td>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Hari</th>
+          <th>Jam</th>
+          <th>Mata Kuliah</th>
+          <th>Dosen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><br><br><br><br><b>1</b></td>
+          <td><br><br><br><br><b>Senin</b></td>
+          <td>
+            14:00 – 14:40
+            14:40 – 15:20
+            15:20 – 16:00<br>
+            16:00 – 16:40
+            16:40 – 17:20
+            17:20 – 18:00
+          </td>
+          <td>
             <br>Praktikum Audio Visual Lanjut
-            <br><br><br><br>Forensik Digital
-        </td>
-        <td>
+            <br><br><br>Forensik Digital
+          </td>
+          <td>
             <br>Meiyi Darlies, S.Kom., M.Kom.
-            <br><br><br><br>Ali Firdaus, S.Kom., M.Kom.
-        </td>
-      </tr>
-      <tr>
-        <td><b>2</b></td>
-        <td><b>Selasa</b></td>
-        <td>
-          19:50 – 20:30<br>
-          20:30 – 21:10
-        </td>
-        <td>Praktikum Animasi Lanjut (Online)</td>
-        <td>Fithri Selva Jumeilah, S.Kom., M.T.I.</td>
-      </tr>
-      <tr>
-        <td>
-          <br><br><br><br><br><b>3</b></td>
-        <td>
-          <br><br><br><br><br><b>Rabu</b></td>
-        <td>
-          13:00 – 13:40<br>
-          13:40 – 14:20<br>
-          14:20 – 15:00<br><br>
-          15:00 – 15:40<br>
-          15:40 – 16:20<br>
-          16:20 – 17:00<br>
-          17:00 – 17:40<br>
-          <em>Istirahat (17:40 – 18:30)</em><br>
-          18:30 – 19:10<br>
-          19:10 – 19:50<br>
-          19:50 – 20:30
-        </td>
-        <td>
-            <br>Pengolahan Citra<br>
-          <br><br><br>Praktikum Animasi Lanjut<br><br>
-          <br><br>Perancangan Sistem Informasi
-        </td>
-        <td>
+            <br><br><br>Ali Firdaus, S.Kom., M.Kom.
+          </td>
+        </tr>
+        <tr>
+          <td><br><b>2</b></td>
+          <td><br><b>Selasa</b></td>
+          <td>
+            19:50 – 20:30
+            20:30 – 21:10
+          </td>
+          <td><br>Praktikum Animasi Lanjut (Online)</td>
+          <td><br>Fithri Selva Jumeilah, S.Kom., M.T.I.</td>
+        </tr>
+        <tr>
+          <td><br><br><br><br><br><br><b>3</b></td>
+          <td><br><br><br><br><br><br><b>Rabu</b></td>
+          <td>
+            13:00 – 13:40
+            13:40 – 14:20
+            14:20 – 15:00<br>
+            15:00 – 15:40
+            15:40 – 16:20
+            16:20 – 17:00
+            17:00 – 17:40<br>
+            <em>Istirahat (17:40 – 18:30)</em><br>
+            18:30 – 19:10
+            19:10 – 19:50
+            19:50 – 20:30
+          </td>
+          <td>
+            <br>Pengolahan Citra
+            <br><br><br>Praktikum Animasi Lanjut
+            <br><br><br><br><br><br>Perancangan Sistem Informasi
+          </td>
+          <td>
             <br>Ahyar Supani, S.T., M.T.
-            <br><br><br><br>Fithri Selva Jumeilah, S.Kom., M.T.I.
-            <br><br><br><br>Isnainy Azro, S.Kom., M.Kom.
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <br><br><b>4</b></td>
-        <td>
-          <br><br><b>Kamis</b></td>
-        <td>
-          13:00 – 13:40<br>
-          13:40 – 14:20<br>
-          14:20 – 15:00<br>
-          <em>Istirahat (15:00 – 16:30)</em><br>
-          16:30 – 17:10<br>
-          17:10 – 17:50
-        </td>
-        <td>
-            <br>Pengembangan Game Cerdas (Tentativ)<br><br>
-            <br>Pendidikan Pancasila (Tentativ)
-        </td>
-        <td>
-            <br>R. M. Chairil Andri, S.S.T., M.I.T.<br><br>
-            <br>Liza Utama, S.H., M.H.
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <br><b>5</b></td>
-        <td>
-          <br><b>Jumat</b></td>
-        <td>
-          15:30 – 16:10<br>
-          16:10 – 16:50<br>
-          16:50 – 17:30
-        </td>
-        <td>
-            <br>Praktikum Pemrograman Web 1</td>
-        <td>
-            <br>Hidayati Ami, S.Kom., M.Kom.</td>
-      </tr>
-      <tr>
-        <td>
-          <br><b>6</b></td>
-        <td>
-          <br><b>Sabtu</b></td>
-        <td>
-          09:00 – 09:40<br>
-          09:40 – 10:20<br>
-          10:20 – 11:00
-        </td>
-        <td>
-            <br>Praktikum Pemrograman Mobile</td>
-        <td>
-            <br>Yunita Fauzia A., S.Kom., M.Kom.</td>
-      </tr>
-    </tbody>
-  </table>
+            <br><br><br>Fithri Selva Jumeilah, S.Kom., M.T.I.
+            <br><br><br><br><br><br>Isnainy Azro, S.Kom., M.Kom.
+          </td>
+        </tr>
+        <tr>
+          <td><br><br><br><br><b>4</b></td>
+          <td><br><br><br><br><b>Kamis</b></td>
+          <td>
+            13:00 – 13:40
+            13:40 – 14:20
+            14:20 – 15:00<br>
+            <em>Istirahat (15:00 – 16:30)</em><br>
+            16:30 – 17:10
+            17:10 – 17:50
+          </td>
+          <td>
+            <br>Pengembangan Game Cerdas (Tentativ)
+            <br><br><br><br>Pendidikan Pancasila (Tentativ)
+          </td>
+          <td>
+            <br>R. M. Chairil Andri, S.S.T., M.I.T.
+            <br><br><br><br>Liza Utama, S.H., M.H.
+          </td>
+        </tr>
+        <tr>
+          <td><br><br><b>5</b></td>
+          <td><br><br><b>Jumat</b></td>
+          <td>
+            15:30 – 16:10
+            16:10 – 16:50
+            16:50 – 17:30
+          </td>
+          <td><br><br>Praktikum Pemrograman Web 1</td>
+          <td><br><br>Hidayati Ami, S.Kom., M.Kom.</td>
+        </tr>
+        <tr>
+          <td><br><br><b>6</b></td>
+          <td><br><br><b>Sabtu</b></td>
+          <td>
+            09:00 – 09:40
+            09:40 – 10:20
+            10:20 – 11:00
+          </td>
+          <td><br><br>Praktikum Pemrograman Mobile</td>
+          <td><br><br>Yunita Fauzia A., S.Kom., M.Kom.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="note">
-    <b>Catatan: Jadwal dapat berubah sewaktu-waktu (tentativ) sesuai kesepakatan bersama.</b><br><br><br>
+    <b>Catatan:</b> Jadwal dapat berubah sewaktu-waktu (tentativ) sesuai kesepakatan bersama.<br><br>
     @roniranggas @timbanganamal
   </div>
+
 </body>
 </html>
