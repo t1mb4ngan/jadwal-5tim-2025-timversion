@@ -1,52 +1,71 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jadwal Perkuliahan 4 TIM Semester Genap 2024/2025</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #f0f2f5;
       margin: 0;
       padding: 20px;
       color: #333;
+      animation: fadeIn 1s ease;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     h1, h3 {
       text-align: center;
       color: #2c3e50;
+      transition: color 0.3s ease;
     }
+
+    h1:hover {
+      color: #1e88e5;
+    }
+
     h1 {
-      font-size: 28px; 
+      font-size: 28px;
       margin-bottom: 5px;
     }
+
     h3 {
-      font-size: 20px; 
+      font-size: 20px;
       margin-top: 0;
       font-weight: 400;
       color: #555;
     }
+
     .table-container {
       overflow-x: auto;
       background: #fff;
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       margin-top: 30px;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       min-width: 800px;
     }
+
     th, td {
       padding: 16px 14px;
       vertical-align: top;
     }
+
     th {
       background-color: #1e88e5;
       color: #fff;
@@ -54,15 +73,19 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+
     td {
       background-color: #fff;
       border-bottom: 1px solid #e0e0e0;
     }
+
     tr:nth-child(even) td {
       background-color: #f9fbfc;
     }
+
     tr:hover td {
-      background-color: #eef4fb;
+      background-color: #e3f2fd;
+      cursor: pointer;
     }
 
     td:not(:last-child),
@@ -80,12 +103,92 @@
       margin-top: 40px;
       color: #666;
       font-size: 16px;
+      opacity: 0.85;
     }
 
-    em {
-      color: #e67e22;
-      font-style: normal;
-      font-weight: 600;
+    .announcement {
+      background-color: #ffffff;
+      padding: 20px;
+      margin-top: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .announcement h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .announcement ul {
+      padding-left: 20px;
+    }
+
+    .announcement ul li {
+      margin-bottom: 10px;
+    }
+
+    .announcement-form {
+      background-color: #ffffff;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      max-height: 1000px;
+    }
+
+    .announcement-form.minimized {
+      max-height: 50px;
+    }
+
+    .announcement-form h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-size: 20px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .announcement-form .form-content {
+      transition: opacity 0.3s ease;
+    }
+
+    .announcement-form.minimized .form-content {
+      opacity: 0;
+      pointer-events: none;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .announcement-form input,
+    .announcement-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+    }
+
+    .announcement-form button {
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .announcement-form button:hover {
+      background-color: #1565c0;
     }
 
     @media (max-width: 768px) {
@@ -98,9 +201,15 @@
       h3 {
         font-size: 16px;
       }
-      .note {
+      .note, .announcement h2 {
         font-size: 14px;
       }
+    }
+
+    em {
+      color: #e67e22;
+      font-style: normal;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -110,7 +219,7 @@
   <h3>(Minggu 1–22) TIM Latest Version (Tentativ) 2024/2025</h3>
 
   <div class="table-container">
-    <table>
+    <table id="jadwalTable">
       <thead>
         <tr>
           <th>No</th>
@@ -122,112 +231,204 @@
       </thead>
       <tbody>
         <tr>
-          <td><br><br><br><br><b>1</b></td>
-          <td><br><br><br><br><b>Senin</b></td>
-          <td>
-            14:00 – 14:40
-            14:40 – 15:20
-            15:20 – 16:00<br>
-            16:00 – 16:40
-            16:40 – 17:20
-            17:20 – 18:00
-          </td>
-          <td>
-            <br>Praktikum Audio Visual Lanjut
-            <br><br><br>Forensik Digital
-          </td>
-          <td>
-            <br>Meiyi Darlies, S.Kom., M.Kom.
-            <br><br><br>Ali Firdaus, S.Kom., M.Kom.
-          </td>
-        </tr>
-        <tr>
-          <td><br><b>2</b></td>
-          <td><br><b>Selasa</b></td>
-          <td>
-            19:50 – 20:30
-            20:30 – 21:10
-          </td>
-          <td><br>Praktikum Animasi Lanjut (Online)</td>
-          <td><br>Fithri Selva Jumeilah, S.Kom., M.T.I.</td>
-        </tr>
-        <tr>
-          <td><br><br><br><br><br><br><b>3</b></td>
-          <td><br><br><br><br><br><br><b>Rabu</b></td>
-          <td>
-            13:00 – 13:40
-            13:40 – 14:20
-            14:20 – 15:00<br>
-            15:00 – 15:40
-            15:40 – 16:20
-            16:20 – 17:00
-            17:00 – 17:40<br>
-            <em>Istirahat (17:40 – 18:30)</em><br>
-            18:30 – 19:10
-            19:10 – 19:50
-            19:50 – 20:30
-          </td>
-          <td>
-            <br>Pengolahan Citra
-            <br><br><br>Praktikum Animasi Lanjut
-            <br><br><br><br><br><br>Perancangan Sistem Informasi
-          </td>
-          <td>
-            <br>Ahyar Supani, S.T., M.T.
-            <br><br><br>Fithri Selva Jumeilah, S.Kom., M.T.I.
-            <br><br><br><br><br><br>Isnainy Azro, S.Kom., M.Kom.
-          </td>
-        </tr>
-        <tr>
-          <td><br><br><br><br><b>4</b></td>
-          <td><br><br><br><br><b>Kamis</b></td>
-          <td>
-            13:00 – 13:40
-            13:40 – 14:20
-            14:20 – 15:00<br>
-            <em>Istirahat (15:00 – 16:30)</em><br>
-            16:30 – 17:10
-            17:10 – 17:50
-          </td>
-          <td>
-            <br>Pengembangan Game Cerdas
-            <br><br><br><br>Pendidikan Pancasila (Tentativ)
-          </td>
-          <td>
-            <br>R. M. Chairil Andri, S.S.T., M.I.T.
-            <br><br><br><br>Liza Utama, S.H., M.H.
-          </td>
-        </tr>
-        <tr>
-          <td><br><br><b>5</b></td>
-          <td><br><br><b>Jumat</b></td>
-          <td>
-            15:30 – 16:10
-            16:10 – 16:50
-            16:50 – 17:30
-          </td>
-          <td><br><br>Praktikum Pemrograman Web 1 (Tentativ)</td>
-          <td><br><br>Hidayati Ami, S.Kom., M.Kom.</td>
-        </tr>
-        <tr>
-          <td><br><br><b>6</b></td>
-          <td><br><br><b>Sabtu</b></td>
-          <td>
-            09:00 – 09:40
-            09:40 – 10:20
-            10:20 – 11:00
-          </td>
-          <td><br><br>Praktikum Pemrograman Mobile</td>
-          <td><br><br>Yunita Fauzia A., S.Kom., M.Kom.</td>
-        </tr>
+            <td><br><br><br><br><br><br><b>1</b></td>
+            <td><br><br><br><br><br><br><b>Senin</b></td>
+            <td>
+              14:00 – 14:40
+              14:40 – 15:20
+              15:20 – 16:00<br>
+              16:00 – 16:40
+              16:40 – 17:20
+              17:20 – 18:00<br>
+              <em>Istirahat (18:00 – 18:30)</em><br>
+              18.30 – 19.10
+              19.10 – 19.50
+            </td>
+            <td>
+              <br>Praktikum Audio Visual Lanjut
+              <br><br><br>Forensik Digital
+              <br><br><br><br>Pendidikan Pancasila
+            </td>
+            <td>
+              <br>Meiyi Darlies, S.Kom., M.Kom.
+              <br><br><br>Ali Firdaus, S.Kom., M.Kom.
+              <br><br><br><br>Liza Utama, S.H., M.H.
+            </td>
+          </tr>
+          <tr>
+            <td><br><b>2</b></td>
+            <td><br><b>Selasa</b></td>
+            <td>
+              19:50 – 20:30
+              20:30 – 21:10
+            </td>
+            <td><br>Praktikum Animasi Lanjut (Online)</td>
+            <td><br>Fithri Selva Jumeilah, S.Kom., M.T.I.</td>
+          </tr>
+          <tr>
+            <td><br><br><br><br><br><br><b>3</b></td>
+            <td><br><br><br><br><br><br><b>Rabu</b></td>
+            <td>
+              13:00 – 13:40
+              13:40 – 14:20
+              14:20 – 15:00<br>
+              15:00 – 15:40
+              15:40 – 16:20
+              16:20 – 17:00
+              17:00 – 17:40<br>
+              <em>Istirahat (17:40 – 18:30)</em><br>
+              18:30 – 19:10
+              19:10 – 19:50
+              19:50 – 20:30
+            </td>
+            <td>
+              <br>Pengolahan Citra
+              <br><br><br>Praktikum Animasi Lanjut
+              <br><br><br><br><br><br>Perancangan Sistem Informasi
+            </td>
+            <td>
+              <br>Ahyar Supani, S.T., M.T.
+              <br><br><br>Fithri Selva Jumeilah, S.Kom., M.T.I.
+              <br><br><br><br><br><br>Isnainy Azro, S.Kom., M.Kom.
+            </td>
+          </tr>
+          <tr>
+            <td><br><br><b>4</b></td>
+            <td><br><br><b>Kamis</b></td>
+            <td>
+              13:00 – 13:40
+              13:40 – 14:20
+              14:20 – 15:00
+            </td>
+            <td>
+              <br>Pengembangan Game Cerdas
+            </td>
+            <td>
+              <br>R. M. Chairil Andri, S.S.T., M.I.T.
+            </td>
+          </tr>
+          <tr>
+            <td><br><br><b>5</b></td>
+            <td><br><br><b>Jumat</b></td>
+            <td>
+              15:30 – 16:10
+              16:10 – 16:50
+              16:50 – 17:30
+            </td>
+            <td><br><br>Praktikum Pemrograman Web 1 (Tentativ)</td>
+            <td><br><br>Hidayati Ami, S.Kom., M.Kom.</td>
+          </tr>
+          <tr>
+            <td><br><br><b>6</b></td>
+            <td><br><br><b>Sabtu</b></td>
+            <td>
+              09:00 – 09:40
+              09:40 – 10:20
+              10:20 – 11:00
+            </td>
+            <td><br><br>Praktikum Pemrograman Mobile</td>
+            <td><br><br>Yunita Fauzia A., S.Kom., M.Kom.</td>
+          </tr>
       </tbody>
     </table>
   </div>
 
-  <div class="note">
-    <b>Catatan:</b> Jadwal dapat berubah sewaktu-waktu (tentativ) sesuai kesepakatan bersama.<br><br>
-    @roniranggas @timbanganamal
+  <div class="announcement">
+    <h2>📢 Pengumuman</h2>
+    <ul id="daftarPengumuman">
+    </ul>
   </div>
 
+  <div class="announcement-form minimized" id="formPengumuman">
+    <h2 onclick="toggleMinimize()">📝 Tambah Pengumuman <span id="toggleIcon">–</span></h2>
+    <div class="form-content">
+      <input type="text" id="judulPengumuman" placeholder="Judul pengumuman (opsional)">
+      <textarea id="isiPengumuman" rows="3" placeholder="Tulis isi pengumuman..."></textarea>
+      <button onclick="tambahPengumuman()">Tambah</button>
+    </div>
+  </div>
+
+  <div class="note">
+    <small>@roniranggas @timbanganamal @TIMD'23</small>
+ </div>
+
+  <script>
+    let isMinimized = false;
+
+// Fungsi untuk menambah pengumuman
+function tambahPengumuman() {
+  const judul = document.getElementById("judulPengumuman").value.trim();
+  const isi = document.getElementById("isiPengumuman").value.trim();
+
+  if (!isi) {
+    alert("Isi pengumuman tidak boleh kosong.");
+    return;
+  }
+
+  const ul = document.getElementById("daftarPengumuman");
+  const li = document.createElement("li");
+
+  // Tambahkan pengumuman ke dalam daftar
+  if (judul) {
+    li.innerHTML = `<strong>${judul}</strong>: ${isi} <button onclick="hapusPengumuman(this)">Hapus</button>`;
+  } else {
+    li.innerHTML = `${isi} <button onclick="hapusPengumuman(this)">Hapus</button>`;
+  }
+
+  ul.appendChild(li);
+
+  // Simpan pengumuman di LocalStorage
+  simpanPengumuman();
+
+  document.getElementById("judulPengumuman").value = "";
+  document.getElementById("isiPengumuman").value = "";
+}
+
+// Fungsi untuk menghapus pengumuman
+function hapusPengumuman(button) {
+  button.parentElement.remove();
+  simpanPengumuman();  // Update local storage setelah pengumuman dihapus
+}
+
+// Fungsi untuk menyimpan pengumuman ke LocalStorage
+function simpanPengumuman() {
+  const pengumumanList = [];
+  const daftarPengumuman = document.getElementById("daftarPengumuman");
+  daftarPengumuman.querySelectorAll("li").forEach(li => {
+    pengumumanList.push(li.innerHTML);
+  });
+  localStorage.setItem('pengumuman', JSON.stringify(pengumumanList));
+}
+
+// Cek apakah ada pengumuman yang disimpan saat halaman dimuat
+window.onload = function() {
+  const savedPengumuman = localStorage.getItem('pengumuman');
+  if (savedPengumuman) {
+    const pengumumanList = JSON.parse(savedPengumuman);
+    const ul = document.getElementById("daftarPengumuman");
+    pengumumanList.forEach(pengumuman => {
+      const li = document.createElement("li");
+      li.innerHTML = pengumuman;
+      ul.appendChild(li);
+    });
+  }
+};
+
+// Fungsi untuk toggle minimize form
+function toggleMinimize() {
+  const form = document.getElementById('formPengumuman');
+  const icon = document.getElementById('toggleIcon');
+  isMinimized = !isMinimized;
+
+  if (isMinimized) {
+    form.classList.add("minimized");
+    icon.textContent = "–";
+  } else {
+    form.classList.remove("minimized");
+    icon.textContent = "–";
+  }
+}
+
+  </script>
 </body>
 </html>
