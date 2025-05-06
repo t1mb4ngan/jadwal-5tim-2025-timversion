@@ -119,76 +119,28 @@
       color: #2c3e50;
       font-size: 22px;
       margin-bottom: 12px;
-    }
-
-    .announcement ul {
-      padding-left: 20px;
-    }
-
-    .announcement ul li {
-      margin-bottom: 10px;
-    }
-
-    .announcement-form {
-      background-color: #ffffff;
-      padding: 20px;
-      margin-top: 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      max-height: 1000px;
-    }
-
-    .announcement-form.minimized {
-      max-height: 50px;
-    }
-
-    .announcement-form h2 {
-      margin-top: 0;
-      color: #2c3e50;
-      font-size: 20px;
-      margin-bottom: 12px;
-      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .announcement-form .form-content {
-      transition: opacity 0.3s ease;
-    }
-
-    .announcement-form.minimized .form-content {
-      opacity: 0;
-      pointer-events: none;
-      height: 0;
-      overflow: hidden;
-    }
-
-    .announcement-form input,
-    .announcement-form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-    }
-
-    .announcement-form button {
+    .announcement button {
       background-color: #1e88e5;
       color: white;
       border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
+      padding: 6px 12px;
+      border-radius: 6px;
       cursor: pointer;
+      font-size: 14px;
       transition: background-color 0.3s ease;
     }
 
-    .announcement-form button:hover {
+    .announcement button:hover {
       background-color: #1565c0;
+    }
+
+    .hidden {
+      display: none;
     }
 
     @media (max-width: 768px) {
@@ -334,101 +286,37 @@
   </div>
 
   <div class="announcement">
-    <h2>📢 Pengumuman</h2>
+    <h2>
+      📢 Pengumuman
+      <button id="toggleAnnouncement">–</button>
+    </h2>
     <ul id="daftarPengumuman">
+      <b>Note</b>: Jadwal dapat berubah sewaktu-waktu (tentativ) sesuai kesepakatan bersama.<br><br>
+      <b>Perubahan Jadwal Senin dan Kamis</b>: Mata Kuliah Pendidikan Pancasila yang pada asalnya dilaksanakan pada hari kamis di jam 16.30-17.50, 
+      dipindahkan tetap dihari senin di jam 18.30-19.50 setelah mata kuliah forensik digital, berlaku hingga minggu ke 18, 
+      setelah minggu tersebut akan diinfokan dosen bersangkutan mengenai pergantian libur 4 minggu pertemuan, terjadwal pada minggu ke 19-22. Terima kasih🙏<br><br>
+      <b>Pengganti Libur Ramadhan</b>: <br>Berikut mata kuliah yang terjadwal pengganti pada minggu ke 19-22 <br>• Pengembangan Game Cerdas <br>• Pengolahan Citra 
+      <br>• Perancangan Sistem Informasi <br>• Pendidikan Pancasila <br>• Praktikum Animasi Lanjut
     </ul>
   </div>
 
-  <div class="announcement-form minimized" id="formPengumuman">
-    <h2 onclick="toggleMinimize()">📝 Tambah Pengumuman <span id="toggleIcon">–</span></h2>
-    <div class="form-content">
-      <input type="text" id="judulPengumuman" placeholder="Judul pengumuman (opsional)">
-      <textarea id="isiPengumuman" rows="3" placeholder="Tulis isi pengumuman..."></textarea>
-      <button onclick="tambahPengumuman()">Tambah</button>
-    </div>
+  <div class="note">
+    <small>©roniranggas @timbanganamal @TIMD'23</small>
   </div>
 
-  <div class="note">
-    <small>@roniranggas @timbanganamal @TIMD'23</small>
- </div>
-
   <script>
-    let isMinimized = false;
-
-// Fungsi untuk menambah pengumuman
-function tambahPengumuman() {
-  const judul = document.getElementById("judulPengumuman").value.trim();
-  const isi = document.getElementById("isiPengumuman").value.trim();
-
-  if (!isi) {
-    alert("Isi pengumuman tidak boleh kosong.");
-    return;
-  }
-
-  const ul = document.getElementById("daftarPengumuman");
-  const li = document.createElement("li");
-
-  // Tambahkan pengumuman ke dalam daftar
-  if (judul) {
-    li.innerHTML = `<strong>${judul}</strong>: ${isi} <button onclick="hapusPengumuman(this)">Hapus</button>`;
-  } else {
-    li.innerHTML = `${isi} <button onclick="hapusPengumuman(this)">Hapus</button>`;
-  }
-
-  ul.appendChild(li);
-
-  // Simpan pengumuman di LocalStorage
-  simpanPengumuman();
-
-  document.getElementById("judulPengumuman").value = "";
-  document.getElementById("isiPengumuman").value = "";
-}
-
-// Fungsi untuk menghapus pengumuman
-function hapusPengumuman(button) {
-  button.parentElement.remove();
-  simpanPengumuman();  // Update local storage setelah pengumuman dihapus
-}
-
-// Fungsi untuk menyimpan pengumuman ke LocalStorage
-function simpanPengumuman() {
-  const pengumumanList = [];
-  const daftarPengumuman = document.getElementById("daftarPengumuman");
-  daftarPengumuman.querySelectorAll("li").forEach(li => {
-    pengumumanList.push(li.innerHTML);
-  });
-  localStorage.setItem('pengumuman', JSON.stringify(pengumumanList));
-}
-
-// Cek apakah ada pengumuman yang disimpan saat halaman dimuat
-window.onload = function() {
-  const savedPengumuman = localStorage.getItem('pengumuman');
-  if (savedPengumuman) {
-    const pengumumanList = JSON.parse(savedPengumuman);
-    const ul = document.getElementById("daftarPengumuman");
-    pengumumanList.forEach(pengumuman => {
-      const li = document.createElement("li");
-      li.innerHTML = pengumuman;
-      ul.appendChild(li);
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleBtn = document.getElementById('toggleAnnouncement');
+      const pengumuman = document.getElementById('daftarPengumuman');
+      
+      toggleBtn.addEventListener('click', function () {
+        pengumuman.classList.toggle('hidden');
+        toggleBtn.textContent = pengumuman.classList.contains('hidden') 
+          ? '–' 
+          : '–';
+      });
     });
-  }
-};
-
-// Fungsi untuk toggle minimize form
-function toggleMinimize() {
-  const form = document.getElementById('formPengumuman');
-  const icon = document.getElementById('toggleIcon');
-  isMinimized = !isMinimized;
-
-  if (isMinimized) {
-    form.classList.add("minimized");
-    icon.textContent = "–";
-  } else {
-    form.classList.remove("minimized");
-    icon.textContent = "–";
-  }
-}
-
   </script>
+
 </body>
 </html>
