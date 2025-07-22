@@ -414,6 +414,7 @@
         }
 
         /* Styles for text in schedule table */
+        /* Keep white-space: pre-line for all 3 columns as requested for original breaks */
         .content-card td:nth-child(3), .content-card td:nth-child(4), .content-card td:nth-child(5) {
             white-space: pre-line;
         }
@@ -954,6 +955,13 @@
                 padding: 0.8rem 1rem;
                 font-size: 0.9em;
             }
+            /* Specific adjustment for the time column on small screens */
+            .content-card td:nth-child(3) { /* This targets the 'Jam' column */
+                font-size: 0.75em; /* Make font smaller for times */
+                line-height: 1.2; /* Reduce line height for compactness */
+                white-space: pre-line; /* Keep pre-line as requested */
+            }
+
             .student-photos-grid {
                 grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
                 gap: 1rem;
@@ -1027,7 +1035,7 @@
             }
             .sidebar ul li.active {
                 border-left: none;
-                border-bottom: 44px solid var(--secondary-color);
+                border-bottom: 4px solid var(--secondary-color);
                 background-color: var(--primary-color);
             }
             .sidebar .logout {
@@ -1115,13 +1123,18 @@
             .mobile-overlay small {
                 font-size: 0.8em;
             }
+            /* Further specific adjustment for the time column on very small screens */
+            .content-card td:nth-child(3) { /* This targets the 'Jam' column */
+                font-size: 0.65em; /* Even smaller font for times on tiny screens */
+                line-height: 1.1; /* Even tighter line height */
+            }
         }
     </style>
 </head>
 <body>
     <div class="mobile-overlay" id="mobile-overlay">
         <p><i class="fas fa-desktop"></i> Maaf ya, untuk pengalaman terbaik, disarankan mengakses website ini di mode desktop.</p>
-        <small>Aktifkan mode dekstop di browser kamu.</small>
+        <small>Aktifkan mode desktop di browser kamu.</small>
     </div>
 
     <div class="sidebar">
@@ -1215,15 +1228,15 @@
                             <td><br><br><br><br><br><br><b>1</b></td>
                             <td><br><br><br><br><br><br><b>Senin</b></td>
                             <td>
-                                14:00 – 14:40
-                                14:40 – 15:20
+                                14:00 – 14:40<br>
+                                14:40 – 15:20<br>
                                 15:20 – 16:00<br>
-                                16:00 – 16:40
-                                16:40 – 17:20
+                                16:00 – 16:40<br>
+                                16:40 – 17:20<br>
                                 17:20 – 18:00<br>
                                 <em>Istirahat (18:00 – 18:30)</em><br>
-                                18.30 – 19.10
-                                19.10 – 19.50
+                                18:30 – 19:10<br>
+                                19:10 – 19:50
                             </td>
                             <td>
                                 <br>Praktikum Audio Visual Lanjut
@@ -1240,7 +1253,7 @@
                             <td><br><b>2</b></td>
                             <td><br><b>Selasa</b></td>
                             <td>
-                                19:50 – 20:30
+                                19:50 – 20:30<br>
                                 20:30 – 21:10
                             </td>
                             <td><br>Praktikum Animasi Lanjut (Online)</td>
@@ -1250,16 +1263,16 @@
                             <td><br><br><br><br><br><br><b>3</b></td>
                             <td><br><br><br><br><br><br><b>Rabu</b></td>
                             <td>
-                                13:00 – 13:40
-                                13:40 – 14:20
+                                13:00 – 13:40<br>
+                                13:40 – 14:20<br>
                                 14:20 – 15:00<br>
-                                15:00 – 15:40
-                                15:40 – 16:20
-                                16:20 – 17:00
+                                15:00 – 15:40<br>
+                                15:40 – 16:20<br>
+                                16:20 – 17:00<br>
                                 17:00 – 17:40<br>
                                 <em>Istirahat (17:40 – 18:30)</em><br>
-                                18:30 – 19:10
-                                19:10 – 19:50
+                                18:30 – 19:10<br>
+                                19:10 – 19:50<br>
                                 19:50 – 20:30
                             </td>
                             <td>
@@ -1277,8 +1290,8 @@
                             <td><br><br><b>4</b></td>
                             <td><br><br><b>Kamis</b></td>
                             <td>
-                                13:00 – 13:40
-                                13:40 – 14:20
+                                13:00 – 13:40<br>
+                                13:40 – 14:20<br>
                                 14:20 – 15:00
                             </td>
                             <td>
@@ -1292,8 +1305,8 @@
                             <td><br><br><b>5</b></td>
                             <td><br><br><b>Jumat</b></td>
                             <td>
-                                15:30 – 16:10
-                                16:10 – 16:50
+                                15:30 – 16:10<br>
+                                16:10 – 16:50<br>
                                 16:50 – 17:30
                             </td>
                             <td><br><br>Praktikum Pemrograman Web 1 (Tentative)</td>
@@ -1303,8 +1316,8 @@
                             <td><br><br><b>6</b></td>
                             <td><br><br><b>Sabtu</b></td>
                             <td>
-                                09:00 – 09:40
-                                09:40 – 10:20
+                                09:00 – 09:40<br>
+                                09:40 – 10:20<br>
                                 10:20 – 11:00
                             </td>
                             <td><br><br>Praktikum Pemrograman Mobile</td>
@@ -1432,7 +1445,7 @@
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Ardya Pratiwi Putri</span>
                         <span class="student-role">Anggota</span>
@@ -1557,23 +1570,23 @@
             const body = document.body;
             const themeToggle = document.getElementById('pengaturan-tema');
             const sidebarElement = document.querySelector('.sidebar');
-            const mainContentElement = document.querySelector('.main-content'); // Get main content element
+            const mainContentElement = document.querySelector('.main-content');
             const mobileOverlay = document.getElementById('mobile-overlay');
 
             // Function to check if the user agent indicates a desktop operating system
             function isDesktopUserAgent() {
                 const userAgent = navigator.userAgent;
-                // Common desktop OS indicators
-                return /windows|macintosh|linux|x11/i.test(userAgent) && !/android|iphone|ipad|ipod|windows phone/i.test(userAgent);
+                // Common desktop OS indicators, exclude mobile/tablet explicitly
+                return /windows|macintosh|linux|x11/i.test(userAgent) && !/android|iphone|ipad|ipod|windows phone|iemobile|opera mini/i.test(userAgent);
             }
 
             // Function to handle the display of the mobile overlay
             function checkMobileOverlay() {
                 const isSmallScreen = window.innerWidth <= 992; // Threshold for mobile view
-                const isTrulyDesktop = isDesktopUserAgent(); // Check if user agent is desktop
+                const isUserAgentDesktop = isDesktopUserAgent(); // Check if user agent is desktop
 
-                if (isSmallScreen && !isTrulyDesktop) {
-                    // It's a small screen AND user agent is NOT desktop (implies mobile device) -> show overlay
+                // Show overlay only if it's a small screen AND user agent is NOT desktop (meaning it's a mobile device in its default mobile view)
+                if (isSmallScreen && !isUserAgentDesktop) {
                     mobileOverlay.style.display = 'flex';
                     // Sembunyikan konten utama dan sidebar
                     sidebarElement.style.display = 'none';
@@ -1581,11 +1594,11 @@
                     if (sidebarToggleBtn) sidebarToggleBtn.style.display = 'none';
                     document.body.style.overflow = 'hidden'; // Prevent scrolling behind the overlay
                 } else {
-                    // It's a large screen OR user agent is desktop -> hide overlay and show content
+                    // Hide overlay and show content
                     mobileOverlay.style.display = 'none';
-                    // Tampilkan kembali konten utama dan sidebar (sesuai dengan CSS aslinya)
-                    sidebarElement.style.display = ''; // Reset to default (flex by CSS)
-                    mainContentElement.style.display = ''; // Reset to default (flex by CSS)
+                    // Restore original display styles
+                    sidebarElement.style.display = ''; 
+                    mainContentElement.style.display = '';
                     if (sidebarToggleBtn) sidebarToggleBtn.style.display = '';
                     document.body.style.overflow = ''; // Allow scrolling
                 }
@@ -1599,6 +1612,12 @@
 
             // Function to set the active section and link
             function showSection(targetId) {
+                // Only change section if not blocked by overlay
+                if (mobileOverlay.style.display === 'flex') {
+                    // Optionally alert user or just do nothing
+                    return; 
+                }
+
                 sidebarLinks.forEach(item => item.classList.remove('active'));
                 contentSections.forEach(section => {
                     section.classList.remove('active');
@@ -1688,19 +1707,56 @@
                 });
             }
 
-            // Load saved theme preference
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                applyTheme(savedTheme);
-                themeToggle.value = savedTheme;
-            } else {
-                applyTheme('light');
+            // Carousel functionality
+            const carouselSlides = document.querySelector('.carousel-slides');
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const nextButton = document.querySelector('.carousel-button.next');
+            const slides = document.querySelectorAll('.carousel-slide');
+            let currentSlide = 0;
+            let autoSlideInterval;
+
+            function showSlide(index) {
+                if (slides.length === 0) return; // Prevent errors if no slides
+                if (index >= slides.length) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = slides.length - 1;
+                } else {
+                    currentSlide = index;
+                }
+                carouselSlides.style.transform = `translateX(${-currentSlide * 100}%)`;
             }
 
-            // Event listener for theme change
-            themeToggle.addEventListener('change', function() {
-                applyTheme(this.value);
-            });
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+
+            function startAutoSlide() {
+                stopAutoSlide(); // Clear any existing interval before starting a new one
+                autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            if (slides.length > 0) {
+                prevButton.addEventListener('click', () => {
+                    stopAutoSlide();
+                    prevSlide();
+                    startAutoSlide();
+                });
+                nextButton.addEventListener('click', () => {
+                    stopAutoSlide();
+                    nextSlide();
+                    startAutoSlide();
+                });
+                startAutoSlide(); // Start auto-sliding when the page loads
+            }
 
             // PDF Announcements (Dummy Data)
             const pdfAnnouncementsData = [
