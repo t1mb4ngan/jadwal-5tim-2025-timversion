@@ -887,13 +887,13 @@
 
         /* --- Mobile Overlay Styles --- */
         .mobile-overlay {
-            display: none; /* Hidden by default */
+            display: none; /* Hidden by default, controlled by JS */
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.9); /* Dark semi-transparent background */
+            background-color: rgba(0, 0, 0, 0.95); /* Darker semi-transparent background */
             color: white;
             z-index: 9999; /* Ensure it's on top of everything */
             flex-direction: column;
@@ -902,6 +902,7 @@
             padding: 20px;
             text-align: center;
             animation: fadeIn 0.5s ease-out;
+            pointer-events: auto; /* Allow interactions on the overlay itself */
         }
 
         .mobile-overlay p {
@@ -922,6 +923,7 @@
 
         /* Responsive adjustments */
         @media (max-width: 992px) {
+            /* General responsive styles for layouts below 992px */
             .sidebar {
                 width: 220px;
             }
@@ -978,20 +980,10 @@
             .pdf-announcements .announcement-date {
                 font-size: 0.75em;
             }
-
-            /* Hide everything and show overlay on mobile/tablet screens */
-            .sidebar, .main-content, #sidebar-toggle {
-                display: none !important; /* Force hide these elements */
-                visibility: hidden !important;
-                opacity: 0 !important;
-            }
-            .mobile-overlay {
-                display: flex; /* Show the overlay */
-            }
         }
 
         @media (max-width: 768px) {
-            /* These styles are still applied, but overridden by the 992px media query for the overlay */
+            /* These styles are for smaller mobile screens when overlay is not active */
             body {
                 flex-direction: column;
             }
@@ -1126,7 +1118,7 @@
     </style>
 </head>
 <body>
-    <div class="mobile-overlay">
+    <div class="mobile-overlay" id="mobile-overlay">
         <p><i class="fas fa-desktop"></i> Maaf ya, untuk pengalaman terbaik, disarankan mengakses website ini di mode desktop.</p>
         <small>Aktifkan mode dekstop di browser kamu.</small>
     </div>
@@ -1563,9 +1555,45 @@
             const sidebarToggleBtn = document.getElementById('sidebar-toggle');
             const body = document.body;
             const themeToggle = document.getElementById('pengaturan-tema');
-            const sidebarElement = document.querySelector('.sidebar'); // Get sidebar element once
-            
-            // Removed desktop-access-alert and its related JS as it's now handled by the mobile-overlay CSS
+            const sidebarElement = document.querySelector('.sidebar');
+            const mobileOverlay = document.getElementById('mobile-overlay');
+
+            // Function to check if the user agent indicates a mobile device
+            function isMobileDeviceByUA() {
+                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                // Regex to detect common mobile OS/browsers, but excludes common tablet indicators if you want to allow larger tablets
+                return /android|iphone|ipad|ipod|blackberry|windows phone|iemobile|opera mini/i.test(userAgent) &&
+                       !/macintosh|windows|linux/i.test(userAgent); // Exclude common desktop OS
+            }
+
+            // Function to handle the display of the mobile overlay
+            function checkMobileOverlay() {
+                const isMobileView = window.innerWidth <= 992; // Max width for overlay to appear
+                const isDesktopUserAgent = !isMobileDeviceByUA(); // True if UA looks like desktop
+
+                if (isMobileView && !isDesktopUserAgent) {
+                    // It's a small screen AND user agent is mobile -> show overlay
+                    mobileOverlay.style.display = 'flex';
+                    // Hide main content and sidebar
+                    document.querySelector('.sidebar').style.display = 'none';
+                    document.querySelector('.main-content').style.display = 'none';
+                    if (sidebarToggleBtn) sidebarToggleBtn.style.display = 'none';
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling behind the overlay
+                } else {
+                    // It's a large screen OR user agent is desktop -> hide overlay and show content
+                    mobileOverlay.style.display = 'none';
+                    document.querySelector('.sidebar').style.display = ''; // Reset to default display (flex by CSS)
+                    document.querySelector('.main-content').style.display = ''; // Reset to default display (flex by CSS)
+                    if (sidebarToggleBtn) sidebarToggleBtn.style.display = '';
+                    document.body.style.overflow = ''; // Allow scrolling
+                }
+            }
+
+            // Initial check on page load
+            checkMobileOverlay();
+
+            // Re-check on window resize
+            window.addEventListener('resize', checkMobileOverlay);
 
             // Function to set the active section and link
             function showSection(targetId) {
@@ -1613,7 +1641,6 @@
             }
 
             // Initial sidebar animation on page load (only for desktop)
-            // This will only run if the mobile-overlay is NOT active via CSS media query
             if (sidebarElement && !body.classList.contains('sidebar-hidden') && window.innerWidth > 992) {
                 sidebarElement.style.animation = 'slideInLeft 0.8s forwards 0.1s';
             }
@@ -1629,15 +1656,15 @@
             // Sidebar navigation click handler
             sidebarLinks.forEach(linkParent => {
                 linkParent.addEventListener('click', function(e) {
-                    // Prevent default action only if on mobile, to allow proper desktop behavior
-                    if (window.innerWidth <= 992) {
+                    // Only prevent default if overlay is active, to allow normal desktop behavior
+                    if (mobileOverlay.style.display === 'flex') {
                         e.preventDefault(); 
                     }
                     const targetId = this.dataset.target;
                     window.location.hash = targetId; // Update URL hash
                     showSection(targetId);
                     // Hide sidebar on mobile after clicking a link
-                    if (window.innerWidth <= 768) {
+                    if (window.innerWidth <= 768 && mobileOverlay.style.display !== 'flex') { // Only hide if not completely covered by overlay
                         body.classList.add('sidebar-hidden');
                         sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>'; // Change icon back to bars
                     }
@@ -1655,15 +1682,6 @@
                     }
                 });
             }
-
-            // Handle initial sidebar state based on screen width
-            // This is primarily for a desktop view to start with a hidden sidebar if preferred
-            // The mobile-overlay media query will handle actual mobile hiding
-            if (window.innerWidth <= 768) {
-                body.classList.add('sidebar-hidden'); // Keep it hidden on small screens for consistency
-                sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-
 
             // Carousel functionality
             const carouselSlides = document.querySelector('.carousel-slides');
