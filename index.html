@@ -66,6 +66,11 @@
             flex-direction: column;
             z-index: 1000;
             transition: all 0.3s ease;
+            /* Animation for sidebar on load */
+            opacity: 0;
+            transform: translateX(-100%);
+            animation: slideInLeft 0.8s forwards;
+            animation-delay: 0.1s; /* Reduced delay for sidebar to appear first */
         }
 
         .sidebar h2 {
@@ -193,6 +198,11 @@
             padding: 2.5rem;
             overflow-y: auto;
             transition: all 0.3s ease;
+            /* Animation for main content on load */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s forwards;
+            animation-delay: 0.2s; /* Increased delay to allow sidebar to lead */
         }
 
         /* Sidebar Toggle Button */
@@ -212,7 +222,7 @@
             font-size: 1.5em;
             cursor: pointer;
             box-shadow: var(--shadow-light);
-            z-index: 1001;
+            z-index: 1002; /* Higher z-index to ensure it's on top */
             transition: all 0.3s ease;
         }
 
@@ -228,6 +238,8 @@
             padding-left: 0;
             padding-right: 0;
             box-shadow: none;
+            transform: translateX(-100%); /* Ensure it slides out */
+            animation: none; /* Disable initial animation when hidden */
         }
 
         body.sidebar-hidden .sidebar-profile,
@@ -259,6 +271,11 @@
             color: var(--text-color);
             border-left: 6px solid var(--primary-color);
             transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            /* Animation for home header */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s forwards;
+            animation-delay: 0.4s;
         }
 
         .home-header h1 {
@@ -288,6 +305,11 @@
             overflow-x: auto;
             transition: all 0.3s ease;
             border-top: 5px solid var(--primary-color);
+            /* Animation for content cards */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s forwards;
+            animation-delay: 0.6s; /* Adjust delay for sequential appearance */
         }
 
         .content-card:hover {
@@ -408,7 +430,7 @@
         /* Announcement Styling */
         .announcement h2 {
             margin-top: 0;
-            color: var(--primary-color); /* Kept as primary-color (purple) as requested */
+            color: var(--primary-color);  
             font-size: 1.7em;
             margin-bottom: 1rem;
             display: flex;
@@ -514,6 +536,11 @@
             overflow: hidden;
             border-bottom: 5px solid var(--primary-color);
             text-align: center;
+            /* Animation for home cards */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s forwards;
+            /* Will be controlled by JS for staggered effect */
         }
 
         .home-card:hover {
@@ -572,6 +599,11 @@
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-medium);
             background-color: var(--card-bg);
+            /* Animation for carousel */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s forwards;
+            animation-delay: 0.3s;
         }
 
         .carousel-slides {
@@ -652,6 +684,10 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             height: auto;
             min-height: 150px;
+            /* Animation for student cards */
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeInScaleUp 0.6s forwards;
         }
 
         .student-card:hover {
@@ -697,6 +733,11 @@
             border: 2px solid var(--secondary-color);
             background-color: var(--card-bg); /* Use card-bg */
             box-shadow: var(--shadow-medium);
+            /* Animation for PA card */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s forwards;
+            animation-delay: 0.7s;
         }
         body.dark-mode .dosen-pa-card {
             background-color: #263040; /* Slightly different dark background for PA card */
@@ -810,6 +851,41 @@
             margin: 2.5rem 0;
         }
 
+        /* Keyframe Animations */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInScaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
         /* Responsive adjustments */
         @media (max-width: 992px) {
             .sidebar {
@@ -824,6 +900,9 @@
             }
             .home-header h1 {
                 font-size: 1.6em;
+            }
+            .home-header div {
+                font-size: 1em;
             }
             .home-card-container {
                 grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
@@ -878,6 +957,8 @@
                 box-shadow: none;
                 padding-top: 1.4rem;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                transform: translateX(0); /* Remove initial transform for mobile layout */
+                animation: none; /* Disable slideInLeft animation on mobile for better flow */
             }
             .sidebar h2 {
                 margin-bottom: 1.8rem;
@@ -928,6 +1009,7 @@
             .main-content {
                 margin-left: 0;
                 padding: 1.4rem;
+                animation: fadeInSlideUp 0.8s forwards; /* Keep main content animation */
             }
             .home-header {
                 flex-direction: column;
@@ -992,9 +1074,8 @@
             .pdf-announcements .announcement-item i {
                 font-size: 1.4em;
             }
-            .pdf-announcements .announcement-item .content-wrapper a {
-                font-size: 0.9em;
-                white-space: normal;
+            .pdf-announcements .announcement-item .content-wrapper {
+                width: 100%;
             }
             .pdf-announcements .announcement-date {
                 font-size: 0.75em;
@@ -1068,7 +1149,7 @@
                 width: 100%;
             }
             .pdf-announcements .announcement-date {
-                font-size: 0.7em;
+                font-size: 0.75em;
                 margin-left: 0;
                 flex-basis: 100%;
                 text-align: left;
@@ -1470,15 +1551,15 @@
             <div class="content-card">
                 <h3>Informasi Umum Website</h3>
                 <div class="form-group">
-                    <label for="pengaturan-nama-sistem"><i class="fas fa-wrench"></i> Nama Sistem:</label> 
+                    <label for="pengaturan-nama-sistem"><i class="fas fa-wrench"></i> Nama Sistem:</label>  
                     <input type="text" id="pengaturan-nama-sistem" value="Sistem Informasi 5 TIM">
                 </div>
                 <div class="form-group">
-                    <label for="pengaturan-versi"><i class="fas fa-code-branch"></i> Versi:</label> 
+                    <label for="pengaturan-versi"><i class="fas fa-code-branch"></i> Versi:</label>  
                     <input type="text" id="pengaturan-versi" value="1.0.0" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="pengaturan-tema"><i class="fas fa-palette"></i> Tema Tampilan:</label> 
+                    <label for="pengaturan-tema"><i class="fas fa-palette"></i> Tema Tampilan:</label>  
                     <select id="pengaturan-tema">
                         <option value="light">Terang (Default)</option>
                         <option value="dark">Gelap</option>
@@ -1509,6 +1590,7 @@
             const sidebarToggleBtn = document.getElementById('sidebar-toggle');
             const body = document.body;
             const themeToggle = document.getElementById('pengaturan-tema');
+            const sidebarElement = document.querySelector('.sidebar'); // Get sidebar element once
 
             // Function to set the active section and link
             function showSection(targetId) {
@@ -1527,7 +1609,37 @@
                 if (targetSection) {
                     targetSection.classList.add('active');
                     targetSection.style.display = 'block'; // Display block for active section
+
+                    // Apply animation to elements within the newly active section
+                    const animatableElements = targetSection.querySelectorAll('.home-header, .carousel-container, .home-card, .content-card, .dosen-pa-card, .student-card');
+                    animatableElements.forEach((el, index) => {
+                        // Reset opacity and transform to re-trigger animation
+                        el.style.opacity = '0';
+                        el.style.transform = el.classList.contains('student-card') ? 'scale(0.9)' : 'translateY(20px)';
+                        
+                        // Clear any existing animation and force reflow
+                        el.style.animation = 'none'; 
+                        void el.offsetWidth; // Trigger reflow to apply 'none'
+                        
+                        // Set a small delay for staggered effect
+                        let delay = 0.2; // Base delay for most elements
+                        if (el.classList.contains('home-card')) delay = 0.4 + (index * 0.1); // Stagger home cards
+                        else if (el.classList.contains('dosen-pa-card')) delay = 0.6;
+                        else if (el.classList.contains('student-card')) delay = 0.7 + (index * 0.05); // Stagger student cards
+
+                        // Apply the appropriate animation
+                        if (el.classList.contains('student-card')) {
+                            el.style.animation = `fadeInScaleUp 0.6s forwards ${delay}s`;
+                        } else {
+                            el.style.animation = `fadeInSlideUp 0.8s forwards ${delay}s`;
+                        }
+                    });
                 }
+            }
+
+            // Initial sidebar animation on page load
+            if (sidebarElement && !body.classList.contains('sidebar-hidden')) {
+                sidebarElement.style.animation = 'slideInLeft 0.8s forwards 0.1s';
             }
 
             // Initialize active section on page load (from hash or default to home)
