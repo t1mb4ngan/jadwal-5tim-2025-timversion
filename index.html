@@ -24,7 +24,7 @@
             --success-color: #10B981; /* Green for success */
             --warning-color: #F59E0B; /* Yellow for warnings */
             --danger-color: #EF4444; /* Red for danger */
-            --info-color: #3B82F6; /* Blue for info */
+            --info-color: #3B82F6; /* Blue for info - NEWLY USED FOR ANNOUNCEMENT LINKS */
         }
 
         /* Dark Mode Variables */
@@ -141,6 +141,7 @@
             font-weight: 500;
             display: flex;
             align-items: center;
+            justify-content: flex-start;
         }
 
         .sidebar ul li i {
@@ -407,7 +408,7 @@
         /* Announcement Styling */
         .announcement h2 {
             margin-top: 0;
-            color: var(--primary-color);
+            color: var(--primary-color); /* Kept as primary-color (purple) as requested */
             font-size: 1.7em;
             margin-bottom: 1rem;
             display: flex;
@@ -464,7 +465,7 @@
 
         .pdf-announcements .announcement-item .content-wrapper a {
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--info-color); /* Changed to info-color (blue) */
             text-decoration: none;
             font-size: 1em;
             margin-bottom: 0;
@@ -477,7 +478,7 @@
         }
 
         .pdf-announcements .announcement-item .content-wrapper a:hover {
-            color: var(--secondary-color); /* Adjusted hover color */
+            color: var(--primary-color); /* Hover remains primary-color (purple) */
             text-decoration: underline;
         }
 
@@ -983,7 +984,7 @@
                 font-size: 0.8em;
             }
             .student-card .student-role {
-                font-size: 0.7em;
+                font-size: 0.75em;
             }
             .carousel-slide {
                 height: 220px;
@@ -996,7 +997,7 @@
                 white-space: normal;
             }
             .pdf-announcements .announcement-date {
-                font-size: 0.7em;
+                font-size: 0.75em;
                 margin-left: 0;
                 flex-basis: 100%;
                 text-align: left;
@@ -1065,6 +1066,12 @@
             }
             .pdf-announcements .announcement-item .content-wrapper {
                 width: 100%;
+            }
+            .pdf-announcements .announcement-date {
+                font-size: 0.7em;
+                margin-left: 0;
+                flex-basis: 100%;
+                text-align: left;
             }
         }
     </style>
