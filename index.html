@@ -9,21 +9,35 @@
     <style>
         /* CSS Variables for easy theme changes */
         :root {
-            --primary-color: #4A90E2; /* A modern blue */
-            --secondary-color: #50E3C2; /* A vibrant teal */
-            --dark-bg: #2C3E50; /* Darker blue-gray for sidebar */
-            --light-bg: #ECF0F1; /* Light gray for background */
+            --primary-color: #7B68EE; /* Medium Slate Blue - Elegant Purple */
+            --secondary-color: #8A2BE2; /* Blue Violet - Deeper Purple accent */
+            --dark-bg: #1F2937; /* Darker Gray-Blue for sidebar */
+            --light-bg: #F0F4F8; /* Light gray for background */
             --card-bg: #FFFFFF; /* Clean white for cards */
-            --text-color: #34495E; /* Dark grayish blue */
-            --light-text-color: #7F8C8D; /* Medium gray for light text */
-            --border-color: #DDE2E6; /* Light gray for borders */
+            --text-color: #334155; /* Dark grayish blue */
+            --light-text-color: #64748B; /* Medium gray for light text */
+            --border-color: #E2E8F0; /* Light gray for borders */
             --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
             --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.12);
             --border-radius: 12px; /* Slightly more rounded */
-            --success-color: #27AE60; /* Green for success */
-            --warning-color: #F39C12; /* Yellow for warnings */
-            --danger-color: #E74C3C; /* Red for danger */
-            --info-color: #3498DB; /* Blue for info */
+            --success-color: #10B981; /* Green for success */
+            --warning-color: #F59E0B; /* Yellow for warnings */
+            --danger-color: #EF4444; /* Red for danger */
+            --info-color: #3B82F6; /* Blue for info */
+        }
+
+        /* Dark Mode Variables */
+        body.dark-mode {
+            --primary-color: #9333EA; /* Darker Purple for primary in dark mode */
+            --secondary-color: #C084FC; /* Lighter Purple accent in dark mode */
+            --dark-bg: #0F172A; /* Even darker background for sidebar */
+            --light-bg: #1E293B; /* Dark background for main content */
+            --card-bg: #2D3748; /* Darker cards */
+            --text-color: #F8FAFC; /* Light text */
+            --light-text-color: #A0AEC0; /* Lighter gray for light text */
+            --border-color: #4A5568; /* Darker borders */
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
 
         body {
@@ -35,6 +49,7 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Sidebar Styling */
@@ -42,19 +57,19 @@
             width: 280px;
             background-color: var(--dark-bg);
             color: white;
-            padding-top: 2.5rem; /* 35px */
+            padding-top: 2.5rem;
             box-shadow: var(--shadow-medium);
             position: fixed;
             height: 100%;
             display: flex;
             flex-direction: column;
             z-index: 1000;
-            transition: width 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .sidebar h2 {
             text-align: center;
-            margin-bottom: 3rem; /* 45px */
+            margin-bottom: 3rem;
             font-size: 1.9em;
             color: var(--secondary-color);
             font-weight: 700;
@@ -65,26 +80,26 @@
         }
 
         .sidebar h2 i {
-            margin-right: 0.8rem; /* 10px */
+            margin-right: 0.8rem;
         }
 
         /* Profile Info in Sidebar */
         .sidebar-profile {
             text-align: center;
-            padding: 1.5rem 0 2rem; /* 20px 0 30px */
+            padding: 1.5rem 0 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 1.8rem; /* 25px */
+            margin-bottom: 1.8rem;
         }
 
         .sidebar-profile .profile-avatar {
-            width: 6rem; /* 90px */
-            height: 6rem; /* 90px */
+            width: 6rem;
+            height: 6rem;
             border-radius: 50%;
             background-color: var(--primary-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 0.7rem; /* 10px */
+            margin: 0 auto 0.7rem;
             font-size: 2.5em;
             font-weight: 600;
             color: white;
@@ -100,14 +115,14 @@
         }
 
         .sidebar-profile .profile-name {
-            font-size: 1.1em; /* 1.35em originally */
+            font-size: 1.1em;
             font-weight: 600;
-            margin-bottom: 0.3rem; /* 5px */
+            margin-bottom: 0.3rem;
             color: white;
         }
 
         .sidebar-profile .profile-details {
-            font-size: 0.85em; /* 0.95em originally */
+            font-size: 0.85em;
             color: var(--light-text-color);
         }
 
@@ -118,7 +133,7 @@
         }
 
         .sidebar ul li {
-            padding: 1rem 1.8rem; /* 16px 28px */
+            padding: 1rem 1.8rem;
             cursor: pointer;
             transition: background-color 0.3s ease, border-left 0.3s ease, color 0.3s ease;
             border-left: 5px solid transparent;
@@ -128,7 +143,7 @@
         }
 
         .sidebar ul li i {
-            margin-right: 1rem; /* 15px */
+            margin-right: 1rem;
             font-size: 1.1em;
         }
 
@@ -154,18 +169,18 @@
             display: flex;
             align-items: center;
             flex-grow: 1;
-            font-size: 1em; /* 1.05em originally */
+            font-size: 1em;
         }
         
         /* Logout Button - if needed in sidebar */
         .sidebar .logout {
             margin-top: auto;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.4rem 0; /* 20px */
+            padding: 1.4rem 0;
             text-align: center;
         }
         .sidebar .logout li {
-            padding: 1rem 1.5rem; /* 15px 25px */
+            padding: 1rem 1.5rem;
         }
 
 
@@ -173,37 +188,89 @@
         .main-content {
             margin-left: 280px;
             flex-grow: 1;
-            padding: 2.5rem; /* 35px */
+            padding: 2.5rem;
             overflow-y: auto;
-            transition: margin-left 0.3s ease;
+            transition: all 0.3s ease;
         }
+
+        /* Sidebar Toggle Button */
+        #sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: var(--shadow-light);
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        #sidebar-toggle:hover {
+            background-color: var(--secondary-color); /* Adjusted hover color for purple theme */
+            transform: scale(1.05);
+        }
+
+        /* Classes for hidden sidebar */
+        body.sidebar-hidden .sidebar {
+            width: 0;
+            overflow: hidden;
+            padding-left: 0;
+            padding-right: 0;
+            box-shadow: none;
+        }
+
+        body.sidebar-hidden .sidebar-profile,
+        body.sidebar-hidden .sidebar h2,
+        body.sidebar-hidden .sidebar ul li a {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s ease;
+        }
+        body.sidebar-hidden .main-content {
+            margin-left: 0;
+        }
+        
+        body.sidebar-hidden #sidebar-toggle {
+            left: 20px;
+        }
+
 
         /* Header specific to the Home section */
         .home-header {
             background-color: var(--card-bg);
-            padding: 2rem 2.5rem; /* 28px 35px */
+            padding: 2rem 2.5rem;
             border-radius: var(--border-radius);
-            margin-bottom: 2.5rem; /* 35px */
+            margin-bottom: 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow-light);
             color: var(--text-color);
             border-left: 6px solid var(--primary-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
 
         .home-header h1 {
             margin: 0;
-            font-size: 1.8em; /* 2.2em originally */
+            font-size: 1.8em;
             color: var(--primary-color);
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 0.8rem; /* 10px */
+            gap: 0.8rem;
         }
 
         .home-header div {
-            font-size: 1em; /* 1.15em originally */
+            font-size: 1em;
             font-weight: 600;
             color: var(--light-text-color);
         }
@@ -211,10 +278,10 @@
         /* Card Styling (for general content blocks) */
         .content-card {
             background: var(--card-bg);
-            padding: 2rem; /* 30px */
+            padding: 2rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-light);
-            margin: 0 auto 2rem auto; /* 30px */
+            margin: 0 auto 2rem auto;
             max-width: 1000px;
             overflow-x: auto;
             transition: all 0.3s ease;
@@ -229,8 +296,8 @@
         /* Specific styles for sections (using content-section class from previous iteration) */
         .content-section {
             text-align: center;
-            padding: 2rem; /* 30px */
-            margin: 0 auto 2rem auto; /* 30px */
+            padding: 2rem;
+            margin: 0 auto 2rem auto;
             max-width: 1000px;
         }
         .content-section.active {
@@ -242,35 +309,35 @@
 
         .content-section h1 {
             color: var(--primary-color);
-            font-size: 2em; /* 2.5em originally */
-            margin-bottom: 1.5rem; /* 25px */
+            font-size: 2em;
+            margin-bottom: 1.5rem;
             font-weight: 700;
             text-align: center;
         }
 
         .content-section h2 {
             color: var(--primary-color);
-            font-size: 1.8em; /* 28px */
-            margin-bottom: 1.4rem; /* 20px */
+            font-size: 1.8em;
+            margin-bottom: 1.4rem;
             display: flex;
             align-items: center;
-            justify-content: center; /* This was the key fix for h2 */
-            gap: 0.7rem; /* 10px */
+            justify-content: center;
+            gap: 0.7rem;
             font-weight: 600;
         }
         .content-section h3 {
             color: var(--text-color);
-            font-size: 1.4em; /* 1.6em originally */
-            margin-bottom: 1.4rem; /* 20px */
+            font-size: 1.4em;
+            margin-bottom: 1.4rem;
             font-weight: 600;
             text-align: center;
         }
 
         .content-section p {
             color: var(--text-color);
-            font-size: 1em; /* 1.1em originally */
+            font-size: 1em;
             line-height: 1.8;
-            margin-bottom: 1.4rem; /* 20px */
+            margin-bottom: 1.4rem;
         }
 
         /* Table Styling (for main data tables like jadwal, class structure) */
@@ -278,17 +345,18 @@
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin-top: 1.4rem; /* 20px */
+            margin-top: 1.4rem;
             border-radius: var(--border-radius);
             overflow: hidden;
         }
 
         .content-card th, .content-card td {
             border: 1px solid var(--border-color);
-            padding: 1rem 1.2rem; /* 15px 18px */
+            padding: 1rem 1.2rem;
             vertical-align: top;
             text-align: left;
-            font-size: 0.95em; /* 1em originally */
+            font-size: 0.95em;
+            color: var(--text-color); /* Ensure text color changes in dark mode */
         }
 
         .content-card th {
@@ -297,7 +365,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-size: 0.9em; /* 0.95em originally */
+            font-size: 0.9em;
         }
         
         .content-card th:first-child { border-top-left-radius: 8px; }
@@ -307,11 +375,18 @@
 
 
         .content-card tr:nth-child(even) {
-            background-color: #FDFEFF;
+            background-color: var(--light-bg); /* Use light-bg for subtle stripe */
         }
+        body.dark-mode .content-card tr:nth-child(even) {
+            background-color: #263040; /* Darker stripe for dark mode */
+        }
+
 
         .content-card tr:hover {
             background-color: #F0F5F9;
+        }
+        body.dark-mode .content-card tr:hover {
+            background-color: #3A4557;
         }
 
         /* Styles for text in schedule table */
@@ -322,9 +397,9 @@
         .note {
             text-align: center;
             font-style: italic;
-            margin-top: 2.5rem; /* 40px */
+            margin-top: 2.5rem;
             color: var(--light-text-color);
-            font-size: 0.9em; /* 15px */
+            font-size: 0.9em;
             opacity: 0.9;
         }
 
@@ -332,13 +407,17 @@
         .announcement h2 {
             margin-top: 0;
             color: var(--primary-color);
-            font-size: 1.7em; /* 26px */
-            margin-bottom: 1rem; /* 15px */
+            font-size: 1.7em;
+            margin-bottom: 1rem;
             display: flex;
-            align-items: center; /* Align items to center */
-            gap: 0.7rem; /* Space between icon and text */
+            align-items: center;
+            gap: 0.7rem;
             font-weight: 600;
-            justify-content: flex-start; /* Align to the start for the icon + text */
+            justify-content: flex-start;
+            text-align: left;
+        }
+        .announcement h2 i {
+            /* margin-right: 0; */
         }
 
         .announcement ul {
@@ -349,65 +428,68 @@
 
         .pdf-announcements .announcement-item {
             display: flex;
-            align-items: center; /* Align items vertically in the middle */
-            margin-bottom: 1rem; /* 15px */
-            padding: 1rem; /* 15px */
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            background-color: #fcfcfc;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            gap: 1rem; /* Space between icon, title, and date */
+            background-color: var(--card-bg); /* Use card-bg */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            gap: 1rem;
         }
 
         .pdf-announcements .announcement-item:hover {
-            background-color: #f0f5fa;
+            background-color: var(--light-bg); /* Use a lighter background on hover */
             box-shadow: var(--shadow-light);
+        }
+        body.dark-mode .pdf-announcements .announcement-item:hover {
+            background-color: #3A4557; /* Darker hover for dark mode */
         }
 
         .pdf-announcements .announcement-item i {
-            font-size: 1.8em; /* Adjusted to be slightly larger */
+            font-size: 1.8em;
             color: var(--danger-color);
-            flex-shrink: 0; /* Prevent icon from shrinking */
+            flex-shrink: 0;
         }
 
         .pdf-announcements .announcement-item .content-wrapper {
-            flex-grow: 1; /* Allow title to take available space */
+            flex-grow: 1;
             display: flex;
-            flex-direction: row; /* Keep title and date in a row for larger screens */
-            align-items: center; /* Vertically align title and date */
-            justify-content: space-between; /* Push date to the right */
-            min-width: 0; /* Allow content to shrink if needed */
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 0;
         }
 
         .pdf-announcements .announcement-item .content-wrapper a {
             font-weight: 600;
             color: var(--primary-color);
             text-decoration: none;
-            font-size: 1em; /* 1.1em originally */
-            margin-bottom: 0; /* Remove margin-bottom to keep it inline with date conceptually */
-            white-space: nowrap; /* Prevent title from wrapping initially */
-            overflow: hidden; /* Hide overflow if nowrap causes issues */
-            text-overflow: ellipsis; /* Add ellipsis for overflowed titles */
+            font-size: 1em;
+            margin-bottom: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             transition: color 0.2s ease;
-            flex-grow: 1; /* Allow title to grow and push date */
-            margin-right: 0.5rem; /* Small space between title and date */
+            flex-grow: 1;
+            margin-right: 0.5rem;
         }
 
         .pdf-announcements .announcement-item .content-wrapper a:hover {
-            color: #367ac7;
+            color: var(--secondary-color); /* Adjusted hover color */
             text-decoration: underline;
         }
 
         .pdf-announcements .announcement-date {
-            font-size: 0.8em; /* 0.9em originally */
+            font-size: 0.8em;
             color: var(--light-text-color);
-            flex-shrink: 0; /* Prevent date from shrinking */
-            white-space: nowrap; /* Keep date in one line */
-            text-align: right; /* Ensure date aligns to the right */
+            flex-shrink: 0;
+            white-space: nowrap;
+            text-align: right;
         }
 
         em {
-            color: #E67E22;
+            color: var(--warning-color); /* Using warning color for emphasis */
             font-style: normal;
             font-weight: 600;
         }
@@ -415,14 +497,14 @@
         /* Home Section specific cards */
         .home-card-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); /* 280px */
-            gap: 2rem; /* 28px */
-            margin-bottom: 2.5rem; /* 35px */
+            grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .home-card {
             background-color: var(--card-bg);
-            padding: 2rem; /* 30px */
+            padding: 2rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-light);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -441,12 +523,12 @@
         .home-card h3 {
             margin-top: 0;
             color: var(--primary-color);
-            font-size: 1.2em; /* 1.5em originally */
-            margin-bottom: 1rem; /* 15px */
+            font-size: 1.2em;
+            margin-bottom: 1rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 0.6rem; /* 8px */
+            gap: 0.6rem;
             justify-content: center;
         }
         .home-card h3 i {
@@ -454,36 +536,36 @@
         }
 
         .home-card p {
-            font-size: 2.2em; /* 2.8em originally */
+            font-size: 2.2em;
             font-weight: 700;
             color: var(--text-color);
             margin: 0;
         }
         .home-card .alert {
-            font-size: 0.8em; /* 0.95em originally */
+            font-size: 0.8em;
             font-weight: 500;
-            padding: 1rem; /* 15px */
+            padding: 1rem;
             border-radius: 8px;
-            margin-top: 1rem; /* 15px */
+            margin-top: 1rem;
             border: 1px solid;
-            background-color: #D4EDDA;
-            color: #155724;
-            border-color: #C3E6CB;
+            background-color: var(--success-color); /* Use success color */
+            color: white; /* White text on success background */
+            border-color: var(--success-color);
             display: flex;
             align-items: center;
-            gap: 0.6rem; /* 8px */
+            gap: 0.6rem;
             justify-content: center;
         }
         .home-card .alert i {
-            font-size: 1em; /* 1.1em originally */
-            color: #28a745;
+            font-size: 1em;
+            color: white; /* White icon on success background */
         }
 
         /* Carousel Styling */
         .carousel-container {
             position: relative;
             max-width: 1000px;
-            margin: 0 auto 2rem auto; /* 30px */
+            margin: 0 auto 2rem auto;
             overflow: hidden;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-medium);
@@ -499,7 +581,7 @@
         .carousel-slide {
             min-width: 100%;
             width: 100%;
-            height: 350px; /* Tinggi carousel ditingkatkan */
+            height: 350px;
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -520,9 +602,9 @@
             background-color: rgba(0, 0, 0, 0.6);
             color: white;
             border: none;
-            padding: 1.2rem; /* 18px */
+            padding: 1.2rem;
             cursor: pointer;
-            font-size: 1.5em; /* 1.8em originally */
+            font-size: 1.5em;
             z-index: 10;
             border-radius: 50%;
             display: flex;
@@ -537,28 +619,28 @@
         }
 
         .carousel-button.prev {
-            left: 1rem; /* 15px */
+            left: 1rem;
         }
 
         .carousel-button.next {
-            right: 1rem; /* 15px */
+            right: 1rem;
         }
 
         /* --- Student Photo Grid --- */
         .student-photos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); /* 130px, adjusted for better scaling */
-            gap: 1.4rem; /* 20px */
-            margin-top: 2rem; /* 30px */
+            grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+            gap: 1.4rem;
+            margin-top: 2rem;
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .student-card {
-            background-color: #f8fcfd;
+            background-color: var(--card-bg); /* Use card-bg */
             border-radius: 12px;
-            padding: 1.2rem 1rem; /* 20px 15px */
+            padding: 1.2rem 1rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             text-align: center;
             display: flex;
@@ -566,8 +648,8 @@
             align-items: center;
             justify-content: flex-start;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            height: auto; /* Changed to auto for better content fit */
-            min-height: 150px; /* Ensure a minimum height */
+            height: auto;
+            min-height: 150px;
         }
 
         .student-card:hover {
@@ -576,12 +658,12 @@
         }
 
         .student-card .student-photo {
-            width: 5rem; /* 90px, adjusted slightly */
-            height: 5rem; /* 90px, adjusted slightly */
+            width: 5rem;
+            height: 5rem;
             border-radius: 50%;
-            background-color: #E0E0E0;
+            background-color: var(--light-bg); /* Use light-bg */
             overflow: hidden;
-            margin-bottom: 0.8rem; /* 12px */
+            margin-bottom: 0.8rem;
             border: 3px solid var(--primary-color);
             flex-shrink: 0;
         }
@@ -595,61 +677,64 @@
         .student-card .student-name {
             font-weight: 600;
             color: var(--text-color);
-            font-size: 0.9em; /* 1em originally */
-            margin-bottom: 0.3rem; /* 5px */
-            word-break: break-word; /* Allow long names to wrap cleanly */
-            line-height: 1.2; /* Improve line spacing for wrapped text */
+            font-size: 0.9em;
+            margin-bottom: 0.3rem;
+            word-break: break-word;
+            line-height: 1.2;
         }
 
         .student-card .student-role {
-            font-size: 0.8em; /* 0.85em originally */
+            font-size: 0.8em;
             color: var(--light-text-color);
             font-weight: 500;
         }
 
         .dosen-pa-card {
-            margin-bottom: 2.5rem; /* 40px */
-            padding: 2rem; /* 30px */
+            margin-bottom: 2.5rem;
+            padding: 2rem;
             border: 2px solid var(--secondary-color);
-            background-color: #e8f9f6;
+            background-color: var(--card-bg); /* Use card-bg */
             box-shadow: var(--shadow-medium);
+        }
+        body.dark-mode .dosen-pa-card {
+            background-color: #263040; /* Slightly different dark background for PA card */
         }
         .dosen-pa-card .student-photo {
             border-color: var(--secondary-color);
         }
         .dosen-pa-card .student-name {
-            font-size: 1em; /* 1.2em originally */
+            font-size: 1em;
             color: var(--primary-color);
         }
         .dosen-pa-card .student-role {
-            font-size: 0.9em; /* 1em originally */
+            font-size: 0.9em;
             color: var(--text-color);
             font-weight: 600;
         }
 
         /* Form Styling (for Pengaturan) */
         .form-group {
-            margin-bottom: 1.8rem; /* 25px */
+            margin-bottom: 1.8rem;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.7rem; /* 10px */
+            margin-bottom: 0.7rem;
             font-weight: 600;
             color: var(--text-color);
-            font-size: 0.95em; /* 1em originally */
+            font-size: 0.95em;
         }
         .form-group label i {
-            margin-right: 0.6rem; /* 8px */
+            margin-right: 0.6rem;
             color: var(--primary-color);
         }
 
         .form-group input, 
         .form-group select,
         .form-group textarea {
-            width: calc(100% - 1.5rem); /* Adjusted for 12px padding */
-            padding: 0.8rem; /* 12px */
+            width: calc(100% - 1.5rem);
+            padding: 0.8rem;
             border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 1em;
@@ -662,7 +747,7 @@
         .form-group select:focus,
         .form-group textarea:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.15);
+            box-shadow: 0 0 0 4px rgba(123, 104, 238, 0.15); /* Adjusted shadow for purple */
             outline: none;
         }
         textarea {
@@ -673,22 +758,22 @@
         .btn {
             background-color: var(--primary-color);
             color: white;
-            padding: 0.9rem 1.8rem; /* 13px 28px */
+            padding: 0.9rem 1.8rem;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1em; /* 1.05em originally */
+            font-size: 1em;
             font-weight: 600;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-transform: capitalize;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem; /* 8px */
+            gap: 0.6rem;
         }
 
         .btn:hover {
-            background-color: #367ac7;
+            background-color: var(--secondary-color); /* Adjusted hover color */
             transform: translateY(-3px);
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
         }
@@ -700,17 +785,17 @@
 
         .btn-secondary {
             background-color: var(--light-text-color);
-            margin-left: 0.7rem; /* 10px */
+            margin-left: 0.7rem;
         }
         .btn-secondary:hover {
-            background-color: #62727a;
+            background-color: #64748B; /* Darker grey for hover */
         }
         .btn-sm {
-            padding: 0.6rem 1rem; /* 8px 15px */
-            font-size: 0.8em; /* 0.9em originally */
+            padding: 0.6rem 1rem;
+            font-size: 0.8em;
             border-radius: 6px;
             box-shadow: none;
-            gap: 0.4rem; /* 6px */
+            gap: 0.4rem;
         }
         .btn-sm:hover {
             transform: translateY(-1px);
@@ -720,54 +805,54 @@
         hr {
             border: none;
             border-top: 1px dashed var(--border-color);
-            margin: 2.5rem 0; /* 35px */
+            margin: 2.5rem 0;
         }
 
         /* Responsive adjustments */
         @media (max-width: 992px) {
             .sidebar {
-                width: 220px; /* Adjusted slightly smaller */
+                width: 220px;
             }
             .main-content {
-                margin-left: 220px; /* Adjusted margin */
-                padding: 1.8rem; /* 25px */
+                margin-left: 220px;
+                padding: 1.8rem;
             }
             .home-header {
-                padding: 1.8rem 2rem; /* 25px 30px */
+                padding: 1.8rem 2rem;
             }
             .home-header h1 {
-                font-size: 1.6em; /* Adjusted */
+                font-size: 1.6em;
             }
             .home-card-container {
-                grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); /* Adjusted */
-                gap: 1.4rem; /* 20px */
+                grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+                gap: 1.4rem;
             }
             .home-card {
-                padding: 1.8rem; /* 25px */
+                padding: 1.8rem;
             }
             .content-card {
-                padding: 1.8rem; /* 25px */
+                padding: 1.8rem;
             }
             .content-card th, .content-card td {
-                padding: 0.8rem 1rem; /* 12px 15px */
-                font-size: 0.9em; /* Adjusted */
+                padding: 0.8rem 1rem;
+                font-size: 0.9em;
             }
             .student-photos-grid {
-                grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); /* Adjusted */
-                gap: 1rem; /* 15px */
+                grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+                gap: 1rem;
             }
             .student-card .student-photo {
-                width: 4.5rem; /* 70px */
-                height: 4.5rem; /* 70px */
+                width: 4.5rem;
+                height: 4.5rem;
             }
             .student-card .student-name {
-                font-size: 0.85em; /* Adjusted */
+                font-size: 0.85em;
             }
             .student-card .student-role {
-                font-size: 0.75em; /* Adjusted */
+                font-size: 0.75em;
             }
             .carousel-slide {
-                height: 300px; /* Adjusted to be a bit smaller but still good */
+                height: 300px;
             }
             .pdf-announcements .announcement-item i {
                 font-size: 1.6em;
@@ -789,26 +874,26 @@
                 height: auto;
                 position: relative;
                 box-shadow: none;
-                padding-top: 1.4rem; /* 20px */
+                padding-top: 1.4rem;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
             .sidebar h2 {
-                margin-bottom: 1.8rem; /* 25px */
+                margin-bottom: 1.8rem;
             }
             .sidebar-profile {
-                padding: 1rem 0 1.4rem; /* 15px 0 20px */
-                margin-bottom: 1rem; /* 15px */
+                padding: 1rem 0 1.4rem;
+                margin-bottom: 1rem;
             }
             .sidebar-profile .profile-avatar {
-                width: 4rem; /* 60px */
-                height: 4rem; /* 60px */
-                font-size: 1.8em; /* Adjusted */
+                width: 4rem;
+                height: 4rem;
+                font-size: 1.8em;
             }
             .sidebar-profile .profile-name {
-                font-size: 1em; /* Adjusted */
+                font-size: 1em;
             }
             .sidebar-profile .profile-details {
-                font-size: 0.8em; /* Adjusted */
+                font-size: 0.8em;
             }
             .sidebar ul {
                 flex-direction: row;
@@ -820,14 +905,14 @@
             .sidebar ul li {
                 flex: 1 1 auto;
                 text-align: center;
-                padding: 0.8rem 0.5rem; /* 12px 10px */
+                padding: 0.8rem 0.5rem;
                 border-left: none;
-                font-size: 0.85em; /* Adjusted */
+                font-size: 0.85em;
                 justify-content: center;
                 border-bottom: 4px solid transparent;
             }
             .sidebar ul li i {
-                margin-right: 0.5rem; /* 8px */
+                margin-right: 0.5rem;
             }
             .sidebar ul li.active {
                 border-left: none;
@@ -840,136 +925,137 @@
 
             .main-content {
                 margin-left: 0;
-                padding: 1.4rem; /* 20px */
+                padding: 1.4rem;
             }
             .home-header {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 1.4rem 1.8rem; /* 20px 25px */
+                padding: 1.4rem 1.8rem;
             }
             .home-header h1 {
-                margin-bottom: 0.7rem; /* 10px */
-                font-size: 1.4em; /* Adjusted */
+                margin-bottom: 0.7rem;
+                font-size: 1.4em;
             }
             .home-header div {
-                font-size: 0.9em; /* Adjusted */
+                font-size: 0.9em;
             }
             .home-card-container, .content-card {
                 grid-template-columns: 1fr;
-                gap: 1.4rem; /* 20px */
+                gap: 1.4rem;
             }
             .home-card, .content-card {
-                padding: 1.8rem; /* 25px */
+                padding: 1.8rem;
             }
             .content-card table {
                 min-width: unset;
             }
             .form-group input, .form-group select, .form-group textarea {
-                width: calc(100% - 1rem); /* Adjusted for 10px padding */
+                width: calc(100% - 1rem);
             }
             .btn {
                 width: 100%;
                 margin-left: 0 !important;
-                margin-top: 1rem; /* 15px */
+                margin-top: 1rem;
             }
             .btn-secondary {
-                margin-top: 0.7rem; /* 10px */
+                margin-top: 0.7rem;
             }
             .btn-sm {
                 width: auto;
             }
             .content-section h2 {
-                font-size: 1.5em; /* 24px */
+                font-size: 1.5em;
+                justify-content: center;
             }
             .content-section p {
-                font-size: 0.9em; /* 16px */
+                font-size: 0.9em;
             }
             .student-photos-grid {
-                grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr)); /* Adjusted */
-                gap: 0.7rem; /* 10px */
+                grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+                gap: 0.7rem;
             }
             .student-card .student-photo {
-                width: 3.5rem; /* 60px */
-                height: 3.5rem; /* 60px */
+                width: 3.5rem;
+                height: 3.5rem;
             }
             .student-card .student-name {
-                font-size: 0.8em; /* Adjusted */
+                font-size: 0.8em;
             }
             .student-card .student-role {
-                font-size: 0.7em; /* Adjusted */
+                font-size: 0.7em;
             }
             .carousel-slide {
-                height: 220px; /* Adjusted */
+                height: 220px;
             }
             .pdf-announcements .announcement-item i {
                 font-size: 1.4em;
             }
             .pdf-announcements .announcement-item .content-wrapper a {
                 font-size: 0.9em;
-                white-space: normal; /* Allow title to wrap on smaller screens */
+                white-space: normal;
             }
             .pdf-announcements .announcement-date {
                 font-size: 0.7em;
-                margin-left: 0; /* Reset margin on small screens */
-                flex-basis: 100%; /* Push date to new line on very small screens if needed */
+                margin-left: 0;
+                flex-basis: 100%;
                 text-align: left;
             }
         }
 
         @media (max-width: 480px) {
             .sidebar h2 {
-                font-size: 1.2em; /* Adjusted */
+                font-size: 1.2em;
             }
             .sidebar ul li {
-                padding: 0.7rem 0.3rem; /* 10px 5px */
-                font-size: 0.75em; /* Adjusted */
+                padding: 0.7rem 0.3rem;
+                font-size: 0.75em;
             }
             .sidebar ul li i {
-                margin-right: 0.3rem; /* 5px */
-                font-size: 0.9em; /* Adjusted */
+                margin-right: 0.3rem;
+                font-size: 0.9em;
             }
             .home-header h1 {
-                font-size: 1.2em; /* Adjusted */
+                font-size: 1.2em;
             }
             .home-card h3 {
-                font-size: 1em; /* Adjusted */
+                font-size: 1em;
             }
             .home-card p {
-                font-size: 1.8em; /* Adjusted */
+                font-size: 1.8em;
             }
             .content-card th, .content-card td {
-                padding: 0.7rem 0.8rem; /* 10px 12px */
-                font-size: 0.8em; /* Adjusted */
+                padding: 0.7rem 0.8rem;
+                font-size: 0.8em;
             }
             .btn {
-                padding: 0.7rem 1.4rem; /* 10px 20px */
-                font-size: 0.9em; /* Adjusted */
+                padding: 0.7rem 1.4rem;
+                font-size: 0.9em;
             }
             .content-section h2 {
-                font-size: 1.3em; /* 20px */
+                font-size: 1.3em;
             }
             .content-section p {
-                font-size: 0.85em; /* 16px */
+                font-size: 0.85em;
             }
             .carousel-slide {
-                height: 180px; /* Adjusted */
+                height: 180px;
             }
             .student-photos-grid {
-                grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr)); /* Adjusted */
-                gap: 0.5rem; /* 8px */
+                grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+                gap: 0.5rem;
             }
             .student-card .student-photo {
-                width: 3rem; /* 50px */
-                height: 3rem; /* 50px */
+                width: 3rem;
+                height: 3rem;
             }
             .student-card .student-name {
-                font-size: 0.75em; /* Adjusted */
+                font-size: 0.75em;
             }
             .student-card .student-role {
-                font-size: 0.65em; /* Adjusted */
+                font-size: 0.65em;
             }
             .pdf-announcements .announcement-item {
-                flex-direction: column; /* Stack vertically on very small screens */
+                flex-direction: column;
                 align-items: flex-start;
                 gap: 0.5rem;
             }
@@ -1002,9 +1088,12 @@
     </div>
 
     <div class="main-content">
+        <button id="sidebar-toggle" aria-label="Toggle Sidebar"><i class="fas fa-bars"></i></button>
+
         <section id="home-content" class="content-section active">
             <div class="home-header">
                 <h1><i class="fas fa-tachometer-alt"></i> Dashboard Informasi</h1>
+                <div>Selamat Datang 🙋‍♂️</div>
             </div>
             
             <div class="carousel-container">
@@ -1232,42 +1321,42 @@
                 <div class="student-photos-grid">
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Ketua Kelas">
+                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Daffa Athaillah Perdhana</span>
                         <span class="student-role">Ketua Kelas</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Wakil Ketua">
+                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Muharram Alif Barokah</span>
                         <span class="student-role">Wakil Kelas</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.licdn.com/dms/image/v2/D5603AQEYx3jgvieaGw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718248403806?e=2147483647&v=beta&t=iFalPfH9J5WNrzZys2MzZ68JwOgYwLG5UpFvU2bz0So" alt="Foto Sekretaris 1">
+                            <img src="https://media.licdn.com/dms/image/v2/D5603AQEYx3jgvieaGw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718248403806?e=2147483647&v=beta&t=iFalPfH9J5WNrzZys2MzZ68JwOgYwLG5UpFvU2bz0So" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Roni Ranggas</span>
                         <span class="student-role">Sekretaris</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Sekretaris 2">
+                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Revalina Azzahra Harahap</span>
                         <span class="student-role">Sekretaris</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Bendahara 1">
+                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">M.Revo Abdul Aziz</span>
                         <span class="student-role">Bendahara</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Bendahara 2">
+                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">M.Zidhan Yanotama</span>
                         <span class="student-role">Bendahara</span>
@@ -1369,12 +1458,12 @@
 
         <section id="settings-page" class="content-section">
             <h2><i class="fas fa-cog"></i> Pengaturan</h2>
-            <p>Kelola preferensi umum aplikasi, dan pengaturan akun.</p>
+            <p>Kelola preferensi umum website, dan pengaturan akun.</p>
             <div class="content-card">
-                <h3>Informasi Umum Aplikasi</h3>
+                <h3>Informasi Umum Website</h3>
                 <div class="form-group">
                     <label for="pengaturan-nama-sistem"><i class="fas fa-wrench"></i> Nama Sistem:</label> 
-                    <input type="text" id="pengaturan-nama-sistem" value="Sistem Informasi Akademik 5 TIM">
+                    <input type="text" id="pengaturan-nama-sistem" value="Sistem Informasi 5 TIM">
                 </div>
                 <div class="form-group">
                     <label for="pengaturan-versi"><i class="fas fa-code-branch"></i> Versi:</label> 
@@ -1384,7 +1473,7 @@
                     <label for="pengaturan-tema"><i class="fas fa-palette"></i> Tema Tampilan:</label> 
                     <select id="pengaturan-tema">
                         <option value="light">Terang (Default)</option>
-                        <option value="dark">Gelap (Segera Hadir)</option>
+                        <option value="dark">Gelap</option>
                     </select>
                 </div>
                 <button class="btn" id="simpan-pengaturan"><i class="fas fa-save"></i> Simpan Pengaturan</button>
@@ -1409,32 +1498,16 @@
         document.addEventListener('DOMContentLoaded', function () {
             const sidebarLinks = document.querySelectorAll('.sidebar-menu li');
             const contentSections = document.querySelectorAll('.content-section');
+            const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+            const body = document.body;
+            const themeToggle = document.getElementById('pengaturan-tema');
 
-            function initializeActiveSection() {
-                contentSections.forEach(section => {
-                    section.classList.remove('active');
-                    section.style.display = 'none';
-                });
-
-                const defaultSection = document.getElementById('home-content');
-                if (defaultSection) {
-                    defaultSection.classList.add('active');
-                    defaultSection.style.display = 'block';
-                }
-
-                const defaultLink = document.querySelector('.sidebar-menu li[data-target="home-content"]');
-                if (defaultLink) {
-                    defaultLink.classList.add('active');
-                }
-            }
-            
-            initializeActiveSection();
-
+            // Function to set the active section and link
             function showSection(targetId) {
                 sidebarLinks.forEach(item => item.classList.remove('active'));
                 contentSections.forEach(section => {
                     section.classList.remove('active');
-                    section.style.display = 'none';
+                    section.style.display = 'none'; // Ensure display none for hidden sections
                 });
 
                 const activeLinkParent = document.querySelector(`.sidebar-menu li[data-target="${targetId}"]`);
@@ -1445,17 +1518,50 @@
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     targetSection.classList.add('active');
-                    targetSection.style.display = 'block';
+                    targetSection.style.display = 'block'; // Display block for active section
                 }
             }
 
+            // Initialize active section on page load (from hash or default to home)
+            const initialHash = window.location.hash.substring(1);
+            if (initialHash && document.getElementById(initialHash)) {
+                showSection(initialHash);
+            } else {
+                showSection('home-content'); // Default to home-content
+            }
+
+            // Sidebar navigation click handler
             sidebarLinks.forEach(linkParent => {
                 linkParent.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.dataset.target;
+                    window.location.hash = targetId; // Update URL hash
                     showSection(targetId);
+                    // Hide sidebar on mobile after clicking a link
+                    if (window.innerWidth <= 768) {
+                        body.classList.add('sidebar-hidden');
+                        sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>'; // Change icon back to bars
+                    }
                 });
             });
+
+            // Sidebar Toggle functionality
+            if (sidebarToggleBtn) {
+                sidebarToggleBtn.addEventListener('click', function() {
+                    body.classList.toggle('sidebar-hidden');
+                    if (body.classList.contains('sidebar-hidden')) {
+                        this.innerHTML = '<i class="fas fa-bars"></i>'; // Change to bars icon
+                    } else {
+                        this.innerHTML = '<i class="fas fa-times"></i>'; // Change to close icon
+                    }
+                });
+            }
+
+            // Handle initial sidebar state based on screen width
+            if (window.innerWidth <= 768) {
+                body.classList.add('sidebar-hidden');
+                sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
 
             // Carousel functionality
             const carouselSlides = document.querySelector('.carousel-slides');
@@ -1466,6 +1572,7 @@
             let autoSlideInterval;
 
             function showSlide(index) {
+                if (slides.length === 0) return; // Prevent errors if no slides
                 if (index >= slides.length) {
                     currentSlide = 0;
                 } else if (index < 0) {
@@ -1485,6 +1592,7 @@
             }
 
             function startAutoSlide() {
+                stopAutoSlide(); // Clear any existing interval before starting a new one
                 autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
             }
 
@@ -1542,10 +1650,8 @@
             if (confirmLogoutBtn) {
                 confirmLogoutBtn.addEventListener('click', function() {
                     alert('Anda telah keluar dari sistem. Sampai jumpa!');
-                    // Redirect to a login page or home page as needed
-                    // window.location.href = 'login.html'; 
-                    // For this example, we just go back to home section
-                    showSection('home-content');
+                    // Mengarahkan ke halaman kosong dan menghapus dari riwayat
+                    window.location.replace('about:blank');
                 });
             }
 
@@ -1562,6 +1668,31 @@
                     alert('Pengaturan berhasil disimpan! (Ini adalah demo, perubahan tidak akan tersimpan secara permanen)');
                 });
             }
+
+            // Dark Mode Functionality
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            // Load saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+                themeToggle.value = savedTheme; // Set the dropdown value
+            } else {
+                applyTheme('light'); // Default to light if no preference
+            }
+
+            // Event listener for theme change
+            themeToggle.addEventListener('change', function() {
+                applyTheme(this.value);
+            });
         });
     </script>
 </body>
