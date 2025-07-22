@@ -885,6 +885,40 @@
             }
         }
 
+        /* --- Mobile Overlay Styles --- */
+        .mobile-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9); /* Dark semi-transparent background */
+            color: white;
+            z-index: 9999; /* Ensure it's on top of everything */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .mobile-overlay p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .mobile-overlay small {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
         /* Responsive adjustments */
         @media (max-width: 992px) {
@@ -944,21 +978,22 @@
             .pdf-announcements .announcement-date {
                 font-size: 0.75em;
             }
+
+            /* Hide everything and show overlay on mobile/tablet screens */
+            .sidebar, .main-content, #sidebar-toggle {
+                display: none !important; /* Force hide these elements */
+                visibility: hidden !important;
+                opacity: 0 !important;
+            }
+            .mobile-overlay {
+                display: flex; /* Show the overlay */
+            }
         }
 
         @media (max-width: 768px) {
+            /* These styles are still applied, but overridden by the 992px media query for the overlay */
             body {
                 flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                box-shadow: none;
-                padding-top: 1.4rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                transform: translateX(0); /* Remove initial transform for mobile layout */
-                animation: none; /* Disable slideInLeft animation on mobile for better flow */
             }
             .sidebar h2 {
                 margin-bottom: 1.8rem;
@@ -1006,11 +1041,6 @@
                 display: none;
             }
 
-            .main-content {
-                margin-left: 0;
-                padding: 1.4rem;
-                animation: fadeInSlideUp 0.8s forwards; /* Keep main content animation */
-            }
             .home-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -1086,78 +1116,21 @@
         }
 
         @media (max-width: 480px) {
-            .sidebar h2 {
+            .mobile-overlay p {
                 font-size: 1.2em;
             }
-            .sidebar ul li {
-                padding: 0.7rem 0.3rem;
-                font-size: 0.75em;
-            }
-            .sidebar ul li i {
-                margin-right: 0.3rem;
-                font-size: 0.9em;
-            }
-            .home-header h1 {
-                font-size: 1.2em;
-            }
-            .home-card h3 {
-                font-size: 1em;
-            }
-            .home-card p {
-                font-size: 1.8em;
-            }
-            .content-card th, .content-card td {
-                padding: 0.7rem 0.8rem;
+            .mobile-overlay small {
                 font-size: 0.8em;
-            }
-            .btn {
-                padding: 0.7rem 1.4rem;
-                font-size: 0.9em;
-            }
-            .content-section h2 {
-                font-size: 1.3em;
-            }
-            .content-section p {
-                font-size: 0.85em;
-            }
-            .carousel-slide {
-                height: 180px;
-            }
-            .student-photos-grid {
-                grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
-                gap: 0.5rem;
-            }
-            .student-card .student-photo {
-                width: 3rem;
-                height: 3rem;
-            }
-            .student-card .student-name {
-                font-size: 0.75em;
-            }
-            .student-card .student-role {
-                font-size: 0.65em;
-            }
-            .pdf-announcements .announcement-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-            .pdf-announcements .announcement-item i {
-                margin-right: 0;
-            }
-            .pdf-announcements .announcement-item .content-wrapper {
-                width: 100%;
-            }
-            .pdf-announcements .announcement-date {
-                font-size: 0.75em;
-                margin-left: 0;
-                flex-basis: 100%;
-                text-align: left;
             }
         }
     </style>
 </head>
 <body>
+    <div class="mobile-overlay">
+        <p><i class="fas fa-desktop"></i> Maaf ya, untuk pengalaman terbaik, disarankan mengakses website ini di mode desktop.</p>
+        <small>Aktifkan mode dekstop di browser kamu.</small>
+    </div>
+
     <div class="sidebar">
         <div class="sidebar-profile">
             <div class="profile-avatar">
@@ -1466,7 +1439,7 @@
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Ardya Pratiwi Putri</span>
                         <span class="student-role">Anggota</span>
@@ -1591,6 +1564,8 @@
             const body = document.body;
             const themeToggle = document.getElementById('pengaturan-tema');
             const sidebarElement = document.querySelector('.sidebar'); // Get sidebar element once
+            
+            // Removed desktop-access-alert and its related JS as it's now handled by the mobile-overlay CSS
 
             // Function to set the active section and link
             function showSection(targetId) {
@@ -1618,7 +1593,7 @@
                         el.style.transform = el.classList.contains('student-card') ? 'scale(0.9)' : 'translateY(20px)';
                         
                         // Clear any existing animation and force reflow
-                        el.style.animation = 'none'; 
+                        el.style.animation = 'none';  
                         void el.offsetWidth; // Trigger reflow to apply 'none'
                         
                         // Set a small delay for staggered effect
@@ -1637,8 +1612,9 @@
                 }
             }
 
-            // Initial sidebar animation on page load
-            if (sidebarElement && !body.classList.contains('sidebar-hidden')) {
+            // Initial sidebar animation on page load (only for desktop)
+            // This will only run if the mobile-overlay is NOT active via CSS media query
+            if (sidebarElement && !body.classList.contains('sidebar-hidden') && window.innerWidth > 992) {
                 sidebarElement.style.animation = 'slideInLeft 0.8s forwards 0.1s';
             }
 
@@ -1653,7 +1629,10 @@
             // Sidebar navigation click handler
             sidebarLinks.forEach(linkParent => {
                 linkParent.addEventListener('click', function(e) {
-                    e.preventDefault();
+                    // Prevent default action only if on mobile, to allow proper desktop behavior
+                    if (window.innerWidth <= 992) {
+                        e.preventDefault(); 
+                    }
                     const targetId = this.dataset.target;
                     window.location.hash = targetId; // Update URL hash
                     showSection(targetId);
@@ -1665,7 +1644,7 @@
                 });
             });
 
-            // Sidebar Toggle functionality
+            // Sidebar Toggle functionality (only visible on desktop if sidebar is minimized)
             if (sidebarToggleBtn) {
                 sidebarToggleBtn.addEventListener('click', function() {
                     body.classList.toggle('sidebar-hidden');
@@ -1678,10 +1657,13 @@
             }
 
             // Handle initial sidebar state based on screen width
+            // This is primarily for a desktop view to start with a hidden sidebar if preferred
+            // The mobile-overlay media query will handle actual mobile hiding
             if (window.innerWidth <= 768) {
-                body.classList.add('sidebar-hidden');
+                body.classList.add('sidebar-hidden'); // Keep it hidden on small screens for consistency
                 sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
             }
+
 
             // Carousel functionality
             const carouselSlides = document.querySelector('.carousel-slides');
