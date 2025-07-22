@@ -980,6 +980,7 @@
             .pdf-announcements .announcement-date {
                 font-size: 0.75em;
             }
+            /* IMPORTANT: We no longer hide content here via CSS. JavaScript will handle it. */
         }
 
         @media (max-width: 768px) {
@@ -1026,7 +1027,7 @@
             }
             .sidebar ul li.active {
                 border-left: none;
-                border-bottom: 4px solid var(--secondary-color);
+                border-bottom: 44px solid var(--secondary-color);
                 background-color: var(--primary-color);
             }
             .sidebar .logout {
@@ -1119,8 +1120,8 @@
 </head>
 <body>
     <div class="mobile-overlay" id="mobile-overlay">
-        <p><i class="fas fa-desktop"></i> Maaf ya, untuk pengalaman terbaik, disarankan mengakses website ini di mode desktop.</p>
-        <small>Aktifkan mode dekstop di browser kamu.</small>
+        <p><i class="fas fa-desktop"></i> Untuk pengalaman terbaik, disarankan untuk mengakses website ini di mode desktop.</p>
+        <small>Konten tidak dapat diakses di perangkat seluler.</small>
     </div>
 
     <div class="sidebar">
@@ -1556,34 +1557,35 @@
             const body = document.body;
             const themeToggle = document.getElementById('pengaturan-tema');
             const sidebarElement = document.querySelector('.sidebar');
+            const mainContentElement = document.querySelector('.main-content'); // Get main content element
             const mobileOverlay = document.getElementById('mobile-overlay');
 
-            // Function to check if the user agent indicates a mobile device
-            function isMobileDeviceByUA() {
-                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-                // Regex to detect common mobile OS/browsers, but excludes common tablet indicators if you want to allow larger tablets
-                return /android|iphone|ipad|ipod|blackberry|windows phone|iemobile|opera mini/i.test(userAgent) &&
-                       !/macintosh|windows|linux/i.test(userAgent); // Exclude common desktop OS
+            // Function to check if the user agent indicates a desktop operating system
+            function isDesktopUserAgent() {
+                const userAgent = navigator.userAgent;
+                // Common desktop OS indicators
+                return /windows|macintosh|linux|x11/i.test(userAgent) && !/android|iphone|ipad|ipod|windows phone/i.test(userAgent);
             }
 
             // Function to handle the display of the mobile overlay
             function checkMobileOverlay() {
-                const isMobileView = window.innerWidth <= 992; // Max width for overlay to appear
-                const isDesktopUserAgent = !isMobileDeviceByUA(); // True if UA looks like desktop
+                const isSmallScreen = window.innerWidth <= 992; // Threshold for mobile view
+                const isTrulyDesktop = isDesktopUserAgent(); // Check if user agent is desktop
 
-                if (isMobileView && !isDesktopUserAgent) {
-                    // It's a small screen AND user agent is mobile -> show overlay
+                if (isSmallScreen && !isTrulyDesktop) {
+                    // It's a small screen AND user agent is NOT desktop (implies mobile device) -> show overlay
                     mobileOverlay.style.display = 'flex';
-                    // Hide main content and sidebar
-                    document.querySelector('.sidebar').style.display = 'none';
-                    document.querySelector('.main-content').style.display = 'none';
+                    // Sembunyikan konten utama dan sidebar
+                    sidebarElement.style.display = 'none';
+                    mainContentElement.style.display = 'none';
                     if (sidebarToggleBtn) sidebarToggleBtn.style.display = 'none';
                     document.body.style.overflow = 'hidden'; // Prevent scrolling behind the overlay
                 } else {
                     // It's a large screen OR user agent is desktop -> hide overlay and show content
                     mobileOverlay.style.display = 'none';
-                    document.querySelector('.sidebar').style.display = ''; // Reset to default display (flex by CSS)
-                    document.querySelector('.main-content').style.display = ''; // Reset to default display (flex by CSS)
+                    // Tampilkan kembali konten utama dan sidebar (sesuai dengan CSS aslinya)
+                    sidebarElement.style.display = ''; // Reset to default (flex by CSS)
+                    mainContentElement.style.display = ''; // Reset to default (flex by CSS)
                     if (sidebarToggleBtn) sidebarToggleBtn.style.display = '';
                     document.body.style.overflow = ''; // Allow scrolling
                 }
@@ -1640,8 +1642,8 @@
                 }
             }
 
-            // Initial sidebar animation on page load (only for desktop)
-            if (sidebarElement && !body.classList.contains('sidebar-hidden') && window.innerWidth > 992) {
+            // Initial sidebar animation on page load (only if overlay is not active)
+            if (sidebarElement && !body.classList.contains('sidebar-hidden') && mobileOverlay.style.display !== 'flex') {
                 sidebarElement.style.animation = 'slideInLeft 0.8s forwards 0.1s';
             }
 
@@ -1656,83 +1658,49 @@
             // Sidebar navigation click handler
             sidebarLinks.forEach(linkParent => {
                 linkParent.addEventListener('click', function(e) {
-                    // Only prevent default if overlay is active, to allow normal desktop behavior
+                    // Only prevent default if the overlay is actively displayed
                     if (mobileOverlay.style.display === 'flex') {
                         e.preventDefault(); 
                     }
                     const targetId = this.dataset.target;
                     window.location.hash = targetId; // Update URL hash
                     showSection(targetId);
-                    // Hide sidebar on mobile after clicking a link
-                    if (window.innerWidth <= 768 && mobileOverlay.style.display !== 'flex') { // Only hide if not completely covered by overlay
+                    // Hide sidebar on mobile after clicking a link, only if not blocked by overlay
+                    if (window.innerWidth <= 768 && mobileOverlay.style.display !== 'flex') {
                         body.classList.add('sidebar-hidden');
-                        sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>'; // Change icon back to bars
+                        sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
                     }
                 });
             });
 
-            // Sidebar Toggle functionality (only visible on desktop if sidebar is minimized)
+            // Sidebar Toggle functionality (only relevant when the overlay is NOT active)
             if (sidebarToggleBtn) {
                 sidebarToggleBtn.addEventListener('click', function() {
+                    if (mobileOverlay.style.display === 'flex') { // If overlay is active, ignore toggle
+                        return;
+                    }
                     body.classList.toggle('sidebar-hidden');
                     if (body.classList.contains('sidebar-hidden')) {
-                        this.innerHTML = '<i class="fas fa-bars"></i>'; // Change to bars icon
+                        this.innerHTML = '<i class="fas fa-bars"></i>';
                     } else {
-                        this.innerHTML = '<i class="fas fa-times"></i>'; // Change to close icon
+                        this.innerHTML = '<i class="fas fa-times"></i>';
                     }
                 });
             }
 
-            // Carousel functionality
-            const carouselSlides = document.querySelector('.carousel-slides');
-            const prevButton = document.querySelector('.carousel-button.prev');
-            const nextButton = document.querySelector('.carousel-button.next');
-            const slides = document.querySelectorAll('.carousel-slide');
-            let currentSlide = 0;
-            let autoSlideInterval;
-
-            function showSlide(index) {
-                if (slides.length === 0) return; // Prevent errors if no slides
-                if (index >= slides.length) {
-                    currentSlide = 0;
-                } else if (index < 0) {
-                    currentSlide = slides.length - 1;
-                } else {
-                    currentSlide = index;
-                }
-                carouselSlides.style.transform = `translateX(${-currentSlide * 100}%)`;
+            // Load saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+                themeToggle.value = savedTheme;
+            } else {
+                applyTheme('light');
             }
 
-            function nextSlide() {
-                showSlide(currentSlide + 1);
-            }
-
-            function prevSlide() {
-                showSlide(currentSlide - 1);
-            }
-
-            function startAutoSlide() {
-                stopAutoSlide(); // Clear any existing interval before starting a new one
-                autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-            }
-
-            function stopAutoSlide() {
-                clearInterval(autoSlideInterval);
-            }
-
-            if (slides.length > 0) {
-                prevButton.addEventListener('click', () => {
-                    stopAutoSlide();
-                    prevSlide();
-                    startAutoSlide();
-                });
-                nextButton.addEventListener('click', () => {
-                    stopAutoSlide();
-                    nextSlide();
-                    startAutoSlide();
-                });
-                startAutoSlide(); // Start auto-sliding when the page loads
-            }
+            // Event listener for theme change
+            themeToggle.addEventListener('change', function() {
+                applyTheme(this.value);
+            });
 
             // PDF Announcements (Dummy Data)
             const pdfAnnouncementsData = [
@@ -1745,7 +1713,7 @@
             const pdfAnnouncementsList = document.getElementById('pdf-announcements-list');
 
             function displayPdfAnnouncements() {
-                pdfAnnouncementsList.innerHTML = ''; // Clear existing announcements
+                pdfAnnouncementsList.innerHTML = '';
                 pdfAnnouncementsData.forEach(announcement => {
                     const listItem = document.createElement('li');
                     listItem.classList.add('announcement-item');
@@ -1759,8 +1727,6 @@
                     pdfAnnouncementsList.appendChild(listItem);
                 });
             }
-
-            // Initial display of PDF announcements
             displayPdfAnnouncements();
 
             // Logout confirmation and redirect
@@ -1770,18 +1736,17 @@
             if (confirmLogoutBtn) {
                 confirmLogoutBtn.addEventListener('click', function() {
                     alert('Anda telah keluar dari sistem. Sampai jumpa!');
-                    // Mengarahkan ke halaman kosong dan menghapus dari riwayat
                     window.location.replace('about:blank');
                 });
             }
 
             if (cancelLogoutBtn) {
                 cancelLogoutBtn.addEventListener('click', function() {
-                    showSection('home-content'); // Kembali ke home jika batal logout
+                    showSection('home-content');
                 });
             }
 
-            // Dummy Save Settings (for demonstration, does not persist unless using localStorage/backend)
+            // Dummy Save Settings
             const simpanPengaturanBtn = document.getElementById('simpan-pengaturan');
             if (simpanPengaturanBtn) {
                 simpanPengaturanBtn.addEventListener('click', function() {
@@ -1799,20 +1764,6 @@
                     localStorage.setItem('theme', 'light');
                 }
             }
-
-            // Load saved theme preference
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                applyTheme(savedTheme);
-                themeToggle.value = savedTheme; // Set the dropdown value
-            } else {
-                applyTheme('light'); // Default to light if no preference
-            }
-
-            // Event listener for theme change
-            themeToggle.addEventListener('change', function() {
-                applyTheme(this.value);
-            });
         });
     </script>
 </body>
