@@ -8,39 +8,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* CSS Variables for easy theme changes */
+        /* CSS Variables */
         :root {
-            --primary-color: #7B68EE; /* Medium Slate Blue - Elegant Purple */
-            --secondary-color: #8A2BE2; /* Blue Violet - Deeper Purple accent */
-            --dark-bg: #1F2937; /* Darker Gray-Blue for sidebar */
-            --light-bg: #F0F4F8; /* Light gray for background */
-            --card-bg: #FFFFFF; /* Clean white for cards */
-            --text-color: #334155; /* Dark grayish blue */
-            --light-text-color: #64748B; /* Medium gray for light text */
-            --border-color: #E2E8F0; /* Light gray for borders */
+            --primary-color: #7B68EE;
+            --secondary-color: #8A2BE2;
+            --dark-bg: #1F2937;
+            --light-bg: #F0F4F8;
+            --card-bg: #FFFFFF;
+            --text-color: #334155;
+            --light-text-color: #64748B;
+            --border-color: #E2E8F0;
             --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
             --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.12);
-            --border-radius: 12px; /* Slightly more rounded */
-            --success-color: #10B981; /* Green for success */
-            --warning-color: #F59E0B; /* Yellow for warnings */
-            --danger-color: #EF4444; /* Red for danger */
-            --info-color: #3B82F6; /* Blue for info - NEWLY USED FOR ANNOUNCEMENT LINKS */
+            --border-radius: 12px;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --danger-color: #EF4444;
+            --info-color: #3B82F6;
         }
 
-        /* Dark Mode Variables */
+        /* Dark Mode */
         body.dark-mode {
-            --primary-color: #9333EA; /* Darker Purple for primary in dark mode */
-            --secondary-color: #C084FC; /* Lighter Purple accent in dark mode */
-            --dark-bg: #0F172A; /* Even darker background for sidebar */
-            --light-bg: #1E293B; /* Dark background for main content */
-            --card-bg: #2D3748; /* Darker cards */
-            --text-color: #F8FAFC; /* Light text */
-            --light-text-color: #A0AEC0; /* Lighter gray for light text */
-            --border-color: #4A5568; /* Darker borders */
+            --primary-color: #9333EA;
+            --secondary-color: #C084FC;
+            --dark-bg: #0F172A;
+            --light-bg: #1E293B;
+            --card-bg: #2D3748;
+            --text-color: #F8FAFC;
+            --light-text-color: #A0AEC0;
+            --border-color: #4A5568;
             --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
             --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
 
+        /* General Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -52,7 +53,21 @@
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 2.5rem;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s forwards;
+            animation-delay: 0.2s;
+            /* No margin-top needed now that the fixed alert is gone */
+        }
+        
         /* Sidebar Styling */
         .sidebar {
             width: 280px;
@@ -66,13 +81,11 @@
             flex-direction: column;
             z-index: 1000;
             transition: all 0.3s ease;
-            /* Animation for sidebar on load */
             opacity: 0;
             transform: translateX(-100%);
             animation: slideInLeft 0.8s forwards;
-            animation-delay: 0.1s; /* Reduced delay for sidebar to appear first */
+            animation-delay: 0.1s;
         }
-
         .sidebar h2 {
             text-align: center;
             margin-bottom: 3rem;
@@ -84,19 +97,15 @@
             align-items: center;
             justify-content: center;
         }
-
         .sidebar h2 i {
             margin-right: 0.8rem;
         }
-
-        /* Profile Info in Sidebar */
         .sidebar-profile {
             text-align: center;
             padding: 1.5rem 0 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 1.8rem;
         }
-
         .sidebar-profile .profile-avatar {
             width: 6rem;
             height: 6rem;
@@ -113,31 +122,26 @@
             overflow: hidden;
             box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
         }
-
         .sidebar-profile .profile-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .sidebar-profile .profile-name {
             font-size: 1.1em;
             font-weight: 600;
             margin-bottom: 0.3rem;
             color: white;
         }
-
         .sidebar-profile .profile-details {
             font-size: 0.85em;
             color: var(--light-text-color);
         }
-
         .sidebar ul {
             list-style: none;
             padding: 0;
             flex-grow: 1;
         }
-
         .sidebar ul li {
             padding: 1rem 1.8rem;
             cursor: pointer;
@@ -148,28 +152,23 @@
             align-items: center;
             justify-content: flex-start;
         }
-
         .sidebar ul li i {
             margin-right: 1rem;
             font-size: 1.1em;
         }
-
         .sidebar ul li:hover {
             background-color: rgba(255, 255, 255, 0.15);
             border-left-color: var(--secondary-color);
         }
-
         .sidebar ul li.active {
             background-color: var(--primary-color);
             border-left: 5px solid var(--secondary-color);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             color: white;
         }
-
         .sidebar ul li.active a {
             font-weight: 600;
         }
-
         .sidebar ul li a {
             color: white;
             text-decoration: none;
@@ -178,8 +177,6 @@
             flex-grow: 1;
             font-size: 1em;
         }
-        
-        /* Logout Button - if needed in sidebar */
         .sidebar .logout {
             margin-top: auto;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -188,21 +185,6 @@
         }
         .sidebar .logout li {
             padding: 1rem 1.5rem;
-        }
-
-
-        /* Main Content Styling */
-        .main-content {
-            margin-left: 280px;
-            flex-grow: 1;
-            padding: 2.5rem;
-            overflow-y: auto;
-            transition: all 0.3s ease;
-            /* Animation for main content on load */
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInSlideUp 0.8s forwards;
-            animation-delay: 0.2s; /* Increased delay to allow sidebar to lead */
         }
 
         /* Sidebar Toggle Button */
@@ -222,26 +204,22 @@
             font-size: 1.5em;
             cursor: pointer;
             box-shadow: var(--shadow-light);
-            z-index: 1002; /* Higher z-index to ensure it's on top */
+            z-index: 1002;
             transition: all 0.3s ease;
         }
-
         #sidebar-toggle:hover {
-            background-color: var(--secondary-color); /* Adjusted hover color for purple theme */
+            background-color: var(--secondary-color);
             transform: scale(1.05);
         }
-
-        /* Classes for hidden sidebar */
         body.sidebar-hidden .sidebar {
             width: 0;
             overflow: hidden;
             padding-left: 0;
             padding-right: 0;
             box-shadow: none;
-            transform: translateX(-100%); /* Ensure it slides out */
-            animation: none; /* Disable initial animation when hidden */
+            transform: translateX(-100%);
+            animation: none;
         }
-
         body.sidebar-hidden .sidebar-profile,
         body.sidebar-hidden .sidebar h2,
         body.sidebar-hidden .sidebar ul li a {
@@ -252,13 +230,11 @@
         body.sidebar-hidden .main-content {
             margin-left: 0;
         }
-        
         body.sidebar-hidden #sidebar-toggle {
             left: 20px;
         }
 
-
-        /* Header specific to the Home section */
+        /* Home Header */
         .home-header {
             background-color: var(--card-bg);
             padding: 2rem 2.5rem;
@@ -271,13 +247,11 @@
             color: var(--text-color);
             border-left: 6px solid var(--primary-color);
             transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-            /* Animation for home header */
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInSlideUp 0.8s forwards;
             animation-delay: 0.4s;
         }
-
         .home-header h1 {
             margin: 0;
             font-size: 1.8em;
@@ -287,14 +261,13 @@
             align-items: center;
             gap: 0.8rem;
         }
-
         .home-header div {
             font-size: 1em;
             font-weight: 600;
             color: var(--light-text-color);
         }
 
-        /* Card Styling (for general content blocks) */
+        /* Content Card */
         .content-card {
             background: var(--card-bg);
             padding: 2rem;
@@ -305,19 +278,79 @@
             overflow-x: auto;
             transition: all 0.3s ease;
             border-top: 5px solid var(--primary-color);
-            /* Animation for content cards */
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInSlideUp 0.8s forwards;
-            animation-delay: 0.6s; /* Adjust delay for sequential appearance */
+            animation-delay: 0.6s;
         }
-
         .content-card:hover {
             box-shadow: var(--shadow-medium);
             transform: translateY(-3px);
         }
 
-        /* Specific styles for sections (using content-section class from previous iteration) */
+        /* Dismissible Alert Styling */
+        .dismissible-alert {
+            position: relative;
+            padding: 1.5rem;
+            background-color: var(--warning-color);
+            color: white;
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            border-left: 6px solid #eab308;
+            transition: all 0.3s ease, padding 0.5s ease, margin 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s forwards;
+            animation-delay: 0.8s;
+        }
+        body.dark-mode .dismissible-alert {
+            background-color: #d97706;
+        }
+        .dismissible-alert .alert-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .dismissible-alert p {
+            margin: 0;
+            font-size: 1em;
+            font-weight: 500;
+            color: white;
+            flex-grow: 1;
+            text-align: left;
+        }
+        .dismissible-alert em {
+            font-style: italic;
+            font-weight: 600;
+            color: white;
+        }
+        .dismissible-alert .close-alert-btn {
+            background: none;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: white;
+            padding: 0.5rem;
+            margin-left: 1rem;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        .dismissible-alert .close-alert-btn:hover {
+            transform: scale(1.2);
+            color: #fca5a5;
+        }
+        .dismissible-alert.hidden {
+            opacity: 0;
+            height: 0;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Content Sections */
         .content-section {
             text-align: center;
             padding: 2rem;
@@ -330,7 +363,6 @@
         .content-section:not(.active) {
             display: none;
         }
-
         .content-section h1 {
             color: var(--primary-color);
             font-size: 2em;
@@ -338,7 +370,6 @@
             font-weight: 700;
             text-align: center;
         }
-
         .content-section h2 {
             color: var(--primary-color);
             font-size: 1.8em;
@@ -356,7 +387,6 @@
             font-weight: 600;
             text-align: center;
         }
-
         .content-section p {
             color: var(--text-color);
             font-size: 1em;
@@ -364,7 +394,7 @@
             margin-bottom: 1.4rem;
         }
 
-        /* Table Styling (for main data tables like jadwal, class structure) */
+        /* Table Styling */
         .content-card table {
             width: 100%;
             border-collapse: separate;
@@ -373,16 +403,14 @@
             border-radius: var(--border-radius);
             overflow: hidden;
         }
-
         .content-card th, .content-card td {
             border: 1px solid var(--border-color);
             padding: 1rem 1.2rem;
             vertical-align: top;
             text-align: left;
             font-size: 0.95em;
-            color: var(--text-color); /* Ensure text color changes in dark mode */
+            color: var(--text-color);
         }
-
         .content-card th {
             background-color: var(--primary-color);
             color: white;
@@ -391,33 +419,25 @@
             letter-spacing: 0.5px;
             font-size: 0.9em;
         }
-        
         .content-card th:first-child { border-top-left-radius: 8px; }
         .content-card th:last-child { border-top-right-radius: 8px; }
         .content-card tr:last-child td:first-child { border-bottom-left-radius: 8px; }
         .content-card tr:last-child td:last-child { border-bottom-right-radius: 8px; }
-
-
         .content-card tr:nth-child(even) {
-            background-color: var(--light-bg); /* Use light-bg for subtle stripe */
+            background-color: var(--light-bg);
         }
         body.dark-mode .content-card tr:nth-child(even) {
-            background-color: #263040; /* Darker stripe for dark mode */
+            background-color: #263040;
         }
-
-
         .content-card tr:hover {
             background-color: #F0F5F9;
         }
         body.dark-mode .content-card tr:hover {
             background-color: #3A4557;
         }
-
-        /* Styles for text in schedule table */
         .content-card td:nth-child(3), .content-card td:nth-child(4), .content-card td:nth-child(5) {
             white-space: pre-line;
         }
-
         .note {
             text-align: center;
             font-style: italic;
@@ -430,7 +450,7 @@
         /* Announcement Styling */
         .announcement h2 {
             margin-top: 0;
-            color: var(--primary-color);  
+            color: var(--primary-color);
             font-size: 1.7em;
             margin-bottom: 1rem;
             display: flex;
@@ -440,16 +460,11 @@
             justify-content: flex-start;
             text-align: left;
         }
-        .announcement h2 i {
-            /* margin-right: 0; */
-        }
-
         .announcement ul {
             padding-left: 0;
             margin: 0;
             list-style: none;
         }
-
         .pdf-announcements .announcement-item {
             display: flex;
             align-items: center;
@@ -457,25 +472,22 @@
             padding: 1rem;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            background-color: var(--card-bg); /* Use card-bg */
+            background-color: var(--card-bg);
             transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             gap: 1rem;
         }
-
         .pdf-announcements .announcement-item:hover {
-            background-color: var(--light-bg); /* Use a lighter background on hover */
+            background-color: var(--light-bg);
             box-shadow: var(--shadow-light);
         }
         body.dark-mode .pdf-announcements .announcement-item:hover {
-            background-color: #3A4557; /* Darker hover for dark mode */
+            background-color: #3A4557;
         }
-
         .pdf-announcements .announcement-item i {
             font-size: 1.8em;
             color: var(--danger-color);
             flex-shrink: 0;
         }
-
         .pdf-announcements .announcement-item .content-wrapper {
             flex-grow: 1;
             display: flex;
@@ -484,10 +496,9 @@
             justify-content: space-between;
             min-width: 0;
         }
-
         .pdf-announcements .announcement-item .content-wrapper a {
             font-weight: 600;
-            color: var(--info-color); /* Changed to info-color (blue) */
+            color: var(--info-color);
             text-decoration: none;
             font-size: 1em;
             margin-bottom: 0;
@@ -498,12 +509,10 @@
             flex-grow: 1;
             margin-right: 0.5rem;
         }
-
         .pdf-announcements .announcement-item .content-wrapper a:hover {
-            color: var(--primary-color); /* Hover remains primary-color (purple) */
+            color: var(--primary-color);
             text-decoration: underline;
         }
-
         .pdf-announcements .announcement-date {
             font-size: 0.8em;
             color: var(--light-text-color);
@@ -511,21 +520,17 @@
             white-space: nowrap;
             text-align: right;
         }
-
         em {
-            color: var(--warning-color); /* Using warning color for emphasis */
+            color: var(--warning-color);
             font-style: normal;
             font-weight: 600;
         }
-        
-        /* Home Section specific cards */
         .home-card-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
             gap: 2rem;
             margin-bottom: 2.5rem;
         }
-
         .home-card {
             background-color: var(--card-bg);
             padding: 2rem;
@@ -536,19 +541,15 @@
             overflow: hidden;
             border-bottom: 5px solid var(--primary-color);
             text-align: center;
-            /* Animation for home cards */
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInSlideUp 0.8s forwards;
-            /* Will be controlled by JS for staggered effect */
         }
-
         .home-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-medium);
             border-bottom-color: var(--secondary-color);
         }
-
         .home-card h3 {
             margin-top: 0;
             color: var(--primary-color);
@@ -563,7 +564,6 @@
         .home-card h3 i {
             color: var(--secondary-color);
         }
-
         .home-card p {
             font-size: 2.2em;
             font-weight: 700;
@@ -577,8 +577,8 @@
             border-radius: 8px;
             margin-top: 1rem;
             border: 1px solid;
-            background-color: var(--success-color); /* Use success color */
-            color: white; /* White text on success background */
+            background-color: var(--success-color);
+            color: white;
             border-color: var(--success-color);
             display: flex;
             align-items: center;
@@ -587,10 +587,8 @@
         }
         .home-card .alert i {
             font-size: 1em;
-            color: white; /* White icon on success background */
+            color: white;
         }
-
-        /* Carousel Styling */
         .carousel-container {
             position: relative;
             max-width: 1000px;
@@ -599,19 +597,16 @@
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-medium);
             background-color: var(--card-bg);
-            /* Animation for carousel */
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInSlideUp 0.8s forwards;
             animation-delay: 0.3s;
         }
-
         .carousel-slides {
             display: flex;
             transition: transform 0.5s ease-in-out;
             width: 100%;
         }
-
         .carousel-slide {
             min-width: 100%;
             width: 100%;
@@ -621,14 +616,12 @@
             justify-content: center;
             align-items: center;
         }
-
         .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: var(--border-radius);
         }
-
         .carousel-button {
             position: absolute;
             top: 50%;
@@ -646,21 +639,16 @@
             justify-content: center;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
-
         .carousel-button:hover {
             background-color: rgba(0, 0, 0, 0.8);
             transform: translateY(-50%) scale(1.05);
         }
-
         .carousel-button.prev {
             left: 1rem;
         }
-
         .carousel-button.next {
             right: 1rem;
         }
-
-        /* --- Student Photo Grid --- */
         .student-photos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
@@ -670,9 +658,8 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         .student-card {
-            background-color: var(--card-bg); /* Use card-bg */
+            background-color: var(--card-bg);
             border-radius: 12px;
             padding: 1.2rem 1rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
@@ -684,34 +671,29 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             height: auto;
             min-height: 150px;
-            /* Animation for student cards */
             opacity: 0;
             transform: scale(0.9);
             animation: fadeInScaleUp 0.6s forwards;
         }
-
         .student-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
         }
-
         .student-card .student-photo {
             width: 5rem;
             height: 5rem;
             border-radius: 50%;
-            background-color: var(--light-bg); /* Use light-bg */
+            background-color: var(--light-bg);
             overflow: hidden;
             margin-bottom: 0.8rem;
             border: 3px solid var(--primary-color);
             flex-shrink: 0;
         }
-
         .student-card .student-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .student-card .student-name {
             font-weight: 600;
             color: var(--text-color);
@@ -720,27 +702,24 @@
             word-break: break-word;
             line-height: 1.2;
         }
-
         .student-card .student-role {
             font-size: 0.8em;
             color: var(--light-text-color);
             font-weight: 500;
         }
-
         .dosen-pa-card {
             margin-bottom: 2.5rem;
             padding: 2rem;
             border: 2px solid var(--secondary-color);
-            background-color: var(--card-bg); /* Use card-bg */
+            background-color: var(--card-bg);
             box-shadow: var(--shadow-medium);
-            /* Animation for PA card */
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInSlideUp 0.8s forwards;
             animation-delay: 0.7s;
         }
         body.dark-mode .dosen-pa-card {
-            background-color: #263040; /* Slightly different dark background for PA card */
+            background-color: #263040;
         }
         .dosen-pa-card .student-photo {
             border-color: var(--secondary-color);
@@ -754,13 +733,10 @@
             color: var(--text-color);
             font-weight: 600;
         }
-
-        /* Form Styling (for Pengaturan) */
         .form-group {
             margin-bottom: 1.8rem;
             text-align: left;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 0.7rem;
@@ -772,8 +748,7 @@
             margin-right: 0.6rem;
             color: var(--primary-color);
         }
-
-        .form-group input, 
+        .form-group input,
         .form-group select,
         .form-group textarea {
             width: calc(100% - 1.5rem);
@@ -785,19 +760,16 @@
             background-color: var(--card-bg);
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .form-group input:focus, 
+        .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(123, 104, 238, 0.15); /* Adjusted shadow for purple */
+            box-shadow: 0 0 0 4px rgba(123, 104, 238, 0.15);
             outline: none;
         }
         textarea {
             resize: vertical;
         }
-
-        /* Button Styling */
         .btn {
             background-color: var(--primary-color);
             color: white;
@@ -814,24 +786,21 @@
             align-items: center;
             gap: 0.6rem;
         }
-
         .btn:hover {
-            background-color: var(--secondary-color); /* Adjusted hover color */
+            background-color: var(--secondary-color);
             transform: translateY(-3px);
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
         }
-
         .btn:active {
             transform: translateY(0);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
         .btn-secondary {
             background-color: var(--light-text-color);
             margin-left: 0.7rem;
         }
         .btn-secondary:hover {
-            background-color: #64748B; /* Darker grey for hover */
+            background-color: #64748B;
         }
         .btn-sm {
             padding: 0.6rem 1rem;
@@ -844,7 +813,6 @@
             transform: translateY(-1px);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
         }
-
         hr {
             border: none;
             border-top: 1px dashed var(--border-color);
@@ -853,301 +821,143 @@
 
         /* Keyframe Animations */
         @keyframes fadeInSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-100%); }
+            to { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes fadeInScaleUp {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* --- Mobile Overlay Styles --- */
+        /* Mobile Overlay */
         .mobile-overlay {
-            display: none; /* Hidden by default, controlled by JS */
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.95); /* Darker semi-transparent background */
+            background-color: rgba(0, 0, 0, 0.95);
             color: white;
-            z-index: 9999; /* Ensure it's on top of everything */
+            z-index: 9999;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
             text-align: center;
             animation: fadeIn 0.5s ease-out;
-            pointer-events: auto; /* Allow interactions on the overlay itself */
+            pointer-events: auto;
         }
-
         .mobile-overlay p {
             font-size: 1.5em;
             margin-bottom: 20px;
             font-weight: 600;
         }
-
         .mobile-overlay small {
             font-size: 0.9em;
             color: #ccc;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         /* Responsive adjustments */
         @media (max-width: 992px) {
-            /* General responsive styles for layouts below 992px */
-            .sidebar {
-                width: 220px;
-            }
-            .main-content {
-                margin-left: 220px;
-                padding: 1.8rem;
-            }
-            .home-header {
-                padding: 1.8rem 2rem;
-            }
-            .home-header h1 {
-                font-size: 1.6em;
-            }
-            .home-header div {
-                font-size: 1em;
-            }
-            .home-card-container {
-                grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-                gap: 1.4rem;
-            }
-            .home-card {
-                padding: 1.8rem;
-            }
-            .content-card {
-                padding: 1.8rem;
-            }
-            .content-card th, .content-card td {
-                padding: 0.8rem 1rem;
-                font-size: 0.9em;
-            }
-            .student-photos-grid {
-                grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
-                gap: 1rem;
-            }
-            .student-card .student-photo {
-                width: 4.5rem;
-                height: 4.5rem;
-            }
-            .student-card .student-name {
-                font-size: 0.85em;
-            }
-            .student-card .student-role {
-                font-size: 0.75em;
-            }
-            .carousel-slide {
-                height: 300px;
-            }
-            .pdf-announcements .announcement-item i {
-                font-size: 1.6em;
-            }
-            .pdf-announcements .announcement-item .content-wrapper a {
-                font-size: 0.95em;
-            }
-            .pdf-announcements .announcement-date {
-                font-size: 0.75em;
-            }
-            /* IMPORTANT: We no longer hide content here via CSS. JavaScript will handle it. */
+            .sidebar { width: 220px; }
+            .main-content { margin-left: 220px; padding: 1.8rem; }
+            .home-header { padding: 1.8rem 2rem; }
+            .home-header h1 { font-size: 1.6em; }
+            .home-header div { font-size: 1em; }
+            .home-card-container { grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.4rem; }
+            .home-card { padding: 1.8rem; }
+            .content-card { padding: 1.8rem; }
+            .content-card th, .content-card td { padding: 0.8rem 1rem; font-size: 0.9em; }
+            .student-photos-grid { grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: 1rem; }
+            .student-card .student-photo { width: 4.5rem; height: 4.5rem; }
+            .student-card .student-name { font-size: 0.85em; }
+            .student-card .student-role { font-size: 0.75em; }
+            .carousel-slide { height: 300px; }
+            .pdf-announcements .announcement-item i { font-size: 1.6em; }
+            .pdf-announcements .announcement-item .content-wrapper a { font-size: 0.95em; }
+            .pdf-announcements .announcement-date { font-size: 0.75em; }
+            .dismissible-alert .close-alert-btn { position: static; }
         }
-
         @media (max-width: 768px) {
-            /* These styles are for smaller mobile screens when overlay is not active */
-            body {
-                flex-direction: column;
-            }
-            /* Sidebar becomes fixed at top for mobile navigation */
+            body { flex-direction: column; }
             .sidebar {
                 width: 100%;
-                height: auto; /* Allow height to adjust to content */
-                position: static; /* No longer fixed to the side */
+                height: auto;
+                position: static;
                 padding-top: 1rem;
                 box-shadow: var(--shadow-light);
-                animation: none; /* Disable sidebar animation for mobile */
-                transform: translateX(0); /* Ensure it's not off-screen */
-                flex-direction: row; /* Align items horizontally */
-                justify-content: space-around;
-                align-items: center;
-                flex-wrap: wrap; /* Allow items to wrap */
-                padding-bottom: 0;
-            }
-
-            .sidebar-profile {
-                display: none; /* Hide profile in mobile sidebar for brevity */
-            }
-            .sidebar h2 {
-                display: none; /* Hide main title in mobile sidebar */
-            }
-
-            .sidebar ul {
-                display: flex; /* Make menu items flex for horizontal layout */
+                animation: none;
+                transform: translateX(0);
                 flex-direction: row;
                 justify-content: space-around;
-                width: 100%; /* Take full width */
+                align-items: center;
+                flex-wrap: wrap;
+                padding-bottom: 0;
+            }
+            .sidebar-profile, .sidebar h2, .sidebar .logout { display: none; }
+            .sidebar ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
                 border-bottom: none;
                 padding-bottom: 0;
                 flex-wrap: wrap;
                 margin-top: 1rem;
             }
             .sidebar ul li {
-                flex: 1 1 auto; /* Allow items to grow/shrink and wrap */
+                flex: 1 1 auto;
                 text-align: center;
                 padding: 0.8rem 0.5rem;
-                border-left: none; /* Remove left border */
+                border-left: none;
                 font-size: 0.85em;
                 justify-content: center;
-                border-bottom: 4px solid transparent; /* Use bottom border for active state */
-                white-space: nowrap; /* Prevent text wrapping within nav items */
+                border-bottom: 4px solid transparent;
+                white-space: nowrap;
             }
-            .sidebar ul li i {
-                margin-right: 0.5rem;
-                font-size: 1em; /* Adjust icon size for mobile */
-            }
-            .sidebar ul li.active {
-                border-bottom: 4px solid var(--secondary-color); /* Active state with bottom border */
-                background-color: var(--primary-color);
-            }
-            /* Ensure the text color of active link is white on mobile */
-            .sidebar ul li.active a {
-                color: white;
-            }
-
-            .sidebar .logout {
-                display: none; /* Hide logout button in mobile sidebar */
-            }
-
-            .main-content {
-                margin-left: 0; /* No margin on mobile */
-                padding: 1.5rem; /* Reduced padding for smaller screens */
-                width: 100%; /* Take full width */
-            }
-            
-            #sidebar-toggle {
-                display: none; /* Hide sidebar toggle button on mobile since sidebar is always visible at top */
-            }
-
-            .home-header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 1.4rem 1.8rem;
-            }
-            .home-header h1 {
-                margin-bottom: 0.7rem;
-                font-size: 1.4em;
-            }
-            .home-header div {
-                font-size: 0.9em;
-            }
-            .home-card-container, .content-card {
-                grid-template-columns: 1fr;
-                gap: 1.4rem;
-            }
-            .home-card, .content-card {
-                padding: 1.8rem;
-            }
-            .content-card table {
-                min-width: unset;
-            }
-            .form-group input, .form-group select, .form-group textarea {
-                width: calc(100% - 1rem);
-            }
-            .btn {
-                width: 100%;
-                margin-left: 0 !important;
-                margin-top: 1rem;
-            }
-            .btn-secondary {
-                margin-top: 0.7rem;
-            }
-            .btn-sm {
-                width: auto;
-            }
-            .content-section h2 {
-                font-size: 1.5em;
-                justify-content: center;
-            }
-            .content-section p {
-                font-size: 0.9em;
-            }
-            .student-photos-grid {
-                grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-                gap: 0.7rem;
-            }
-            .student-card .student-photo {
-                width: 3.5rem;
-                height: 3.5rem;
-            }
-            .student-card .student-name {
-                font-size: 0.8em;
-            }
-            .student-card .student-role {
-                font-size: 0.75em;
-            }
-            .carousel-slide {
-                height: 220px;
-            }
-            .pdf-announcements .announcement-item i {
-                font-size: 1.4em;
-            }
-            .pdf-announcements .announcement-item .content-wrapper {
-                flex-direction: column; /* Stack title and date on small screens */
-                align-items: flex-start;
-            }
-            .pdf-announcements .announcement-date {
-                font-size: 0.75em;
-                margin-left: 0;
-                margin-top: 0.2rem; /* Add a little space */
-                text-align: left;
-                width: 100%; /* Ensure date takes full width */
-            }
+            .sidebar ul li i { margin-right: 0.5rem; font-size: 1em; }
+            .sidebar ul li.active { border-bottom: 4px solid var(--secondary-color); background-color: var(--primary-color); }
+            .sidebar ul li.active a { color: white; }
+            .main-content { margin-left: 0; padding: 1.5rem; width: 100%; }
+            #sidebar-toggle { display: none; }
+            .home-header { flex-direction: column; align-items: flex-start; padding: 1.4rem 1.8rem; }
+            .home-header h1 { margin-bottom: 0.7rem; font-size: 1.4em; }
+            .home-header div { font-size: 0.9em; }
+            .home-card-container, .content-card { grid-template-columns: 1fr; gap: 1.4rem; }
+            .home-card, .content-card { padding: 1.8rem; }
+            .content-card table { min-width: unset; }
+            .form-group input, .form-group select, .form-group textarea { width: calc(100% - 1rem); }
+            .btn { width: 100%; margin-left: 0 !important; margin-top: 1rem; }
+            .btn-secondary { margin-top: 0.7rem; }
+            .btn-sm { width: auto; }
+            .content-section h2 { font-size: 1.5em; justify-content: center; }
+            .content-section p { font-size: 0.9em; }
+            .student-photos-grid { grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr)); gap: 0.7rem; }
+            .student-card .student-photo { width: 3.5rem; height: 3.5rem; }
+            .student-card .student-name { font-size: 0.8em; }
+            .student-card .student-role { font-size: 0.75em; }
+            .carousel-slide { height: 220px; }
+            .pdf-announcements .announcement-item i { font-size: 1.4em; }
+            .pdf-announcements .announcement-item .content-wrapper { flex-direction: column; align-items: flex-start; }
+            .pdf-announcements .announcement-date { font-size: 0.75em; margin-left: 0; margin-top: 0.2rem; text-align: left; width: 100%; }
+            .dismissible-alert .alert-content { flex-direction: column; align-items: flex-start; }
+            .dismissible-alert p { margin-bottom: 0.5rem; }
+            .dismissible-alert .close-alert-btn { position: absolute; top: 1rem; right: 1rem; margin-left: 0; }
         }
-
         @media (max-width: 480px) {
-            .mobile-overlay p {
-                font-size: 1.2em;
-            }
-            .mobile-overlay small {
-                font-size: 0.8em;
-            }
-             .sidebar ul li {
-                font-size: 0.75em; /* Further reduce font size for very small screens */
-                padding: 0.6rem 0.3rem;
-            }
-            .sidebar ul li i {
-                margin-right: 0.3rem;
-            }
+            .mobile-overlay p { font-size: 1.2em; }
+            .mobile-overlay small { font-size: 0.8em; }
+            .sidebar ul li { font-size: 0.75em; padding: 0.6rem 0.3rem; }
+            .sidebar ul li i { margin-right: 0.3rem; }
         }
     </style>
 </head>
@@ -1183,7 +993,6 @@
                 <h1><i class="fas fa-tachometer-alt"></i> Dashboard Informasi</h1>
                 <div>Selamat Datang 🙋‍♂️</div>
             </div>
-            
             <div class="carousel-container">
                 <div class="carousel-slides">
                     <div class="carousel-slide">
@@ -1223,14 +1032,20 @@
 
             <div class="content-card announcement pdf-announcements">
                 <h2><i class="fas fa-bullhorn"></i> Pengumuman Penting</h2>
-                <ul id="pdf-announcements-list">
-                    </ul>
-            </div >
+                <ul id="pdf-announcements-list"></ul>
+            </div>
         </section>
 
         <section id="schedule-content" class="content-section">
             <h1><i class="fas fa-calendar-alt"></i> Jadwal Perkuliahan 5 TIM Semester Ganjil</h1>
             <h3>(Minggu 1–18) TIM Latest Version (Tentative) 2025/2026</h3>
+            
+            <div class="content-card dismissible-alert">
+                <div class="alert-content">
+                    <p><strong>Pemberitahuan:</strong> Jadwal perkuliahan di bawah bersifat <em>tentative</em> dan dapat berubah sewaktu-waktu. Harap selalu periksa informasi terbaru dari dosen terkait. Terima kasih! 😊</p>
+                </div>
+                <button class="close-alert-btn" aria-label="Tutup pemberitahuan"><i class="fas fa-times"></i></button>
+            </div>
 
             <div class="content-card">
                 <table id="jadwalTable">
@@ -1255,8 +1070,8 @@
                                 16:40 – 17:20
                                 17:20 – 18:00<br>
                                 <em>Istirahat (18:00 – 18:30)</em><br>
-                                18.30 – 19.10
-                                19.10 – 19.50
+                                18:30 – 19:10
+                                19:10 – 19:50
                             </td>
                             <td>
                                 <br>Praktikum Audio Visual Lanjut
@@ -1350,7 +1165,6 @@
 
         <section id="class-structure-page" class="content-section">
             <h2><i class="fas fa-users"></i> Struktur Kelas 5 TIM</h2>
-
             <div class="content-card">
                 <h3>Daftar Pengurus Kelas</h3>
                 <table>
@@ -1362,40 +1176,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Ketua Kelas</td>
-                            <td>Daffa Athaillah Perdhana</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Wakil Ketua Kelas</td>
-                            <td>Muharram Alif Barokah</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Sekretaris 1</td>
-                            <td>Roni Ranggas</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Sekretaris 2</td>
-                            <td>Revalina Azzahra Harahap</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Bendahara 1</td>
-                            <td>M.Revo Abdul Aziz</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Bendahara 2</td>
-                            <td>M.Zidhan Yanotama</td>
-                            <td>-</td>
-                        </tr>
+                        <tr><td>Ketua Kelas</td><td>Daffa Athaillah Perdhana</td><td>-</td></tr>
+                        <tr><td>Wakil Ketua Kelas</td><td>Muharram Alif Barokah</td><td>-</td></tr>
+                        <tr><td>Sekretaris 1</td><td>Roni Ranggas</td><td>-</td></tr>
+                        <tr><td>Sekretaris 2</td><td>Revalina Azzahra Harahap</td><td>-</td></tr>
+                        <tr><td>Bendahara 1</td><td>M.Revo Abdul Aziz</td><td>-</td></tr>
+                        <tr><td>Bendahara 2</td><td>M.Zidhan Yanotama</td><td>-</td></tr>
                     </tbody>
                 </table>
             </div>
-
             <div class="content-card" style="margin-top: 2rem;">
                 <h3>Profile Dosen PA dan Anggota 5 TIM</h3>
                 <div class="dosen-pa-card student-card">
@@ -1407,139 +1196,25 @@
                 </div>
                 <p>Total mahasiswa: 19 orang (termasuk pengurus)</p>
                 <div class="student-photos-grid">
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Dafa.png" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Daffa Athaillah Perdhana</span>
-                        <span class="student-role">Ketua Kelas</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Alif.jpg" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Muharram Alif Barokah</span>
-                        <span class="student-role">Wakil Kelas</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="https://media.licdn.com/dms/image/v2/D5603AQEYx3jgvieaGw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718248403806?e=2147483647&v=beta&t=iFalPfH9J5WNrzZys2MzZ68JwOgYwLG5UpFvU2bz0So" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Roni Ranggas</span>
-                        <span class="student-role">Sekretaris</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Reva.JPG" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Revalina Azzahra Harahap</span>
-                        <span class="student-role">Sekretaris</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Revo.jpg" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">M.Revo Abdul Aziz</span>
-                        <span class="student-role">Bendahara</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Zidan.JPG" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">M.Zidhan Yanotama</span>
-                        <span class="student-role">Bendahara</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Iyan.jpg" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Achmad Triansyah Saputra</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Alfin.jpg" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Alfin Yudha Berlian</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="https://media.licdn.com/dms/image/v2/D5603AQFing1MbFs3rA/profile-displayphoto-shrink_200_200/B56ZbdhbBxHgAc-/0/1747473254882?e=2147483647&v=beta&t=LL1JwRuBZdKboFn_f2sM-fot2lcSL5IH6eGNbXhWFbA" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Ardya Pratiwi Putri</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Charin.JPG" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Charisma Tri Putri Agustin Gultom</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Alka.jpg" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Kgs Muhammad Alkatiri Nama</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="khalib.png" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Khalib Wisnu Wardhana</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="https://www.dbl.id/uploads/teams/23712ayghW/142892TjlSV/142892FP666d947722d63.jpg" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Muhammad Dama Adiputra</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Rama.jpg" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Muhammad Derindra Pratama</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Nabila.jpg" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Nabilla Azzahra Putri Syahrial</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Putri.JPG" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Putri Natasya</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="https://media.licdn.com/dms/image/v2/D5603AQGnlNnEGb4-6g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1705037051985?e=2147483647&v=beta&t=pZ5X-WWaCBvn79GwRsDI_NMtxp9TPlR8erAyO0JTcZ0" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Ratu Cahia D'Aurel</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="surya.png" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Surya Hidayatullah</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
-                    <div class="student-card">
-                        <div class="student-photo">
-                            <img src="Zalikah.png" alt="Foto Mahasiswa">
-                        </div>
-                        <span class="student-name">Zalikhah Naurah Inayah</span>
-                        <span class="student-role">Anggota</span>
-                    </div>
+                    <div class="student-card"><div class="student-photo"><img src="Dafa.png" alt="Foto Mahasiswa"></div><span class="student-name">Daffa Athaillah Perdhana</span><span class="student-role">Ketua Kelas</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Alif.jpg" alt="Foto Mahasiswa"></div><span class="student-name">Muharram Alif Barokah</span><span class="student-role">Wakil Kelas</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="https://media.licdn.com/dms/image/v2/D5603AQEYx3jgvieaGw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718248403806?e=2147483647&v=beta&t=iFalPfH9J5WNrzZys2MzZ68JwOgYwLG5UpFvU2bz0So" alt="Foto Mahasiswa"></div><span class="student-name">Roni Ranggas</span><span class="student-role">Sekretaris</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Reva.JPG" alt="Foto Mahasiswa"></div><span class="student-name">Revalina Azzahra Harahap</span><span class="student-role">Sekretaris</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Revo.jpg" alt="Foto Mahasiswa"></div><span class="student-name">M.Revo Abdul Aziz</span><span class="student-role">Bendahara</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Zidan.JPG" alt="Foto Mahasiswa"></div><span class="student-name">M.Zidhan Yanotama</span><span class="student-role">Bendahara</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Iyan.jpg" alt="Foto Mahasiswa"></div><span class="student-name">Achmad Triansyah Saputra</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Alfin.jpg" alt="Foto Mahasiswa"></div><span class="student-name">Alfin Yudha Berlian</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="https://media.licdn.com/dms/image/v2/D5603AQFing1MbFs3rA/profile-displayphoto-shrink_200_200/B56ZbdhbBxHgAc-/0/1747473254882?e=2147483647&v=beta&t=LL1JwRuBZdKboFn_f2sM-fot2lcSL5IH6eGNbXhWFbA" alt="Foto Mahasiswa"></div><span class="student-name">Ardya Pratiwi Putri</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Charin.JPG" alt="Foto Mahasiswa"></div><span class="student-name">Charisma Tri Putri Agustin Gultom</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Alka.jpg" alt="Foto Mahasiswa"></div><span class="student-name">Kgs Muhammad Alkatiri Nama</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="khalib.png" alt="Foto Mahasiswa"></div><span class="student-name">Khalib Wisnu Wardhana</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="https://www.dbl.id/uploads/teams/23712ayghW/142892TjlSV/142892FP666d947722d63.jpg" alt="Foto Mahasiswa"></div><span class="student-name">Muhammad Dama Adiputra</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Rama.jpg" alt="Foto Mahasiswa"></div><span class="student-name">Muhammad Derindra Pratama</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Nabila.jpg" alt="Foto Mahasiswa"></div><span class="student-name">Nabilla Azzahra Putri Syahrial</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Putri.JPG" alt="Foto Mahasiswa"></div><span class="student-name">Putri Natasya</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="https://media.licdn.com/dms/image/v2/D5603AQGnlNnEGb4-6g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1705037051985?e=2147483647&v=beta&t=pZ5X-WWaCBvn79GwRsDI_NMtxp9TPlR8erAyO0JTcZ0" alt="Foto Mahasiswa"></div><span class="student-name">Ratu Cahia D'Aurel</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="surya.png" alt="Foto Mahasiswa"></div><span class="student-name">Surya Hidayatullah</span><span class="student-role">Anggota</span></div>
+                    <div class="student-card"><div class="student-photo"><img src="Zalikah.png" alt="Foto Mahasiswa"></div><span class="student-name">Zalikhah Naurah Inayah</span><span class="student-role">Anggota</span></div>
                 </div>
             </div>
         </section>
@@ -1550,15 +1225,15 @@
             <div class="content-card">
                 <h3>Informasi Umum Website</h3>
                 <div class="form-group">
-                    <label for="pengaturan-nama-sistem"><i class="fas fa-wrench"></i> Nama Sistem:</label>  
+                    <label for="pengaturan-nama-sistem"><i class="fas fa-wrench"></i> Nama Sistem:</label>
                     <input type="text" id="pengaturan-nama-sistem" value="Sistem Informasi 5 TIM">
                 </div>
                 <div class="form-group">
-                    <label for="pengaturan-versi"><i class="fas fa-code-branch"></i> Versi:</label>  
+                    <label for="pengaturan-versi"><i class="fas fa-code-branch"></i> Versi:</label>
                     <input type="text" id="pengaturan-versi" value="1.0.0" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="pengaturan-tema"><i class="fas fa-palette"></i> Tema Tampilan:</label>  
+                    <label for="pengaturan-tema"><i class="fas fa-palette"></i> Tema Tampilan:</label>
                     <select id="pengaturan-tema">
                         <option value="light">Terang (Default)</option>
                         <option value="dark">Gelap</option>
@@ -1596,14 +1271,11 @@
             // --- Mobile Overlay Logic ---
             function isDesktopUserAgent() {
                 const userAgent = navigator.userAgent;
-                // Common desktop OS indicators
                 return /windows|macintosh|linux|x11/i.test(userAgent) && !/android|iphone|ipad|ipod|windows phone/i.test(userAgent);
             }
-
             function checkMobileOverlay() {
-                const isSmallScreen = window.innerWidth <= 768; // Changed threshold to 768px for mobile-specific layout
+                const isSmallScreen = window.innerWidth <= 768;
                 const isTrulyDesktop = isDesktopUserAgent();
-
                 if (isSmallScreen && !isTrulyDesktop) {
                     mobileOverlay.style.display = 'flex';
                     sidebarElement.style.display = 'none';
@@ -1612,14 +1284,12 @@
                     document.body.style.overflow = 'hidden';
                 } else {
                     mobileOverlay.style.display = 'none';
-                    sidebarElement.style.display = ''; // Reset to default (flex by CSS)
-                    mainContentElement.style.display = ''; // Reset to default (flex by CSS)
+                    sidebarElement.style.display = '';
+                    mainContentElement.style.display = '';
                     if (sidebarToggleBtn) sidebarToggleBtn.style.display = '';
                     document.body.style.overflow = '';
                 }
             }
-
-            // Initial check and re-check on resize
             checkMobileOverlay();
             window.addEventListener('resize', checkMobileOverlay);
 
@@ -1630,35 +1300,25 @@
                     section.classList.remove('active');
                     section.style.display = 'none';
                 });
-
                 const activeLinkParent = document.querySelector(`.sidebar-menu li[data-target="${targetId}"]`);
                 if (activeLinkParent) {
                     activeLinkParent.classList.add('active');
                 }
-                
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     targetSection.classList.add('active');
                     targetSection.style.display = 'block';
-
-                    // Apply animation to elements within the newly active section
-                    const animatableElements = targetSection.querySelectorAll('.home-header, .carousel-container, .home-card, .content-card, .dosen-pa-card, .student-card');
+                    const animatableElements = targetSection.querySelectorAll('.home-header, .carousel-container, .home-card, .content-card, .dosen-pa-card, .student-card, .dismissible-alert');
                     animatableElements.forEach((el, index) => {
-                        // Reset opacity and transform to re-trigger animation
                         el.style.opacity = '0';
                         el.style.transform = el.classList.contains('student-card') ? 'scale(0.9)' : 'translateY(20px)';
-                        
-                        // Clear any existing animation and force reflow
-                        el.style.animation = 'none';  
-                        void el.offsetWidth; // Trigger reflow to apply 'none'
-                        
-                        // Set a small delay for staggered effect
-                        let delay = 0.2; // Base delay for most elements
-                        if (el.classList.contains('home-card')) delay = 0.4 + (index * 0.1); // Stagger home cards
+                        el.style.animation = 'none';
+                        void el.offsetWidth;
+                        let delay = 0.2;
+                        if (el.classList.contains('home-card')) delay = 0.4 + (index * 0.1);
                         else if (el.classList.contains('dosen-pa-card')) delay = 0.6;
-                        else if (el.classList.contains('student-card')) delay = 0.7 + (index * 0.05); // Stagger student cards
-
-                        // Apply the appropriate animation
+                        else if (el.classList.contains('student-card')) delay = 0.7 + (index * 0.05);
+                        else if (el.classList.contains('dismissible-alert')) delay = 0.8;
                         if (el.classList.contains('student-card')) {
                             el.style.animation = `fadeInScaleUp 0.6s forwards ${delay}s`;
                         } else {
@@ -1667,32 +1327,23 @@
                     });
                 }
             }
-
-            // Initial sidebar animation on page load (only if overlay is not active and not on mobile)
             if (sidebarElement && !body.classList.contains('sidebar-hidden') && window.innerWidth > 768) {
                 sidebarElement.style.animation = 'slideInLeft 0.8s forwards 0.1s';
             }
-
-            // Initialize active section on page load (from hash or default to home)
             const initialHash = window.location.hash.substring(1);
             if (initialHash && document.getElementById(initialHash)) {
                 showSection(initialHash);
             } else {
-                showSection('home-content'); // Default to home-content
+                showSection('home-content');
             }
-
-            // Sidebar navigation click handler
             sidebarLinks.forEach(linkParent => {
                 linkParent.addEventListener('click', function(e) {
-                    // Only prevent default if the overlay is actively displayed
                     if (mobileOverlay.style.display === 'flex') {
-                        e.preventDefault(); 
+                        e.preventDefault();
                     }
                     const targetId = this.dataset.target;
-                    window.location.hash = targetId; // Update URL hash
+                    window.location.hash = targetId;
                     showSection(targetId);
-                    // Hide sidebar on mobile after clicking a link, only if not blocked by overlay
-                    // This specific check for sidebar-hidden class and toggle button for desktop behavior
                     if (window.innerWidth <= 992 && mobileOverlay.style.display !== 'flex') {
                         body.classList.add('sidebar-hidden');
                         if (sidebarToggleBtn) sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
@@ -1700,11 +1351,10 @@
                 });
             });
 
-            // Sidebar Toggle functionality (only relevant when the overlay is NOT active and screen > 768px)
             if (sidebarToggleBtn) {
                 sidebarToggleBtn.addEventListener('click', function() {
-                    if (mobileOverlay.style.display === 'flex' || window.innerWidth <= 768) { 
-                        return; // If overlay is active or on true mobile layout, ignore toggle
+                    if (mobileOverlay.style.display === 'flex' || window.innerWidth <= 768) {
+                        return;
                     }
                     body.classList.toggle('sidebar-hidden');
                     if (body.classList.contains('sidebar-hidden')) {
@@ -1715,7 +1365,6 @@
                 });
             }
 
-            // Load saved theme preference
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 applyTheme(savedTheme);
@@ -1724,12 +1373,10 @@
                 applyTheme('light');
             }
 
-            // Event listener for theme change
             themeToggle.addEventListener('change', function() {
                 applyTheme(this.value);
             });
 
-            // PDF Announcements (Dummy Data)
             const pdfAnnouncementsData = [
                 { title: "Pengumuman Kalender Akademik dan UKT", date: "30 Juni 2025", file: "https://drive.google.com/file/d/1UP5o02Jk_nvQ1noNyhRgOLJMEOl-ImxY/view?usp=drive_link" },
                 { title: "Pengumuman Kalender Akademik 2024/2025", date: "7 Februari 2025", file: "https://drive.google.com/file/d/17EDilCGz4Bi2C9bcOUUh8rrho4sesXCd/view?usp=drive_link" },
@@ -1738,7 +1385,6 @@
             ];
 
             const pdfAnnouncementsList = document.getElementById('pdf-announcements-list');
-
             function displayPdfAnnouncements() {
                 pdfAnnouncementsList.innerHTML = '';
                 pdfAnnouncementsData.forEach(announcement => {
@@ -1756,7 +1402,6 @@
             }
             displayPdfAnnouncements();
 
-            // Logout confirmation and redirect
             const confirmLogoutBtn = document.getElementById('confirm-logout');
             const cancelLogoutBtn = document.getElementById('cancel-logout');
 
@@ -1773,7 +1418,6 @@
                 });
             }
 
-            // Dummy Save Settings
             const simpanPengaturanBtn = document.getElementById('simpan-pengaturan');
             if (simpanPengaturanBtn) {
                 simpanPengaturanBtn.addEventListener('click', function() {
@@ -1781,7 +1425,6 @@
                 });
             }
 
-            // Dark Mode Functionality
             function applyTheme(theme) {
                 if (theme === 'dark') {
                     body.classList.add('dark-mode');
@@ -1792,13 +1435,27 @@
                 }
             }
 
-            // --- Carousel Functionality (NEWLY ADDED / MODIFIED) ---
+            const closeAlertBtn = document.querySelector('.dismissible-alert .close-alert-btn');
+            const dismissibleAlert = document.querySelector('.dismissible-alert');
+
+            if (closeAlertBtn && dismissibleAlert) {
+                closeAlertBtn.addEventListener('click', function() {
+                    dismissibleAlert.style.opacity = '0';
+                    dismissibleAlert.style.maxHeight = '0';
+                    dismissibleAlert.style.padding = '0';
+                    dismissibleAlert.style.marginBottom = '0';
+                    dismissibleAlert.style.overflow = 'hidden';
+                    setTimeout(() => {
+                        dismissibleAlert.style.display = 'none';
+                    }, 500);
+                });
+            }
+            
             const carouselSlides = document.querySelector('.carousel-slides');
             const carouselButtons = document.querySelectorAll('.carousel-button');
             const totalSlides = document.querySelectorAll('.carousel-slide').length;
             let currentSlide = 0;
             let autoSlideInterval;
-
             function showSlideCarousel(index) {
                 if (index >= totalSlides) {
                     currentSlide = 0;
@@ -1809,46 +1466,34 @@
                 }
                 carouselSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
             }
-
             function nextSlideCarousel() {
                 showSlideCarousel(currentSlide + 1);
             }
-
             function prevSlideCarousel() {
                 showSlideCarousel(currentSlide - 1);
             }
-
             function startAutoSlide() {
-                stopAutoSlide(); // Clear any existing interval before starting a new one
-                autoSlideInterval = setInterval(nextSlideCarousel, 3700); // Change slide every 3 seconds
+                stopAutoSlide();
+                autoSlideInterval = setInterval(nextSlideCarousel, 3700);
             }
-
             function stopAutoSlide() {
                 clearInterval(autoSlideInterval);
             }
-
-            // Add event listeners for carousel buttons
             carouselButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    stopAutoSlide(); // Stop auto-slide on manual interaction
+                    stopAutoSlide();
                     if (button.classList.contains('next')) {
                         nextSlideCarousel();
                     } else {
                         prevSlideCarousel();
                     }
-                    startAutoSlide(); // Restart auto-slide after interaction
+                    startAutoSlide();
                 });
             });
-
-            // Start auto-slide when the page loads
             startAutoSlide();
-
-            // Pause auto-slide when mouse is over the carousel
             carouselSlides.closest('.carousel-container').addEventListener('mouseenter', stopAutoSlide);
             carouselSlides.closest('.carousel-container').addEventListener('mouseleave', startAutoSlide);
-
-            // Initial display of the first slide
-            showSlideCarousel(0); // Ensure the first slide is visible on load
+            showSlideCarousel(0);
         });
     </script>
 </body>
