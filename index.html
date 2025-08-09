@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal dan Profile 5TIM</title>
+    <title>Jadwal dan Profile 5TIM 2025</title>
     <link rel="icon" href="pavicon1.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -414,7 +414,6 @@
         }
 
         /* Styles for text in schedule table */
-        /* Keep white-space: pre-line for all 3 columns as requested for original breaks */
         .content-card td:nth-child(3), .content-card td:nth-child(4), .content-card td:nth-child(5) {
             white-space: pre-line;
         }
@@ -955,13 +954,6 @@
                 padding: 0.8rem 1rem;
                 font-size: 0.9em;
             }
-            /* Specific adjustment for the time column on small screens */
-            .content-card td:nth-child(3) { /* This targets the 'Jam' column */
-                font-size: 0.75em; /* Make font smaller for times */
-                line-height: 1.2; /* Reduce line height for compactness */
-                white-space: pre-line; /* Keep pre-line as requested */
-            }
-
             .student-photos-grid {
                 grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
                 gap: 1rem;
@@ -996,50 +988,74 @@
             body {
                 flex-direction: column;
             }
-            .sidebar h2 {
-                margin-bottom: 1.8rem;
+            /* Sidebar becomes fixed at top for mobile navigation */
+            .sidebar {
+                width: 100%;
+                height: auto; /* Allow height to adjust to content */
+                position: static; /* No longer fixed to the side */
+                padding-top: 1rem;
+                box-shadow: var(--shadow-light);
+                animation: none; /* Disable sidebar animation for mobile */
+                transform: translateX(0); /* Ensure it's not off-screen */
+                flex-direction: row; /* Align items horizontally */
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap; /* Allow items to wrap */
+                padding-bottom: 0;
             }
+
             .sidebar-profile {
-                padding: 1rem 0 1.4rem;
-                margin-bottom: 1rem;
+                display: none; /* Hide profile in mobile sidebar for brevity */
             }
-            .sidebar-profile .profile-avatar {
-                width: 4rem;
-                height: 4rem;
-                font-size: 1.8em;
+            .sidebar h2 {
+                display: none; /* Hide main title in mobile sidebar */
             }
-            .sidebar-profile .profile-name {
-                font-size: 1em;
-            }
-            .sidebar-profile .profile-details {
-                font-size: 0.8em;
-            }
+
             .sidebar ul {
+                display: flex; /* Make menu items flex for horizontal layout */
                 flex-direction: row;
                 justify-content: space-around;
+                width: 100%; /* Take full width */
                 border-bottom: none;
                 padding-bottom: 0;
                 flex-wrap: wrap;
+                margin-top: 1rem;
             }
             .sidebar ul li {
-                flex: 1 1 auto;
+                flex: 1 1 auto; /* Allow items to grow/shrink and wrap */
                 text-align: center;
                 padding: 0.8rem 0.5rem;
-                border-left: none;
+                border-left: none; /* Remove left border */
                 font-size: 0.85em;
                 justify-content: center;
-                border-bottom: 4px solid transparent;
+                border-bottom: 4px solid transparent; /* Use bottom border for active state */
+                white-space: nowrap; /* Prevent text wrapping within nav items */
             }
             .sidebar ul li i {
                 margin-right: 0.5rem;
+                font-size: 1em; /* Adjust icon size for mobile */
             }
             .sidebar ul li.active {
-                border-left: none;
-                border-bottom: 4px solid var(--secondary-color);
+                border-bottom: 4px solid var(--secondary-color); /* Active state with bottom border */
                 background-color: var(--primary-color);
             }
+            /* Ensure the text color of active link is white on mobile */
+            .sidebar ul li.active a {
+                color: white;
+            }
+
             .sidebar .logout {
-                display: none;
+                display: none; /* Hide logout button in mobile sidebar */
+            }
+
+            .main-content {
+                margin-left: 0; /* No margin on mobile */
+                padding: 1.5rem; /* Reduced padding for smaller screens */
+                width: 100%; /* Take full width */
+            }
+            
+            #sidebar-toggle {
+                display: none; /* Hide sidebar toggle button on mobile since sidebar is always visible at top */
             }
 
             .home-header {
@@ -1106,13 +1122,15 @@
                 font-size: 1.4em;
             }
             .pdf-announcements .announcement-item .content-wrapper {
-                width: 100%;
+                flex-direction: column; /* Stack title and date on small screens */
+                align-items: flex-start;
             }
             .pdf-announcements .announcement-date {
                 font-size: 0.75em;
                 margin-left: 0;
-                flex-basis: 100%;
+                margin-top: 0.2rem; /* Add a little space */
                 text-align: left;
+                width: 100%; /* Ensure date takes full width */
             }
         }
 
@@ -1123,10 +1141,12 @@
             .mobile-overlay small {
                 font-size: 0.8em;
             }
-            /* Further specific adjustment for the time column on very small screens */
-            .content-card td:nth-child(3) { /* This targets the 'Jam' column */
-                font-size: 0.65em; /* Even smaller font for times on tiny screens */
-                line-height: 1.1; /* Even tighter line height */
+             .sidebar ul li {
+                font-size: 0.75em; /* Further reduce font size for very small screens */
+                padding: 0.6rem 0.3rem;
+            }
+            .sidebar ul li i {
+                margin-right: 0.3rem;
             }
         }
     </style>
@@ -1134,7 +1154,7 @@
 <body>
     <div class="mobile-overlay" id="mobile-overlay">
         <p><i class="fas fa-desktop"></i> Maaf ya, untuk pengalaman terbaik, disarankan mengakses website ini di mode desktop.</p>
-        <small>Aktifkan mode desktop di browser kamu.</small>
+        <small>Aktifkan mode dekstop di browser kamu.</small>
     </div>
 
     <div class="sidebar">
@@ -1228,15 +1248,15 @@
                             <td><br><br><br><br><br><br><b>1</b></td>
                             <td><br><br><br><br><br><br><b>Senin</b></td>
                             <td>
-                                14:00 – 14:40<br>
-                                14:40 – 15:20<br>
+                                14:00 – 14:40
+                                14:40 – 15:20
                                 15:20 – 16:00<br>
-                                16:00 – 16:40<br>
-                                16:40 – 17:20<br>
+                                16:00 – 16:40
+                                16:40 – 17:20
                                 17:20 – 18:00<br>
                                 <em>Istirahat (18:00 – 18:30)</em><br>
-                                18:30 – 19:10<br>
-                                19:10 – 19:50
+                                18.30 – 19.10
+                                19.10 – 19.50
                             </td>
                             <td>
                                 <br>Praktikum Audio Visual Lanjut
@@ -1253,7 +1273,7 @@
                             <td><br><b>2</b></td>
                             <td><br><b>Selasa</b></td>
                             <td>
-                                19:50 – 20:30<br>
+                                19:50 – 20:30
                                 20:30 – 21:10
                             </td>
                             <td><br>Praktikum Animasi Lanjut (Online)</td>
@@ -1263,16 +1283,16 @@
                             <td><br><br><br><br><br><br><b>3</b></td>
                             <td><br><br><br><br><br><br><b>Rabu</b></td>
                             <td>
-                                13:00 – 13:40<br>
-                                13:40 – 14:20<br>
+                                13:00 – 13:40
+                                13:40 – 14:20
                                 14:20 – 15:00<br>
-                                15:00 – 15:40<br>
-                                15:40 – 16:20<br>
-                                16:20 – 17:00<br>
+                                15:00 – 15:40
+                                15:40 – 16:20
+                                16:20 – 17:00
                                 17:00 – 17:40<br>
                                 <em>Istirahat (17:40 – 18:30)</em><br>
-                                18:30 – 19:10<br>
-                                19:10 – 19:50<br>
+                                18:30 – 19:10
+                                19:10 – 19:50
                                 19:50 – 20:30
                             </td>
                             <td>
@@ -1290,8 +1310,8 @@
                             <td><br><br><b>4</b></td>
                             <td><br><br><b>Kamis</b></td>
                             <td>
-                                13:00 – 13:40<br>
-                                13:40 – 14:20<br>
+                                13:00 – 13:40
+                                13:40 – 14:20
                                 14:20 – 15:00
                             </td>
                             <td>
@@ -1305,8 +1325,8 @@
                             <td><br><br><b>5</b></td>
                             <td><br><br><b>Jumat</b></td>
                             <td>
-                                15:30 – 16:10<br>
-                                16:10 – 16:50<br>
+                                15:30 – 16:10
+                                16:10 – 16:50
                                 16:50 – 17:30
                             </td>
                             <td><br><br>Praktikum Pemrograman Web 1 (Tentative)</td>
@@ -1316,8 +1336,8 @@
                             <td><br><br><b>6</b></td>
                             <td><br><br><b>Sabtu</b></td>
                             <td>
-                                09:00 – 09:40<br>
-                                09:40 – 10:20<br>
+                                09:00 – 09:40
+                                09:40 – 10:20
                                 10:20 – 11:00
                             </td>
                             <td><br><br>Praktikum Pemrograman Mobile</td>
@@ -1389,14 +1409,14 @@
                 <div class="student-photos-grid">
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Dafa.png" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Daffa Athaillah Perdhana</span>
                         <span class="student-role">Ketua Kelas</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Alif.jpg" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Muharram Alif Barokah</span>
                         <span class="student-role">Wakil Kelas</span>
@@ -1410,112 +1430,112 @@
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Reva.JPG" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Revalina Azzahra Harahap</span>
                         <span class="student-role">Sekretaris</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Revo.jpg" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">M.Revo Abdul Aziz</span>
                         <span class="student-role">Bendahara</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Zidan.JPG" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">M.Zidhan Yanotama</span>
                         <span class="student-role">Bendahara</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Iyan.jpg" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Achmad Triansyah Saputra</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Alfin.jpg" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Alfin Yudha Berlian</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="https://media.licdn.com/dms/image/v2/D5603AQFing1MbFs3rA/profile-displayphoto-shrink_200_200/B56ZbdhbBxHgAc-/0/1747473254882?e=2147483647&v=beta&t=LL1JwRuBZdKboFn_f2sM-fot2lcSL5IH6eGNbXhWFbA" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Ardya Pratiwi Putri</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Charin.JPG" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Charisma Tri Putri Agustin Gultom</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Alka.jpg" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Kgs Muhammad Alkatiri Nama</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="khalib.png" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Khalib Wisnu Wardhana</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="https://www.dbl.id/uploads/teams/23712ayghW/142892TjlSV/142892FP666d947722d63.jpg" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Muhammad Dama Adiputra</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Rama.jpg" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Muhammad Derindra Pratama</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Nabila.jpg" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Nabilla Azzahra Putri Syahrial</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Putri.JPG" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Putri Natasya</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="https://media.licdn.com/dms/image/v2/D5603AQGnlNnEGb4-6g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1705037051985?e=2147483647&v=beta&t=pZ5X-WWaCBvn79GwRsDI_NMtxp9TPlR8erAyO0JTcZ0" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Ratu Cahia D'Aurel</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="surya.png" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Surya Hidayatullah</span>
                         <span class="student-role">Anggota</span>
                     </div>
                     <div class="student-card">
                         <div class="student-photo">
-                            <img src="https://media.istockphoto.com/id/1396814518/id/vektor/gambar-akan-segera-datang-tidak-ada-foto-tidak-ada-gambar-thumbnail-yang-tersedia-ilustrasi.jpg?s=612x612&w=0&k=20&c=QACF00WNY4oglFfbfTWEaW0Y3sgL-57-9wU6ptdpxog=" alt="Foto Mahasiswa">
+                            <img src="Zalikah.png" alt="Foto Mahasiswa">
                         </div>
                         <span class="student-name">Zalikhah Naurah Inayah</span>
                         <span class="student-role">Anggota</span>
@@ -1573,55 +1593,42 @@
             const mainContentElement = document.querySelector('.main-content');
             const mobileOverlay = document.getElementById('mobile-overlay');
 
-            // Function to check if the user agent indicates a desktop operating system
+            // --- Mobile Overlay Logic ---
             function isDesktopUserAgent() {
                 const userAgent = navigator.userAgent;
-                // Common desktop OS indicators, exclude mobile/tablet explicitly
-                return /windows|macintosh|linux|x11/i.test(userAgent) && !/android|iphone|ipad|ipod|windows phone|iemobile|opera mini/i.test(userAgent);
+                // Common desktop OS indicators
+                return /windows|macintosh|linux|x11/i.test(userAgent) && !/android|iphone|ipad|ipod|windows phone/i.test(userAgent);
             }
 
-            // Function to handle the display of the mobile overlay
             function checkMobileOverlay() {
-                const isSmallScreen = window.innerWidth <= 992; // Threshold for mobile view
-                const isUserAgentDesktop = isDesktopUserAgent(); // Check if user agent is desktop
+                const isSmallScreen = window.innerWidth <= 768; // Changed threshold to 768px for mobile-specific layout
+                const isTrulyDesktop = isDesktopUserAgent();
 
-                // Show overlay only if it's a small screen AND user agent is NOT desktop (meaning it's a mobile device in its default mobile view)
-                if (isSmallScreen && !isUserAgentDesktop) {
+                if (isSmallScreen && !isTrulyDesktop) {
                     mobileOverlay.style.display = 'flex';
-                    // Sembunyikan konten utama dan sidebar
                     sidebarElement.style.display = 'none';
                     mainContentElement.style.display = 'none';
                     if (sidebarToggleBtn) sidebarToggleBtn.style.display = 'none';
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling behind the overlay
+                    document.body.style.overflow = 'hidden';
                 } else {
-                    // Hide overlay and show content
                     mobileOverlay.style.display = 'none';
-                    // Restore original display styles
-                    sidebarElement.style.display = ''; 
-                    mainContentElement.style.display = '';
+                    sidebarElement.style.display = ''; // Reset to default (flex by CSS)
+                    mainContentElement.style.display = ''; // Reset to default (flex by CSS)
                     if (sidebarToggleBtn) sidebarToggleBtn.style.display = '';
-                    document.body.style.overflow = ''; // Allow scrolling
+                    document.body.style.overflow = '';
                 }
             }
 
-            // Initial check on page load
+            // Initial check and re-check on resize
             checkMobileOverlay();
-
-            // Re-check on window resize
             window.addEventListener('resize', checkMobileOverlay);
 
             // Function to set the active section and link
             function showSection(targetId) {
-                // Only change section if not blocked by overlay
-                if (mobileOverlay.style.display === 'flex') {
-                    // Optionally alert user or just do nothing
-                    return; 
-                }
-
                 sidebarLinks.forEach(item => item.classList.remove('active'));
                 contentSections.forEach(section => {
                     section.classList.remove('active');
-                    section.style.display = 'none'; // Ensure display none for hidden sections
+                    section.style.display = 'none';
                 });
 
                 const activeLinkParent = document.querySelector(`.sidebar-menu li[data-target="${targetId}"]`);
@@ -1632,7 +1639,7 @@
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     targetSection.classList.add('active');
-                    targetSection.style.display = 'block'; // Display block for active section
+                    targetSection.style.display = 'block';
 
                     // Apply animation to elements within the newly active section
                     const animatableElements = targetSection.querySelectorAll('.home-header, .carousel-container, .home-card, .content-card, .dosen-pa-card, .student-card');
@@ -1661,8 +1668,8 @@
                 }
             }
 
-            // Initial sidebar animation on page load (only if overlay is not active)
-            if (sidebarElement && !body.classList.contains('sidebar-hidden') && mobileOverlay.style.display !== 'flex') {
+            // Initial sidebar animation on page load (only if overlay is not active and not on mobile)
+            if (sidebarElement && !body.classList.contains('sidebar-hidden') && window.innerWidth > 768) {
                 sidebarElement.style.animation = 'slideInLeft 0.8s forwards 0.1s';
             }
 
@@ -1685,18 +1692,19 @@
                     window.location.hash = targetId; // Update URL hash
                     showSection(targetId);
                     // Hide sidebar on mobile after clicking a link, only if not blocked by overlay
-                    if (window.innerWidth <= 768 && mobileOverlay.style.display !== 'flex') {
+                    // This specific check for sidebar-hidden class and toggle button for desktop behavior
+                    if (window.innerWidth <= 992 && mobileOverlay.style.display !== 'flex') {
                         body.classList.add('sidebar-hidden');
-                        sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        if (sidebarToggleBtn) sidebarToggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
                     }
                 });
             });
 
-            // Sidebar Toggle functionality (only relevant when the overlay is NOT active)
+            // Sidebar Toggle functionality (only relevant when the overlay is NOT active and screen > 768px)
             if (sidebarToggleBtn) {
                 sidebarToggleBtn.addEventListener('click', function() {
-                    if (mobileOverlay.style.display === 'flex') { // If overlay is active, ignore toggle
-                        return;
+                    if (mobileOverlay.style.display === 'flex' || window.innerWidth <= 768) { 
+                        return; // If overlay is active or on true mobile layout, ignore toggle
                     }
                     body.classList.toggle('sidebar-hidden');
                     if (body.classList.contains('sidebar-hidden')) {
@@ -1707,56 +1715,19 @@
                 });
             }
 
-            // Carousel functionality
-            const carouselSlides = document.querySelector('.carousel-slides');
-            const prevButton = document.querySelector('.carousel-button.prev');
-            const nextButton = document.querySelector('.carousel-button.next');
-            const slides = document.querySelectorAll('.carousel-slide');
-            let currentSlide = 0;
-            let autoSlideInterval;
-
-            function showSlide(index) {
-                if (slides.length === 0) return; // Prevent errors if no slides
-                if (index >= slides.length) {
-                    currentSlide = 0;
-                } else if (index < 0) {
-                    currentSlide = slides.length - 1;
-                } else {
-                    currentSlide = index;
-                }
-                carouselSlides.style.transform = `translateX(${-currentSlide * 100}%)`;
+            // Load saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+                themeToggle.value = savedTheme;
+            } else {
+                applyTheme('light');
             }
 
-            function nextSlide() {
-                showSlide(currentSlide + 1);
-            }
-
-            function prevSlide() {
-                showSlide(currentSlide - 1);
-            }
-
-            function startAutoSlide() {
-                stopAutoSlide(); // Clear any existing interval before starting a new one
-                autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-            }
-
-            function stopAutoSlide() {
-                clearInterval(autoSlideInterval);
-            }
-
-            if (slides.length > 0) {
-                prevButton.addEventListener('click', () => {
-                    stopAutoSlide();
-                    prevSlide();
-                    startAutoSlide();
-                });
-                nextButton.addEventListener('click', () => {
-                    stopAutoSlide();
-                    nextSlide();
-                    startAutoSlide();
-                });
-                startAutoSlide(); // Start auto-sliding when the page loads
-            }
+            // Event listener for theme change
+            themeToggle.addEventListener('change', function() {
+                applyTheme(this.value);
+            });
 
             // PDF Announcements (Dummy Data)
             const pdfAnnouncementsData = [
@@ -1820,6 +1791,64 @@
                     localStorage.setItem('theme', 'light');
                 }
             }
+
+            // --- Carousel Functionality (NEWLY ADDED / MODIFIED) ---
+            const carouselSlides = document.querySelector('.carousel-slides');
+            const carouselButtons = document.querySelectorAll('.carousel-button');
+            const totalSlides = document.querySelectorAll('.carousel-slide').length;
+            let currentSlide = 0;
+            let autoSlideInterval;
+
+            function showSlideCarousel(index) {
+                if (index >= totalSlides) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = totalSlides - 1;
+                } else {
+                    currentSlide = index;
+                }
+                carouselSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            function nextSlideCarousel() {
+                showSlideCarousel(currentSlide + 1);
+            }
+
+            function prevSlideCarousel() {
+                showSlideCarousel(currentSlide - 1);
+            }
+
+            function startAutoSlide() {
+                stopAutoSlide(); // Clear any existing interval before starting a new one
+                autoSlideInterval = setInterval(nextSlideCarousel, 3700); // Change slide every 3 seconds
+            }
+
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            // Add event listeners for carousel buttons
+            carouselButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    stopAutoSlide(); // Stop auto-slide on manual interaction
+                    if (button.classList.contains('next')) {
+                        nextSlideCarousel();
+                    } else {
+                        prevSlideCarousel();
+                    }
+                    startAutoSlide(); // Restart auto-slide after interaction
+                });
+            });
+
+            // Start auto-slide when the page loads
+            startAutoSlide();
+
+            // Pause auto-slide when mouse is over the carousel
+            carouselSlides.closest('.carousel-container').addEventListener('mouseenter', stopAutoSlide);
+            carouselSlides.closest('.carousel-container').addEventListener('mouseleave', startAutoSlide);
+
+            // Initial display of the first slide
+            showSlideCarousel(0); // Ensure the first slide is visible on load
         });
     </script>
 </body>
