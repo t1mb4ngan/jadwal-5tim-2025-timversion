@@ -53,7 +53,7 @@
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        
+       
         /* Main Content */
         .main-content {
             margin-left: 280px;
@@ -65,9 +65,8 @@
             transform: translateY(20px);
             animation: fadeInSlideUp 0.8s forwards;
             animation-delay: 0.2s;
-            /* No margin-top needed now that the fixed alert is gone */
         }
-        
+       
         /* Sidebar Styling */
         .sidebar {
             width: 280px;
@@ -265,6 +264,44 @@
             font-size: 1em;
             font-weight: 600;
             color: var(--light-text-color);
+        }
+        
+        /* New: Running Text Alert Styling */
+        .running-text-alert {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-bottom: 2.5rem;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            animation: fadeInSlideUp 0.8s forwards;
+            animation-delay: 0.5s;
+        }
+        .running-text-alert .alert-icon {
+            font-size: 1.4em;
+            color: var(--warning-color);
+            margin-right: 1rem;
+        }
+        .running-text-alert marquee {
+            flex-grow: 1;
+            font-size: 0.95em;
+            color: var(--text-color);
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .running-text-alert marquee em {
+            font-style: italic;
+            font-weight: 600;
+            color: var(--warning-color);
+        }
+        body.dark-mode .running-text-alert {
+            background-color: #2D3748;
+            border-color: #4A5568;
         }
 
         /* Content Card */
@@ -531,6 +568,13 @@
             gap: 2rem;
             margin-bottom: 2.5rem;
         }
+
+        /* --- New CSS for Home Card Links --- */
+        .home-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
         .home-card {
             background-color: var(--card-bg);
             padding: 2rem;
@@ -545,11 +589,13 @@
             transform: translateY(20px);
             animation: fadeInSlideUp 0.8s forwards;
         }
-        .home-card:hover {
+        .home-card-link:hover .home-card {
             transform: translateY(-8px);
             box-shadow: var(--shadow-medium);
             border-bottom-color: var(--secondary-color);
         }
+        /* --- End of New CSS --- */
+
         .home-card h3 {
             margin-top: 0;
             color: var(--primary-color);
@@ -886,6 +932,9 @@
             .pdf-announcements .announcement-item .content-wrapper a { font-size: 0.95em; }
             .pdf-announcements .announcement-date { font-size: 0.75em; }
             .dismissible-alert .close-alert-btn { position: static; }
+            .running-text-alert { margin-bottom: 2rem; padding: 0.8rem; }
+            .running-text-alert .alert-icon { font-size: 1.2em; }
+            .running-text-alert marquee { font-size: 0.9em; }
         }
         @media (max-width: 768px) {
             body { flex-direction: column; }
@@ -952,6 +1001,9 @@
             .dismissible-alert .alert-content { flex-direction: column; align-items: flex-start; }
             .dismissible-alert p { margin-bottom: 0.5rem; }
             .dismissible-alert .close-alert-btn { position: absolute; top: 1rem; right: 1rem; margin-left: 0; }
+            .running-text-alert { flex-direction: column; align-items: flex-start; padding: 1.2rem; margin-bottom: 1.5rem; }
+            .running-text-alert .alert-icon { margin-bottom: 0.5rem; }
+            .running-text-alert marquee { width: 100%; }
         }
         @media (max-width: 480px) {
             .mobile-overlay p { font-size: 1.2em; }
@@ -993,6 +1045,14 @@
                 <h1><i class="fas fa-tachometer-alt"></i> Dashboard Informasi</h1>
                 <div>Selamat Datang 🙋‍♂️</div>
             </div>
+
+            <div class="running-text-alert">
+                <span class="alert-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                <marquee direction="left" scrollamount="7">
+                    Website ini masih dalam tahap pengembangan, jika ada masukan dan saran silahkan hubungi kontak yang terterah dibawah website. Terima Kasih! 🙏
+                </marquee>
+            </div>
+
             <div class="carousel-container">
                 <div class="carousel-slides">
                     <div class="carousel-slide">
@@ -1013,21 +1073,27 @@
             </div>
 
             <div class="home-card-container">
-                <div class="home-card">
-                    <h3><i class="fas fa-book-open"></i> Mata Kuliah Aktif</h3>
-                    <p>10</p>
-                    <div class="alert"><i class="fas fa-check-circle"></i> Semua Mata Kuliah Sudah diupdate</div>
-                </div>
-                <div class="home-card">
-                    <h3><i class="fas fa-users"></i> Jumlah Mahasiswa</h3>
-                    <p>19</p>
-                    <div class="alert"><i class="fas fa-info-circle"></i> Termasuk Pengurus Kelas</div>
-                </div>
-                <div class="home-card">
-                    <h3><i class="fas fa-chalkboard-teacher"></i> Dosen Pembimbing</h3>
-                    <p>1</p>
-                    <div class="alert"><i class="fas fa-user-check"></i> Tersedia</div>
-                </div>
+                <a href="#schedule-content" class="home-card-link">
+                    <div class="home-card" style="animation-delay: 0.4s;">
+                        <h3><i class="fas fa-book-open"></i> Mata Kuliah Aktif</h3>
+                        <p>10</p>
+                        <div class="alert"><i class="fas fa-check-circle"></i> Semua Mata Kuliah Telah Diupdate</div>
+                    </div>
+                </a>
+                <a href="#class-structure-page" class="home-card-link">
+                    <div class="home-card" style="animation-delay: 0.5s;">
+                        <h3><i class="fas fa-users"></i> Jumlah Mahasiswa</h3>
+                        <p>19</p>
+                        <div class="alert"><i class="fas fa-info-circle"></i> Termasuk Pengurus Kelas</div>
+                    </div>
+                </a>
+                <a href="#class-structure-page" class="home-card-link">
+                    <div class="home-card" style="animation-delay: 0.6s;">
+                        <h3><i class="fas fa-chalkboard-teacher"></i> Dosen Pembimbing</h3>
+                        <p>1</p>
+                        <div class="alert"><i class="fas fa-user-check"></i> Tersedia</div>
+                    </div>
+                </a>
             </div>
 
             <div class="content-card announcement pdf-announcements">
@@ -1038,8 +1104,8 @@
 
         <section id="schedule-content" class="content-section">
             <h1><i class="fas fa-calendar-alt"></i> Jadwal Perkuliahan 5 TIM Semester Ganjil</h1>
-            <h3>(Minggu 1–18) TIM Latest Version (Tentative) 2025/2026</h3>
-            
+            <h3>(Minggu 1–20) TIM Latest Version (Tentative) 2025/2026</h3>
+           
             <div class="content-card dismissible-alert">
                 <div class="alert-content">
                     <p><strong>Pemberitahuan:</strong> Jadwal perkuliahan di bawah bersifat <em>tentative</em> dan dapat berubah sewaktu-waktu. Harap selalu periksa informasi terbaru dari dosen terkait. Terima kasih! 😊</p>
@@ -1060,38 +1126,38 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><br><br><br><b>1</b></td>
-                            <td><br><br><br><b>Senin</b></td>
+                            <td><br><b>1</b></td>
+                            <td><br><b>Senin</b></td>
                             <td>
-                                18:30 – 19:10
-                                19:10 – 19:50<br>
                                 19:50 – 20:30
                                 20:30 – 21:10
                             </td>
                             <td>
-                                Bahasa Inggris 1
-                                <br><br>Praktikum UI/UX
+                                Praktikum UI/UX
                             </td>
                             <td>
-                                Munaja Rahma, S.Pd., M.Pd.
-                                <br>Della Oktaviany, S.Kom., M.T.I.
+                                Della Oktaviany, S.Kom., M.T.I.
                             </td>
                         </tr>
                         <tr>
-                            <td><br><br><br><b>2</b></td>
-                            <td><br><br><br><b>Selasa</b></td>
+                            <td><br><br><br><br><br><b>2</b></td>
+                            <td><br><br><br><br><br><b>Selasa</b></td>
                             <td>
+                                16.30 - 17.10
+                                17.10 - 17.50<br>
                                 18:30 – 19:10
                                 19:10 – 19:50
                                 19:50 – 20:30<br>
                                 20:30 – 21:10
                             </td>
                             <td>
-                                <br>Metodologi Penelitian
-                                <br><br>Praktikum UI/UX
+                                Bahasa Inggris 1
+                                <br><br>Metodologi Penelitian
+                                <br><br><br>Praktikum UI/UX
                             </td>
                             <td>
-                                Dr. Slamet Widodo,S.Kom., M.Kom.
+                                Munaja Rahma, S.Pd., M.Pd.
+                                <br>Dr. Slamet Widodo,S.Kom., M.Kom.
                                 <br>Della Oktaviany, S.Kom., M.T.I.
                             </td>
                         </tr>
@@ -1099,17 +1165,17 @@
                             <td><br><br><br><b>3</b></td>
                             <td><br><br><br><b>Rabu</b></td>
                             <td>
-                                18:30 – 19:10
-                                19:10 – 19:50
-                                19:50 – 20:30<br>
+                                15:00 – 15:40
+                                15:40 – 16:20
+                                16:20 – 17:00<br>
                                 20:30 – 21:10
                             </td>
                             <td>
-                                <br>Praktikum Pemrograman Web 2
-                                <br>Praktikum Pengembangan Project Multimedia
+                                Praktikum Pemrograman Web 2
+                                <br><br>Praktikum Pengembangan Project Multimedia (Tentative)
                             </td>
                             <td>
-                                <br>Hidayati Ami, S.Kom., M.Kom.
+                                Hidayati Ami, S.Kom., M.Kom.
                                 <br>R. M. Chairil Andri, S.S.T., M.I.T.
                             </td>
                         </tr>
@@ -1117,10 +1183,10 @@
                             <td><br><br><b>4</b></td>
                             <td><br><br><b>Kamis</b></td>
                             <td>
-                                18:30 – 19:10
-                                19:10 – 19:50
-                                19:50 – 20:30
-                                20:30 – 21:10
+                                15:40 – 16:20
+                                16:20 – 17:00
+                                17:00 – 17:40
+                                17:40 – 18:00
                             </td>
                             <td>
                                 <br>Praktikum Aplikasi Pemasaran Digital
@@ -1151,8 +1217,8 @@
                                 <em>Istirahat (09:00 – 09:30)</em><br>
                                 09:30 – 10:10
                                 10:10 – 10:50<br>
-                                10:50 – 11:30<br>
-                                <em>Istirahat (11:30 – 12:00)</em><br>
+                                10:50 – 11:30
+                                <em>ISOMA (11:30 – 12:00)</em>
                                 12:00 – 12:40<br>
                                 12:40 – 13:20
                                 13:20 – 14:00
@@ -1161,13 +1227,13 @@
                                 <br>Motion Objek Digital
                                 <br><br><br><br><br><br>Hukum IT
                                 <br><br><br>Pendidikan Kewarganegaraan
-                                <br><br><br><br>Praktikum Pengembangan Project Multimedia
+                                <br><br><br>Praktikum Pengembangan Project Multimedia
                             </td>
                             <td>
                                 <br>Fithri Selva Jumeilah, S.Kom., M.T.I.
                                 <br><br><br><br><br>Dr. Yuli Asmara Triputra.
-                                <br><br><br>Liza Utama, S.H., M.H.
-                                <br><br><br><br>R. M. Chairil Andri, S.S.T., M.I.T.
+                                <br><br>Liza Utama, S.H., M.H.
+                                <br><br><br>R. M. Chairil Andri, S.S.T., M.I.T.
                             </td>
                         </tr>
                     </tbody>
@@ -1279,6 +1345,18 @@
             const sidebarElement = document.querySelector('.sidebar');
             const mainContentElement = document.querySelector('.main-content');
             const mobileOverlay = document.getElementById('mobile-overlay');
+           
+            // --- New Code for Dashboard Links ---
+            const dashboardLinks = document.querySelectorAll('.home-card-link');
+            dashboardLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    window.location.hash = targetId;
+                    showSection(targetId);
+                });
+            });
+            // --- End New Code ---
 
             // --- Mobile Overlay Logic ---
             function isDesktopUserAgent() {
@@ -1320,16 +1398,19 @@
                 if (targetSection) {
                     targetSection.classList.add('active');
                     targetSection.style.display = 'block';
-                    const animatableElements = targetSection.querySelectorAll('.home-header, .carousel-container, .home-card, .content-card, .dosen-pa-card, .student-card, .dismissible-alert');
+                    const animatableElements = targetSection.querySelectorAll('.home-header, .carousel-container, .running-text-alert, .home-card, .content-card, .dosen-pa-card, .student-card, .dismissible-alert');
                     animatableElements.forEach((el, index) => {
                         el.style.opacity = '0';
                         el.style.transform = el.classList.contains('student-card') ? 'scale(0.9)' : 'translateY(20px)';
                         el.style.animation = 'none';
                         void el.offsetWidth;
                         let delay = 0.2;
-                        if (el.classList.contains('home-card')) delay = 0.4 + (index * 0.1);
-                        else if (el.classList.contains('dosen-pa-card')) delay = 0.6;
-                        else if (el.classList.contains('student-card')) delay = 0.7 + (index * 0.05);
+                        if (el.classList.contains('home-header')) delay = 0.4;
+                        else if (el.classList.contains('running-text-alert')) delay = 0.5;
+                        else if (el.classList.contains('carousel-container')) delay = 0.6;
+                        else if (el.classList.contains('home-card')) delay = 0.7 + (index * 0.1);
+                        else if (el.classList.contains('dosen-pa-card')) delay = 0.8;
+                        else if (el.classList.contains('student-card')) delay = 0.9 + (index * 0.05);
                         else if (el.classList.contains('dismissible-alert')) delay = 0.8;
                         if (el.classList.contains('student-card')) {
                             el.style.animation = `fadeInScaleUp 0.6s forwards ${delay}s`;
@@ -1390,10 +1471,10 @@
             });
 
             const pdfAnnouncementsData = [
+                { title: "Pengumuman Pencetakan KHS Secara Mandiri", date: "22 Agustus 2025", file: "https://drive.google.com/file/d/1ZMZQaQ-1QvorWX2OEIQCCZ9OfILqmPMj/view?usp=sharing" },
+                { title: "Pengumuman Jadwal Edaran Tekkom 25/26", date: "Agustus 2025", file: "https://drive.google.com/file/d/189cWJUz6dkPMY6Nb0Uqpsn78aUYZt7RH/view?usp=sharing" },
                 { title: "Pengumuman Kalender Akademik dan UKT", date: "30 Juni 2025", file: "https://drive.google.com/file/d/1UP5o02Jk_nvQ1noNyhRgOLJMEOl-ImxY/view?usp=drive_link" },
-                { title: "Pengumuman Kalender Akademik 2024/2025", date: "7 Februari 2025", file: "https://drive.google.com/file/d/17EDilCGz4Bi2C9bcOUUh8rrho4sesXCd/view?usp=drive_link" },
-                { title: "Panduan Pembayaran UKT", date: "(Tentative)", file: "https://www.polsri.ac.id/tata-cara-pembayaran/" },
-                { title: "Surat Keterangan Aktif", date: "(Tentative)", file: "https://sisak1.polsri.ac.id/mahasiswa/" }
+                { title: "Pengumuman Kalender Akademik 2024/2025", date: "7 Februari 2025", file: "https://drive.google.com/file/d/17EDilCGz4Bi2C9bcOUUh8rrho4sesXCd/view?usp=drive_link" }
             ];
 
             const pdfAnnouncementsList = document.getElementById('pdf-announcements-list');
@@ -1462,7 +1543,7 @@
                     }, 500);
                 });
             }
-            
+           
             const carouselSlides = document.querySelector('.carousel-slides');
             const carouselButtons = document.querySelectorAll('.carousel-button');
             const totalSlides = document.querySelectorAll('.carousel-slide').length;
