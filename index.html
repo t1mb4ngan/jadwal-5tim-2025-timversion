@@ -53,7 +53,7 @@
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        
+       
         /* Main Content */
         .main-content {
             margin-left: 280px;
@@ -66,7 +66,7 @@
             animation: fadeInSlideUp 0.8s forwards;
             animation-delay: 0.2s;
         }
-        
+       
         /* Sidebar Styling */
         .sidebar {
             width: 280px;
@@ -1011,59 +1011,6 @@
             .sidebar ul li { font-size: 0.75em; padding: 0.6rem 0.3rem; }
             .sidebar ul li i { margin-right: 0.3rem; }
         }
-
-        /* Perbaikan untuk tampilan tabel di layar yang sangat kecil (mobile) */
-        @media (max-width: 576px) {
-            .content-card table {
-                display: block;
-                width: 100%;
-                border: none;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-            .content-card table thead {
-                display: none;
-            }
-            .content-card table tbody {
-                display: block;
-                width: 100%;
-            }
-            .content-card tr {
-                display: block;
-                margin-bottom: 1rem;
-                border: 1px solid var(--border-color);
-                border-radius: var(--border-radius);
-                box-shadow: var(--shadow-light);
-            }
-            .content-card td {
-                display: flex;
-                align-items: center;
-                padding: 0.8rem 1rem;
-                border: none !important;
-                position: relative;
-                padding-left: 50% !important; /* Ruang untuk label */
-                white-space: normal;
-            }
-            .content-card td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 1rem;
-                width: calc(50% - 2rem);
-                font-weight: 600;
-                color: var(--primary-color);
-                text-align: left;
-            }
-            .content-card td:first-child { border-top-left-radius: var(--border-radius); border-top-right-radius: var(--border-radius); }
-            .content-card td:last-child { border-bottom-left-radius: var(--border-radius); border-bottom-right-radius: var(--border-radius); }
-            .content-card tr:nth-child(even) { background-color: transparent; }
-            body.dark-mode .content-card tr:nth-child(even) { background-color: transparent; }
-            .content-card td:nth-child(3), .content-card td:nth-child(4), .content-card td:nth-child(5) {
-                white-space: normal; /* Mengganti pre-line di mobile */
-            }
-            .content-card td br {
-                display: none; /* Menyembunyikan <br> di mobile */
-            }
-        }
     </style>
 </head>
 <body>
@@ -1158,7 +1105,7 @@
         <section id="schedule-content" class="content-section">
             <h1><i class="fas fa-calendar-alt"></i> Jadwal Perkuliahan 5 TIM Semester Ganjil</h1>
             <h3>(Minggu 1–20) TIM Latest Version (Tentative) 2025/2026</h3>
-            
+           
             <div class="content-card dismissible-alert">
                 <div class="alert-content">
                     <p><strong>Pemberitahuan:</strong> Jadwal perkuliahan di bawah bersifat <em>tentative</em> dan dapat berubah sewaktu-waktu. Harap selalu periksa informasi terbaru dari dosen terkait. Terima kasih! 😊</p>
@@ -1179,24 +1126,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td data-label="No"><br><b>1</b></td>
-                            <td data-label="Hari"><br><b>Senin</b></td>
-                            <td data-label="Jam">
+                            <td><br><b>1</b></td>
+                            <td><br><b>Senin</b></td>
+                            <td>
                                 16:30-17:10
                                 17:10-17:50
                                 17:10-18:30
                             </td>
-                            <td data-label="Mata Kuliah">
+                            <td>
                                 Praktikum UI/UX
                             </td>
-                            <td data-label="Dosen">
+                            <td>
                                 Della Oktaviany, S.Kom., M.T.I.
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="No"><br><br><br><br><br><b>2</b></td>
-                            <td data-label="Hari"><br><br><br><br><br><b>Selasa</b></td>
-                            <td data-label="Jam">
+                            <td><br><br><br><br><br><b>2</b></td>
+                            <td><br><br><br><br><br><b>Selasa</b></td>
+                            <td>
                                 16.30-17.10
                                 17.10-17.50<br>
                                 <em>Istirahat (17:50-18:30)</em><br>
@@ -1204,65 +1151,65 @@
                                 19:10-19:50
                                 19:50-20:30
                             </td>
-                            <td data-label="Mata Kuliah">
+                            <td>
                                 Bahasa Inggris 1
                                 <br><br><br><br><br><br>Metodologi Penelitian
                             </td>
-                            <td data-label="Dosen">
+                            <td>
                                 Munaja Rahma, S.Pd., M.Pd.
                                 <br><br><br><br><br>Dr. Slamet Widodo,S.Kom., M.Kom.
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="No"><br><br><br><b>3</b></td>
-                            <td data-label="Hari"><br><br><br><b>Rabu</b></td>
-                            <td data-label="Jam">
+                            <td><br><br><br><b>3</b></td>
+                            <td><br><br><br><b>Rabu</b></td>
+                            <td>
                                 15:00-15:40
                                 15:40-16:20
                                 16:20-17:00<br>
                                 20:30-21:10
                             </td>
-                            <td data-label="Mata Kuliah">
+                            <td>
                                 Praktikum Pemrograman Web 2
                                 <br><br>Praktikum Pengembangan Project Multimedia (Tentative)
                             </td>
-                            <td data-label="Dosen">
+                            <td>
                                 Hidayati Ami, S.Kom., M.Kom.
                                 <br>R. M. Chairil Andri, S.S.T., M.I.T.
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="No"><br><br><b>4</b></td>
-                            <td data-label="Hari"><br><br><b>Kamis</b></td>
-                            <td data-label="Jam">
+                            <td><br><br><b>4</b></td>
+                            <td><br><br><b>Kamis</b></td>
+                            <td>
                                 15:40-16:20
                                 16:20-17:00
                                 17:00-17:40
                                 17:40-18:00
                             </td>
-                            <td data-label="Mata Kuliah">
+                            <td>
                                 <br>Praktikum Aplikasi Pemasaran Digital
                             </td>
-                            <td data-label="Dosen">
+                            <td>
                                 <br>Yunita Fauzia A., S.Kom., M.Kom.
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="No"><br><br><b>5</b></td>
-                            <td data-label="Hari"><br><br><b>Jumat</b></td>
-                            <td data-label="Jam">
+                            <td><br><br><b>5</b></td>
+                            <td><br><br><b>Jumat</b></td>
+                            <td>
                                 18:30-19:10
                                 19:10-19:50
                                 19:50-20:30
                                 20:30-21:10
                             </td>
-                            <td data-label="Mata Kuliah"><br><br>Augmanted dan Virtual Reality</td>
-                            <td data-label="Dosen"><br><br>Arif Prambayun, M.Kom.</td>
+                            <td><br><br>Augmanted dan Virtual Reality</td>
+                            <td><br><br>Arif Prambayun, M.Kom.</td>
                         </tr>
                         <tr>
-                            <td data-label="No"><br><br><br><br><br><br><br><br><br><b>6</b></td>
-                            <td data-label="Hari"><br><br><br><br><br><br><br><br><br><b>Sabtu</b></td>
-                            <td data-label="Jam">
+                            <td><br><br><br><br><br><br><br><br><br><b>6</b></td>
+                            <td><br><br><br><br><br><br><br><br><br><b>Sabtu</b></td>
+                            <td>
                                 07:00-07:40
                                 07:40-08:20
                                 08:20-09:00<br>
@@ -1275,13 +1222,13 @@
                                 12:40-13:20
                                 13:20-14:00
                             </td>
-                            <td data-label="Mata Kuliah">
+                            <td>
                                 <br>Motion Objek Digital
                                 <br><br><br><br><br><br>Hukum IT
                                 <br><br><br>Pendidikan Kewarganegaraan
                                 <br><br><br>Praktikum Pengembangan Project Multimedia
                             </td>
-                            <td data-label="Dosen">
+                            <td>
                                 <br>Fithri Selva Jumeilah, S.Kom., M.T.I.
                                 <br><br><br><br><br>Dr. Yuli Asmara Triputra.
                                 <br><br>Liza Utama, S.H., M.H.
@@ -1397,7 +1344,7 @@
             const sidebarElement = document.querySelector('.sidebar');
             const mainContentElement = document.querySelector('.main-content');
             const mobileOverlay = document.getElementById('mobile-overlay');
-            
+           
             // --- New Code for Dashboard Links ---
             const dashboardLinks = document.querySelectorAll('.home-card-link');
             dashboardLinks.forEach(link => {
@@ -1595,7 +1542,7 @@
                     }, 500);
                 });
             }
-            
+           
             const carouselSlides = document.querySelector('.carousel-slides');
             const carouselButtons = document.querySelectorAll('.carousel-button');
             const totalSlides = document.querySelectorAll('.carousel-slide').length;
